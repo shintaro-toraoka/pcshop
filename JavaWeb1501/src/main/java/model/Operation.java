@@ -4,12 +4,22 @@ import java.util.ArrayList;
 
 import jakarta.servlet.http.HttpSession;
 
+import dao.UserDaoDB;
+
 
 /**
  * 店内オペレーションクラス
  * @author M.Takahashi
  */
+
 public class Operation {
+	
+	
+	private UserDaoDB userDao;
+
+	public Operation() {
+	userDao = new UserDaoDB("localhost","3306","cscdb","root","mysql2026");
+	}
 	/**
 	 * ログイン時の処理
 	 * @param userId リクエストパラメータ
