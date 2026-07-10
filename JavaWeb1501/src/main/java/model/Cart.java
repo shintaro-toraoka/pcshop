@@ -74,11 +74,15 @@ public class Cart {
 	 * @return 合計金額
 	 */
 	public int getTotalPrice() {
-		int total = 0;
+		/*int total = 0;
 		for (Product prod : listProd) {
 			total += prod.getPrice();
 		}
+		*/
 		
+		Calculator calculator = new Calculator();
+		int total = calculator.getTotalAmount(listProd);
+
 		return total;
 	}
 	
