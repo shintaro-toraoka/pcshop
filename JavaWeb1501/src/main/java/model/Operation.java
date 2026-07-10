@@ -1,9 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
+import dao.PaymentDaoDB;
+import dao.ProductDaoDB;
 import dao.UserDaoDB;
 
 
@@ -16,9 +19,12 @@ public class Operation {
 	
 	
 	private UserDaoDB userDao;
+	private ProductDaoDB productDao;
+	private PaymentDaoDB paymentDao;
 
 	public Operation() {
 	userDao = new UserDaoDB("localhost","3306","cscdb","root","mysql2026");
+	productDao = new ProductDaoDB("localhost","3306","cscdb","root","mysql2026");
 	}
 	/**
 	 * ログイン時の処理
@@ -54,7 +60,19 @@ public class Operation {
 	private boolean authenticate(String userId, String password) {
 
 		// ★ここでは password = "pass" であれば true とする
-		boolean result = password.equals("pass");
+		boolean result = false;//password.equals("pass");
+		//userdaoを使ってUserを検索して、Userを取得
+		User user = userDao.getUser(userId);
+		//Userがある場合
+		//パスワードを照合（入力値と登録されているパスワードが一致するか確認）
+		if(user != null) {
+		result = password.equals(user.getPassword());
+		}
+		//Userがない場合
+		//false（認証NG）
+		else {
+			return false;
+		}
 
 		return result;
 	}
@@ -64,12 +82,14 @@ public class Operation {
 	 * @return 店舗情報
 	 */
 	private Store makeStore() {
+		List<Product> productList = productDao.getProductList();
+		
 
 		// 店舗情報作成
-		Store store = new Store("速水PC販売", new ArrayList<Product>());
+		Store store = new Store("速水PC販売", productList);
 
 		// 商品追加
-		store.add(new Product("A110", "無線マウス", 2000));
+		/*store.add(new Product("A110", "無線マウス", 2000));
 		store.add(new Product("A120", "薄型キーボード", 3600));
 		store.add(new Product("A130", "Webカメラ", 3900));
 		store.add(new Product("A140", "トラックボールマウス", 2900));
@@ -79,7 +99,7 @@ public class Operation {
 		store.add(new Product("A180", "小型ディスプレイ", 11000));
 		store.add(new Product("A190", "LED照明", 4200));
 		store.add(new Product("A200", "骨伝導イヤホン", 7800));
-
+*/
 		return store;
 	}
 
@@ -130,10 +150,25 @@ public class Operation {
 		if(cart != null) {
 			//セッションに格納（清算済みデータ）
 			session.setAttribute("pay", cart);
-			
+			//cartの内容をpaymentテーブルに登録する
+			//カート内の商品リスト　List<Product> listProd の件数分　paymentテーブルに登録する
+			List<Product> listProd = cart.getProductList();
+
+for (Product product : listProd) {
+
+            paymentDao.insertPayment(
+                cart.getUserId(),     // ユーザID
+                cart.getUserName(),   // ユーザ名
+                product.getproductId(),      // 商品ID
+                product.productName(),    // 商品名
+                product.getPrice()    // 金額
+            );
+        }
+
 			//カート情報の新規作成→セッションに格納
 			Cart newCart = new Cart(cart.getUserId(), new ArrayList<Product>());
 			session.setAttribute("cart", newCart);
+			
 		}
 		
 	}

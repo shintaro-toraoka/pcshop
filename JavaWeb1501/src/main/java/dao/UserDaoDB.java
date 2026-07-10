@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +31,8 @@ public class UserDaoDB implements UserDao {
 			String sql = "SELECT * FROM users WHERE id = ?"; //TODO：ユーザを取得するSQLを書く
 
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, id); //ユーザIDをSQLパラメータに設定する
+			statement.setString(1, userId); //ユーザIDをSQLパラメータに設定する
+			System.out.println(sql + " " + userId);
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					return new User(resultSet.getString("id"),
@@ -50,7 +52,7 @@ public class UserDaoDB implements UserDao {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url = String.format("jdbc:mysql://%s:%s/%s?allowPublicKeyRetrieval=true&useSSL=false", host, port,
 				database);
-		return null;
-	}
+		return DriverManager.getConnection(url, id, password);
+		}
 
 }
