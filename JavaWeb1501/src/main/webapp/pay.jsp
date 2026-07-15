@@ -25,7 +25,7 @@ if (payData == null) {
 }
 if (listProd.size() > 0) {
 %>
-	<h2>清算完了</h2>
+	<h2>精算完了</h2>
 
 	<p>お買い上げ ありがとうございました。</p>
 		<table class="pay-list">

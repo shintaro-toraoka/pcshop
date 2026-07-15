@@ -26,7 +26,7 @@ public class Calculator {
 
 	}
 	/**
-	 * 税込み価格を出しちゃいました
+	 * 税込み価格を算出
 	 * @param productPrice：税抜き商品価格
 	 * @return
 	 */
@@ -40,14 +40,14 @@ public class Calculator {
 
 	/**
 	 * カートに追加された分の税込み合計金額
-	 * @param listProd:清算完了の商品リスト
+	 * @param listProd:精算完了の商品リスト
 	 * @return
 	 */
 	public int getTotalAmount(List<Product> listProd) {
 		int amount = 0;
 		for (int i = 0; i < listProd.size(); i++) {
-			Product prod = listProd.get(i);
-			amount = amount + addTax(prod.getPrice());
+			//Product prod = listProd.get(i);
+			amount += addTax(listProd.get(i).getPrice());
 		}
 		return amount;
 		

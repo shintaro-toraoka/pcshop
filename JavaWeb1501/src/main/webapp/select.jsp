@@ -30,7 +30,7 @@
 
 	<table class="select-list">
 		<tr>
-			<th></th>/
+			<th></th>
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>価格</th>

@@ -62,7 +62,14 @@ public class Product {
 	 * @return 価格 + 円
 	 */
 	public String getPriceString() {
-		return String.format("%,d", price) + "円";
+		//改修
+		//商品価格を税込表示（税率10％）
+		Calculator calculator = new Calculator();
+		int amount = 0;
+		amount = calculator.addTax(price);
+	
+		return String.format("%,d", amount) + "円";
+		//return String.format("%,d", price) + "円";
 	}
 
 }

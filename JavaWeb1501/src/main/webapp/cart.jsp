@@ -55,7 +55,7 @@
 	</table>
 	<br>
 	<form action="pay-servlet" method="post">
-	<input type="submit" value="清算"><br>
+	<input type="submit" value="精算"><br>
 	</form>
 	<%
 	} else {
