@@ -32,7 +32,7 @@
 		<th></th>
 			<th>商品ID</th>
 			<th>商品名</th>
-			<th>価格</th>
+			<th>価格（税込）</th>
 		</tr>
 		<%
 		for (int idx = 0; idx < listProd.size(); idx++) {

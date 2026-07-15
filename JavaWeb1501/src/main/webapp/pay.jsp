@@ -32,7 +32,7 @@ if (listProd.size() > 0) {
 		<tr>
 			<th>商品ID</th>
 			<th>商品名</th>
-			<th>価格</th>
+			<th>価格（税込）</th>
 		</tr>
 
 		<%
@@ -48,7 +48,7 @@ if (listProd.size() > 0) {
 		%>
 	</table>
 	<br>
-	<p>合計：<%=payData.getTotalPriceString() %> になります。</p>
+	<p>合計（税込）：<%=payData.getTotalPriceString() %> になります。</p>
 
 	<%
 	session.removeAttribute("pay");//清算済情報の削除
