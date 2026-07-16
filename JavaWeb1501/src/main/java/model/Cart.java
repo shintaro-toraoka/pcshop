@@ -70,28 +70,21 @@ public class Cart {
 	}
 	
 	/**
-	 * カート内の商品の合計金額を取得する
-	 * @return 合計金額
+	 * カート内の商品の合計金額（税込）を取得する
+	 * @return 合計金額（税込）
 	 */
-	public int getTotalPrice() {
-		/*int total = 0;
-		for (Product prod : listProd) {
-			total += prod.getPrice();
-		}
-		*/
-		
+	public int getTotalPriceIncludingTax() {
 		Calculator calculator = new Calculator();
-		int total = calculator.getTotalAmount(listProd);
-
+		int total = calculator.totalPriceIncludingTax(listProd);
 		return total;
 	}
 	
 	/**
-	 * カート内の商品の合計金額を文字列にして返す(３桁カンマ区切り＋円)
+	 * カート内の商品の合計金額（税込）を文字列にして返す(３桁カンマ区切り＋円)
 	 * @return
 	 */
-	public String getTotalPriceString() {
-		return String.format("%,d", getTotalPrice()) + "円";
+	public String getTotalPriceIncludingTaxString() {
+		return String.format("%,d", getTotalPriceIncludingTax()) + "円";
 	}
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
  * 税込み計算・カートに追加された商品分の税込み合計金額
  */
 public class Calculator {
-	//消費税10％
+	//消費税率10％
 	private final static BigDecimal TAX_RATE = new BigDecimal("0.1");
 
 	public static void main(String[] args) {
@@ -21,13 +21,11 @@ public class Calculator {
 
 		//Calcuratorのcalcuratorメソッドを呼び出す
 		Calculator calculator = new Calculator();
-		int total = calculator.getTotalAmount(productList);
+		int total = calculator.totalPriceIncludingTax(productList);
 
 		//合計金額を出力する
 		System.out.println(total);
-
-		System.out.println(calculator.tax(111));
-
+		System.out.println(calculator.taxAmount(111));
 	}
 
 	/**
@@ -36,7 +34,7 @@ public class Calculator {
 	 * @return 
 	 */
 	//税抜価格×税率
-	public int tax(int productPrice) {
+	public int taxAmount(int productPrice) {
 		//int型 productPriceをBigDecimal型 priceにキャスト
 		BigDecimal price = BigDecimal.valueOf(productPrice);
 		return price.multiply(TAX_RATE).setScale(0, RoundingMode.DOWN).intValue();
@@ -47,10 +45,9 @@ public class Calculator {
 	 * @param productPrice：税抜商品価格
 	 * @return
 	 */
-
 	public int addTax(int productPrice) {
 		int total = 0;
-		total = productPrice + tax(productPrice);
+		total = productPrice + taxAmount(productPrice);
 		return total;
 	}
 
@@ -59,7 +56,7 @@ public class Calculator {
 	 * @param listProd:精算完了の商品リスト
 	 * @return
 	 */
-	public int getTotalAmount(List<Product> listProd) {
+	public int totalPriceIncludingTax(List<Product> listProd) {
 		int amount = 0;
 		for (int i = 0; i < listProd.size(); i++) {
 			//Product prod = listProd.get(i);

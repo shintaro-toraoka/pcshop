@@ -41,14 +41,14 @@ if (listProd.size() > 0) {
 		<tr>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-			<td><%=prod.getPriceString()%></td>
+			<td><%=prod.getPriceIncludingTax()%></td>
 		</tr>
 		<%
 		}
 		%>
 	</table>
 	<br>
-	<p>合計（税込）：<%=payData.getTotalPriceString() %> になります。</p>
+	<p>合計（税込）：<%=payData.getTotalPriceIncludingTaxString() %> になります。</p>
 
 	<%
 	session.removeAttribute("pay");//清算済情報の削除

@@ -56,12 +56,22 @@ public class Product {
 	public int getPrice() {
 		return price;
 	}
+	
+	//税額のみ取得（予備）
+	/*
+	public int getTaxAmount() {
+		Calculator calculator = new Calculator();
+		int amount = 0;
+		amount = calculator.taxAmount(price);
+		return amount;
+	}
+	*/
 
 	/**
-	 * 価格を文字列で返す（３桁カンマ区切り＋"円"）
-	 * @return 価格 + 円
+	 * 税込価格を文字列で返す（３桁カンマ区切り＋"円"）
+	 * @return 税込価格 + 円
 	 */
-	public String getPriceString() {
+	public String getPriceIncludingTax() {
 		//改修
 		//商品価格を税込表示（税率10％）
 		Calculator calculator = new Calculator();

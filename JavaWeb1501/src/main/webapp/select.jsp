@@ -49,7 +49,7 @@
 			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-			<td><%=prod.getPriceString()%></td>
+			<td><%=prod.getPriceIncludingTax()%></td>
 		</tr>
 		<%
 		}
