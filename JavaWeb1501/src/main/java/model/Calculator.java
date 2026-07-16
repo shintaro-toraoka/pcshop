@@ -33,7 +33,7 @@ public class Calculator {
 	 * @param productPrice：税抜商品価格
 	 * @return 
 	 */
-	//税抜価格×税率
+	//税抜価格×税率＝税額
 	public int taxAmount(int productPrice) {
 		//int型 productPriceをBigDecimal型 priceにキャスト
 		BigDecimal price = BigDecimal.valueOf(productPrice);
@@ -45,6 +45,7 @@ public class Calculator {
 	 * @param productPrice：税抜商品価格
 	 * @return
 	 */
+	//税抜価格＋税額＝税込価格
 	public int addTax(int productPrice) {
 		int total = 0;
 		total = productPrice + taxAmount(productPrice);
