@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Calculator {
 	//消費税率10％
-	private final static BigDecimal TAX_RATE = new BigDecimal("0.1");
+	private final static BigDecimal CONSUMPTION_TAX_RATE = new BigDecimal("0.1");
 
 	public static void main(String[] args) {
 		// TODO 自動生成されたメソッド・スタブ
@@ -37,7 +37,7 @@ public class Calculator {
 	public int taxAmount(int productPrice) {
 		//int型 productPriceをBigDecimal型 priceにキャスト
 		BigDecimal price = BigDecimal.valueOf(productPrice);
-		return price.multiply(TAX_RATE).setScale(0, RoundingMode.DOWN).intValue();
+		return price.multiply(CONSUMPTION_TAX_RATE).setScale(0, RoundingMode.DOWN).intValue();
 	}
 
 	/**

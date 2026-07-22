@@ -51,7 +51,7 @@ if (listProd.size() > 0) {
 	<p>合計（税込）：<%=payData.getTotalPriceIncludingTaxString() %> になります。</p>
 
 	<%
-	session.removeAttribute("pay");//清算済情報の削除
+	session.removeAttribute("pay");//精算済情報の削除
 	}
 	%>
 	

@@ -2,7 +2,6 @@ package control;
 
 import java.io.IOException;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -55,8 +54,11 @@ public class AddProdServlet extends HttpServlet {
 		String url = "cart.jsp";
 		
 		// 転送
+		/*
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
+		*/
+		response.sendRedirect(url);
 	
 	
 	}

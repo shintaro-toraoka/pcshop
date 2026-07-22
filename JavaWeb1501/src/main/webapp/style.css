@@ -47,11 +47,15 @@ td {
 	height: 24px;
 }
 
+.cartCount {
+	color: red;
+}
+
 .select-list {
     background-color: #eee8aa;
 }
 .cart-list {
-	background-color: red;
+	background-color: orange;
 }
 .pay-list {
 	background-color: pink;

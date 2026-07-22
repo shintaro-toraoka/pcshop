@@ -12,6 +12,8 @@ public class Cart {
 	 * ユーザーID
 	 */
 	private String userId;
+	
+	private String userName;
 
 	/**
 	 * カート内の商品リスト
@@ -36,6 +38,10 @@ public class Cart {
 	 */
 	public String getUserId() {
 		return userId;
+	}
+	
+	public String getUserName() {
+		return userName;
 	}
 
 	/**

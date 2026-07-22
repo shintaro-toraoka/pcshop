@@ -5,7 +5,6 @@ import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
-import dao.PaymentDaoDB;
 import dao.ProductDaoDB;
 import dao.UserDaoDB;
 
@@ -20,11 +19,12 @@ public class Operation {
 	
 	private UserDaoDB userDao;
 	private ProductDaoDB productDao;
-	private PaymentDaoDB paymentDao;
+	//private PaymentDaoDB paymentDao;
 
 	public Operation() {
 	userDao = new UserDaoDB("localhost","3306","cscdb","root","mysql2026");
 	productDao = new ProductDaoDB("localhost","3306","cscdb","root","mysql2026");
+	//paymentDao = new PaymentDaoDB("localhost","3306","cscdb","root","mysql2026");
 	}
 	/**
 	 * ログイン時の処理
@@ -148,23 +148,23 @@ public class Operation {
 		Cart cart  = (Cart) session.getAttribute("cart");
 		
 		if(cart != null) {
-			//セッションに格納（清算済みデータ）
+			//セッションに格納（精算済みデータ）
 			session.setAttribute("pay", cart);
 			//cartの内容をpaymentテーブルに登録する
-			//カート内の商品リスト　List<Product> listProd の件数分　paymentテーブルに登録する
-/*			List<Product> listProd = cart.getProductList();
+			//カート内の商品リスト List<Product> listProd の件数分 paymentテーブルに登録する
+//			List<Product> listProd = cart.getListProd();
+//
+//for (Product product : listProd) {
+//
+//            paymentDao.insertPayment(
+//                cart.getUserId(),     // ユーザID
+//                cart.getUserName(),//ユーザ名
+//                product.getId(),      // 商品ID
+//                product.getName(),    // 商品名
+//                product.getPrice()    // 金額
+//            );
+//        }
 
-for (Product product : listProd) {
-
-            paymentDao.insertPayment(
-                cart.getUserId(),     // ユーザID
-                cart.getUserName(),   // ユーザ名
-                product.getproductId(),      // 商品ID
-                product.productName(),    // 商品名
-                product.getPrice()    // 金額
-            );
-        }
-*/
 			//カート情報の新規作成→セッションに格納
 			Cart newCart = new Cart(cart.getUserId(), new ArrayList<Product>());
 			session.setAttribute("cart", newCart);
