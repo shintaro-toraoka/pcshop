@@ -16,7 +16,7 @@ public class Calculator {
 		// TODO 自動生成されたメソッド・スタブ
 		List<Product> productList = new ArrayList<Product>();
 		//商品追加
-		productList.add(new Product("A110", "無線マウス", 2000));
+		productList.add(new Product("A110", "無線マウス", null, 2000));
 		//productList.add(new Product("A120", "薄型キーボード", 3600));
 
 		//Calcuratorのcalcuratorメソッドを呼び出す
