@@ -40,7 +40,8 @@ public class ProductDaoDB implements ProductDao {
 				while (resultSet.next()) {
 					productList.add (new Product(resultSet.getString("id"),
 							resultSet.getString("name"),
-							resultSet.getInt("price"))); //TODO：ユーザを生成する
+							resultSet.getString("image_path"),
+							resultSet.getInt("price")));//TODO：ユーザを生成する
 				}
 			}
 		} catch (Exception e) { //例外発生時の処理

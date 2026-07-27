@@ -19,15 +19,16 @@
 <%-- ナビ表示 --%>
 ｜
 <a href="select.jsp">商品選択</a>
+<%--
 <%
 Cart cart = (Cart)session.getAttribute("cart");
 int count = 0;
 if(cart != null){
 count = cart.getListProd().size();
-}
-%>
+}%>
+ --%>
 ｜
-<a href="cart.jsp">カート内一覧<span class = "cartCount">(<%= count %>)</span></a>
+<a href="cart.jsp">カート内一覧<%-- <span class = "cartCount">(<%= count %>)</span>  --%></a>
 ｜
 <a href="logout-servlet">ログアウト</a>
 ｜
