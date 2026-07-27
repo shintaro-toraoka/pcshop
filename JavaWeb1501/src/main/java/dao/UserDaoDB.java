@@ -28,16 +28,16 @@ public class UserDaoDB implements UserDao {
 	public User getUser(String userId) {
 		//データベース接続
 		try (Connection connection = getConnection()) {
-			String sql = "SELECT * FROM users WHERE id = ?"; //TODO：ユーザを取得するSQLを書く
+			String sql = "SELECT * FROM users WHERE user_id = ?"; //TODO：ユーザを取得するSQLを書く
 
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, userId); //ユーザIDをSQLパラメータに設定する
 			System.out.println(sql + " " + userId);
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					return new User(resultSet.getString("id"),
+					return new User(resultSet.getString("user_id"),
 							resultSet.getString("password"),
-							resultSet.getString("name")); //TODO：ユーザを生成する
+							resultSet.getString("user_name")); //TODO：ユーザを生成する
 				}
 			}
 		} catch (Exception e) { //例外発生時の処理
