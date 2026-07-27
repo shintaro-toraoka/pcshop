@@ -13,7 +13,7 @@
 	%>
 <h1><%=storeHdr.getName() %></h1>
 <hr>
-ユーザID：<%=cartHdr.getUserId() %>
+ユーザ名：<%= session.getAttribute("userName") %>
 <hr>
 
 <%-- ナビ表示 --%>

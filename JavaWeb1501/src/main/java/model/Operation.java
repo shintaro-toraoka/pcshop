@@ -40,6 +40,8 @@ public class Operation {
 
 		if (result) {
 			// 店舗データの作成⇒セッションに格納
+			User user = userDao.getUser(userId);
+			session.setAttribute("userName", user.getName());
 			Store store = makeStore();
 			session.setAttribute("store", store);
 
