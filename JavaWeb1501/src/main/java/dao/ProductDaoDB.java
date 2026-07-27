@@ -38,8 +38,8 @@ public class ProductDaoDB implements ProductDao {
 			/*statement.setString(1, product_id); *///ユーザIDをSQLパラメータに設定する
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					productList.add (new Product(resultSet.getString("id"),
-							resultSet.getString("name"),
+					productList.add (new Product(resultSet.getString("product_id"),
+							resultSet.getString("product_name"),
 							resultSet.getString("image_path"),
 							resultSet.getInt("price")));//TODO：ユーザを生成する
 				}
