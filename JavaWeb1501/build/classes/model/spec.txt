@@ -1,0 +1,17 @@
+名詞
+商品名:String productName
+商品の価格:int productPrice
+商品のリスト:List
+合計金額:int totalPrice
+消費税10％:final double  ? = 1.1
+
+
+動詞
+入力：商品名を検索、その価格を手に入れる。Product pro_price = get(name)
+商品名とその価格をリストに入れる。
+リストに入ってる商品の価格を合計する。
+出力：合計金額を表示
+addTax();
+消費税10％を固定加算：productPrice = productPrice * 1.1
+totalAmount();
+リストにある分だけ合計金額を計算：for totalPrice =  productPrice * 商品分
