@@ -130,4 +130,36 @@ td {
 .pay-list {
 	background-color: #FFE6BF;
 	color: #CC6600;
+	
+	.modal {
+	    display: none;
+	    position: fixed;
+	    z-index: 9999;
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: 100%;
+	    background-color: rgba(0,0,0,0.5);
+	}
+
+	.modal-content {
+	    background-color: white;
+	    width: 400px;
+	    margin: 10% auto;
+	    padding: 20px;
+	    border-radius: 10px;
+	}
+
+	#closeModal {
+	    float: right;
+	    font-size: 28px;
+	    cursor: pointer;
+	}
+
+	.product-link {
+	    color: blue;
+	    text-decoration: underline;
+	    cursor: pointer;
+	}
+	
 }

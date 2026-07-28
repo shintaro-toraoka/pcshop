@@ -110,7 +110,9 @@
 
 
 	<p>
-		合計（税込）：<%=cart.getTotalPriceIncludingTax()%>円になります。
+		<p>
+    合計（税込）：<%= String.format("%,d", cart.getTotalPriceIncludingTax()) %>円になります。
+</p>
 	</p>
 
 	<form action="pay-servlet" method="post">

@@ -56,7 +56,14 @@
 				</form>
 			</td>
 			<td><%=prod.getId()%></td>
-			<td><%=prod.getName()%></td>
+			<td>
+    <a href="#"
+       class="product-link"
+       data-id-price="<%=prod.getPriceIncludingTax()%>"
+       data-stock="<%=prod.getStock()%>">
+        <%=prod.getName()%>
+    </a>
+</td>
 
 			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
 
@@ -81,6 +88,11 @@
 		}
 		%>
 	</table>
+	<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal">&times;</span>
+    
+</div>
 <div id="zoomback">
 		<img id="zoomimg" src="">
 	</div>
@@ -111,6 +123,7 @@
 
 			zoomback.style.display = "none";
 		}
+		
 	</script>
 	<%
 	}
