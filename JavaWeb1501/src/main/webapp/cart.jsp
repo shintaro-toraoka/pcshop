@@ -49,10 +49,10 @@
 			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-<<<<<<< HEAD
+
 			<td><a href="images/<%=prod.getImagePath()%>"><img
 					src="images/<%=prod.getImagePath()%>" width="60" height="50"></a></td>
-=======
+
 			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
 			<%
 			if(prod.getImagePath() == null){
