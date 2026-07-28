@@ -18,6 +18,11 @@ public class Product {
 	
 	private String image_path;
 	
+	private int quantity;
+	public void setQuantity(int value) {
+		this.quantity = value;
+	}
+	
 	/**
 	 * 価格
 	 */
@@ -33,12 +38,26 @@ public class Product {
 	 * @param name
 	 * @param price
 	 */
+<<<<<<< HEAD
+	public Product(String id, String name, String image_path, int price) {
+=======
 	public Product(String id, String name, String image_path,int price, int stock) {
+>>>>>>> 107fec47e3a6c35e2088d22c00b14f5679c2a9b9
 		this.id = id;
 		this.name = name;
 		this.image_path = image_path;
 		this.price = price;
+<<<<<<< HEAD
+	}	
+	public Product(String id, String name, String image_path, int price, int quantity) {
+		this.id = id;
+		this.name = name;
+		this.image_path = image_path;
+		this.price = price;
+		this.quantity = quantity;
+=======
 		this.stock = stock;
+>>>>>>> 107fec47e3a6c35e2088d22c00b14f5679c2a9b9
 	}
 
 	/******** メソッド ******************************************/
@@ -60,7 +79,11 @@ public class Product {
 	public String getImagePath() {
 		return image_path;
 	}
-
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	
 	/**
 	 * @return price
 	 */

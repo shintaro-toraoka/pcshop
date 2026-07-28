@@ -29,7 +29,7 @@
 	<h2>商品選択</h2>
 	<form action="/search" method="get">
 	<input type="text" name="query" placeholder="キーワードを1つ入力">
-	<botton typ="submit">検索</botton>
+	<botton type="submit">をさがす</botton>
 	</form>
 	
 	<br>
@@ -40,6 +40,7 @@
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>商品画像</th>
+			<th>数量</th>
 			<th>価格（税込）</th>
 			<th>在庫数</th>
 		</tr>
@@ -53,9 +54,9 @@
 				<form action="add-prod-servlet" method="POST">
 					<input type="hidden" name="idx" value="<%=idx%>"> <input
 						type="submit" value="選択">
-				</form>
 			</td>
 			<td><%=prod.getId()%></td>
+<<<<<<< HEAD
 			<td>
     <a href="#"
        class="product-link"
@@ -64,6 +65,17 @@
         <%=prod.getName()%>
     </a>
 </td>
+=======
+			<td><%=prod.getName()%></td>
+<<<<<<< HEAD
+			<td><a href="images/<%=prod.getImagePath()%>"><img src = "images/<%=prod.getImagePath()%>" width="60" height="50" ></a></td>
+			<td>
+				<input type="number" name="quantity" value="1" min="1" max="10" class="quanti">
+			</td>
+			<td><%=prod.getPriceIncludingTax()%></td>
+				</form>
+=======
+>>>>>>> 69a2e0dc739ed7ba9d241de47d87afd6da33f25a
 
 			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
 
@@ -83,6 +95,7 @@
 
 			<td><%=prod.getPriceIncludingTax()%></td>
 			<td><%=prod.getStock()%></td>
+>>>>>>> 107fec47e3a6c35e2088d22c00b14f5679c2a9b9
 		</tr>
 		<%
 		}

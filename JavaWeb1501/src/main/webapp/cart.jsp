@@ -33,6 +33,7 @@
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>商品画像</th>
+			<th>数量</th>
 			<th>価格（税込）</th>
 			<th>在庫数</th>
 		</tr>
@@ -49,6 +50,10 @@
 			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
+<<<<<<< HEAD
+			<td><a href="images/<%=prod.getImagePath()%>"><img src = "images/<%=prod.getImagePath()%>" width="60" height="50" ></a></td>
+			<td><%=prod.getQuantity() %>個</td>
+=======
 
 			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
 			<%
@@ -65,6 +70,7 @@
 		}
 		%></td>
 			
+>>>>>>> 107fec47e3a6c35e2088d22c00b14f5679c2a9b9
 			<td><%=prod.getPriceIncludingTax()%></td>
 			<td><%=prod.getStock()%></td>
 		</tr>
@@ -108,13 +114,18 @@
 	
 	<br>
 
+	<p>合計（税込）：<%=cart.getTotalPriceIncludingTaxString() %> 円になります。</p>
 
+<<<<<<< HEAD
 	<p>
 		<p>
     合計（税込）：<%= String.format("%,d", cart.getTotalPriceIncludingTax()) %>円になります。
 </p>
 	</p>
 
+=======
+	
+>>>>>>> 69a2e0dc739ed7ba9d241de47d87afd6da33f25a
 	<form action="pay-servlet" method="post">
 		<input type="submit" value="精算"><br>
 

@@ -88,7 +88,7 @@ public class Operation {
 		
 
 		// 店舗情報作成
-		Store store = new Store("速水PC販売→カレー屋さん予定", productList);
+		Store store = new Store("ToraoCurry", productList);
 
 		// 商品追加
 		/*store.add(new Product("A110", "無線マウス", 2000));
@@ -115,15 +115,32 @@ public class Operation {
 
 	}
 
-	public void addProd(int idx, HttpSession session) {
+	public void addProd(int idx, int quantity, HttpSession session) {
 
 		//店舗情報・カート情報の取得
 		Store store = (Store) session.getAttribute("store");
 		Cart cart  = (Cart) session.getAttribute("cart");
 
 		if((store != null) && (cart != null)) {
+			String newProd = store.getListProd().get(idx).getId();		
+			for(Product prod : cart.getListProd()) {
+				if(prod.getId().equals(newProd)) {
+//					System.out.println("一致");
+//					System.out.println(store.getListProd().get(idx).getQuantity());//元
+//					System.out.println(prod.getQuantity());//新
+					int total = prod.getQuantity() + quantity;
+					quantity = total;
+				}
+				
+			}
+			cart.oldRemoveProd(newProd);
+
+			store.getListProd().get(idx).setQuantity(quantity);
 			//カートに指定の商品を追加
 			cart.add(store.getListProd().get(idx));
+
+
+			
 
 			//セッションに再度格納
 			session.setAttribute("cart", cart);
