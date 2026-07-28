@@ -35,6 +35,7 @@ public class UserDaoDB implements UserDao {
 			
 			System.out.println(statement);
 			
+
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					return new User(resultSet.getString("user_id"),

@@ -40,6 +40,8 @@ public class Operation {
 
 		if (result) {
 			// 店舗データの作成⇒セッションに格納
+			User user = userDao.getUser(userId);
+			session.setAttribute("userName", user.getName());
 			Store store = makeStore();
 			session.setAttribute("store", store);
 
@@ -152,9 +154,9 @@ public class Operation {
 			session.setAttribute("pay", cart);
 			//cartの内容をpaymentテーブルに登録する
 			//カート内の商品リスト List<Product> listProd の件数分 paymentテーブルに登録する
-//			List<Product> listProd = cart.getListProd();
+			List<Product> listProd = cart.getListProd();
 //
-//for (Product product : listProd) {
+for (Product product : listProd) {
 //
 //            paymentDao.insertPayment(
 //                cart.getUserId(),     // ユーザID
@@ -163,7 +165,9 @@ public class Operation {
 //                product.getName(),    // 商品名
 //                product.getPrice()    // 金額
 //            );
-//        }
+			System.out.println("User;"+ cart.getUserId());
+			System.out.println("商品;" + product.getId());
+        }
 
 			//カート情報の新規作成→セッションに格納
 			Cart newCart = new Cart(cart.getUserId(), new ArrayList<Product>());
