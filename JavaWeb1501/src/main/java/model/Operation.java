@@ -22,9 +22,10 @@ public class Operation {
 	//private PaymentDaoDB paymentDao;
 
 	public Operation() {
-	userDao = new UserDaoDB("localhost","3306","cscdb","RyanGosling","DBcsc26Newbie");
-	productDao = new ProductDaoDB("localhost","3306","cscdb","RyanGosling","DBcsc26Newbie");
-	//paymentDao = new PaymentDaoDB("localhost","3306","cscdb","root","mysql2026");
+		// 親クラスで共通化した by M.Yokota
+		userDao = new UserDaoDB();
+		productDao = new ProductDaoDB();
+		//paymentDao = new PaymentDaoDB("localhost","3306","cscdb","root","mysql2026");
 	}
 	/**
 	 * ログイン時の処理

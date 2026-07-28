@@ -1,37 +1,22 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Product;
 import model.Store;
 
-public class ProductDaoDB implements ProductDao {
-	private String host;
-	private String port;
-	private String database;
-	private String product_id;
-	private String password;
+public class ProductDaoDB extends DaoDB implements ProductDao {
 
-	public ProductDaoDB(String host, String port, String database, String id, String password) {
-		super();
-		this.host = host;
-		this.port = port;
-		this.database = database;
-		this.product_id = id;
-		this.password = password;
-	}
 
 	@Override
 	public List<Product> getProductList() {
 		List<Product> productList = new ArrayList<>(); 
 		//データベース接続
-		try (Connection connection = getConnection()) {
+		try (Connection connection = super.getConnection()) {
 			String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
 			/*if () {
 				String sql = "SELECT * FROM products WHERE "; //TODO：ユーザを取得するSQLを書く
@@ -81,17 +66,6 @@ public class ProductDaoDB implements ProductDao {
 	    }}
 	    
 
-	
-	
-	
-	// DB接続処理	
-	private Connection getConnection() throws ClassNotFoundException, SQLException {
-		// MySQL JDBCドライバを読み込む	
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = String.format("jdbc:mysql://%s:%s/%s?allowPublicKeyRetrieval=true&useSSL=false", host, port,
-				database);
-		return DriverManager.getConnection(url, product_id, password);
-	}
 	
 	private Store makeStore() {
 		//Productテーブルから商品を検索して取得する
