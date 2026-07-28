@@ -50,52 +50,63 @@
 			Product prod = listProd.get(idx);
 		%>
 		<tr>
+		<form action="add-prod-servlet" method="POST">
 			<td>
-				<form action="add-prod-servlet" method="POST">
+				
 					<input type="hidden" name="idx" value="<%=idx%>"> <input
 						type="submit" value="選択">
 			</td>
 			<td><%=prod.getId()%></td>
-<<<<<<< HEAD
-			<td>
-    <a href="#"
-       class="product-link"
-       data-id-price="<%=prod.getPriceIncludingTax()%>"
-       data-stock="<%=prod.getStock()%>">
-        <%=prod.getName()%>
-    </a>
-</td>
-=======
-			<td><%=prod.getName()%></td>
-<<<<<<< HEAD
-			<td><a href="images/<%=prod.getImagePath()%>"><img src = "images/<%=prod.getImagePath()%>" width="60" height="50" ></a></td>
-			<td>
-				<input type="number" name="quantity" value="1" min="1" max="10" class="quanti">
-			</td>
-			<td><%=prod.getPriceIncludingTax()%></td>
-				</form>
-=======
->>>>>>> 69a2e0dc739ed7ba9d241de47d87afd6da33f25a
-
-			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
-
-			<%
-			if(prod.getImagePath() == null){
-%>
-			<p>No Image</p>
-
-			<%
-			}else{
-%>
-			alt=<%=prod.getName() %>
-			onerror="src='images/Error.png'">
 <%
-		}
-		%></td>
+String imagePath = prod.getImagePath();
+%>
 
-			<td><%=prod.getPriceIncludingTax()%></td>
-			<td><%=prod.getStock()%></td>
->>>>>>> 107fec47e3a6c35e2088d22c00b14f5679c2a9b9
+<td>
+	<a href="#"
+		class="product-link"
+		data-id-price="<%=prod.getPriceIncludingTax()%>"
+		data-stock="<%=prod.getStock()%>">
+		<%=prod.getName()%>
+	</a>
+</td>
+
+<td>
+	<%
+	if (imagePath == null || imagePath.isBlank()) {
+	%>
+		<p>No Image</p>
+	<%
+	} else {
+		String imageUrl = "images/" + imagePath;
+	%>
+		<a href="<%=imageUrl%>">
+			<img
+				src="<%=imageUrl%>"
+				class="zoom"
+				width="60"
+				height="50"
+				alt="<%=prod.getName()%>"
+				onerror="this.onerror=null; this.src='images/Error.png';">
+		</a>
+	<%
+	}
+	%>
+</td>
+
+<td>
+	<input
+		type="number"
+		name="quantity"
+		value="1"
+		min="1"
+		max="<%=Math.min(prod.getStock(), 10)%>"
+		class="quanti">
+</td>
+
+<td><%=prod.getPriceIncludingTax()%></td>
+
+<td><%=prod.getStock()%></td>
+		</form>
 		</tr>
 		<%
 		}

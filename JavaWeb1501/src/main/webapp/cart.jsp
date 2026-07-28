@@ -50,27 +50,34 @@
 			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-<<<<<<< HEAD
-			<td><a href="images/<%=prod.getImagePath()%>"><img src = "images/<%=prod.getImagePath()%>" width="60" height="50" ></a></td>
-			<td><%=prod.getQuantity() %>個</td>
-=======
-
-			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
-			<%
-			if(prod.getImagePath() == null){
-%>
-			<p>No Image</p>
-
-			<%
-			}else{
-%>
-			alt=<%=prod.getName() %>
-			onerror="src='images/Error.png'">
 <%
-		}
-		%></td>
-			
->>>>>>> 107fec47e3a6c35e2088d22c00b14f5679c2a9b9
+String imagePath = prod.getImagePath();
+%>
+
+<td>
+	<%
+	if (imagePath == null || imagePath.isBlank()) {
+	%>
+		<p>No Image</p>
+	<%
+	} else {
+		String imageUrl = "images/" + imagePath;
+	%>
+		<a href="<%=imageUrl%>">
+			<img
+				src="<%=imageUrl%>"
+				class="zoom"
+				width="60"
+				height="50"
+				alt="<%=prod.getName()%>"
+				onerror="this.onerror=null; this.src='images/Error.png';">
+		</a>
+	<%
+	}
+	%>
+</td>
+
+<td><%=prod.getQuantity()%>個</td>
 			<td><%=prod.getPriceIncludingTax()%></td>
 			<td><%=prod.getStock()%></td>
 		</tr>
@@ -116,16 +123,6 @@
 
 	<p>合計（税込）：<%=cart.getTotalPriceIncludingTaxString() %> 円になります。</p>
 
-<<<<<<< HEAD
-	<p>
-		<p>
-    合計（税込）：<%= String.format("%,d", cart.getTotalPriceIncludingTax()) %>円になります。
-</p>
-	</p>
-
-=======
-	
->>>>>>> 69a2e0dc739ed7ba9d241de47d87afd6da33f25a
 	<form action="pay-servlet" method="post">
 		<input type="submit" value="精算"><br>
 
