@@ -15,6 +15,11 @@
 <body>
 	<%@include file="header-navi.jsp"%>
 
+	<form action="/search" method="get">
+  	<input type="text" name="query" placeholder="キーワードを１つ入力">
+  	<button type="submit">検索</button>
+	</form>
+
 	<%
 	List<Product> listProd;
 	Store store = (Store) session.getAttribute("store");
