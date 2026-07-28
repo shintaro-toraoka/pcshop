@@ -49,10 +49,7 @@
 			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-<<<<<<< HEAD
-			<td><a href="images/<%=prod.getImagePath()%>"><img
-					src="images/<%=prod.getImagePath()%>" width="60" height="50"></a></td>
-=======
+
 			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
 			<%
 			if(prod.getImagePath() == null){
@@ -68,7 +65,6 @@
 		}
 		%></td>
 			
->>>>>>> 1d34f76051b3f4fa1d7cdb79e37c9efbe0dde0be
 			<td><%=prod.getPriceIncludingTax()%></td>
 			<td><%=prod.getStock()%></td>
 		</tr>
