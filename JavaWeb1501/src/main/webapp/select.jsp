@@ -27,6 +27,12 @@
 	%>
 
 	<h2>商品選択</h2>
+	<form action="/search" method="get">
+	<input type="text" name="query" placeholder="キーワードを1つ入力">
+	<botton typ="submit">検索</botton>
+	</form>
+	
+	<br>
 
 	<table class="select-list">
 		<tr>
