@@ -6,6 +6,40 @@ body {
 	text-align: center;
 }
 
+/* 親要素をrelativeに */
+body {
+
+position:relative;
+}
+
+
+#zoomback {
+
+	
+	
+/* 絶対位置に配置 */
+position:absolute;
+top:0;
+
+/* 画面いっぱいに */
+width:100vw;
+height:100vh;
+
+/* 背景を少し透過 */
+background-color:rgba(0,0,0,0.8);
+
+/* 中のimgを中央揃え */
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+
+/* 拡大画像のサイズを調整 */
+#zoomimg {
+height:300px
+}
+
 h1 {
 	font-size: 32px;
     color: green
