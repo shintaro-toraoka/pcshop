@@ -32,7 +32,7 @@ public class UserDaoDB implements UserDao {
 
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, userId); //ユーザIDをSQLパラメータに設定する
-			System.out.println(sql + " " + userId);
+			System.out.println(statement);
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					return new User(resultSet.getString("user_id"),

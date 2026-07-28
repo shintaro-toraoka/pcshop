@@ -32,7 +32,7 @@ public class ProductDaoDB implements ProductDao {
 		List<Product> productList = new ArrayList<>(); 
 		//データベース接続
 		try (Connection connection = getConnection()) {
-			String sql = "SELECT * FROM product"; //TODO：ユーザを取得するSQLを書く
+			String sql = "SELECT * FROM products"; //TODO：ユーザを取得するSQLを書く
 
 			PreparedStatement statement = connection.prepareStatement(sql);
 			/*statement.setString(1, product_id); *///ユーザIDをSQLパラメータに設定する
