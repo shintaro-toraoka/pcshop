@@ -35,6 +35,7 @@
 			<th>商品名</th>
 			<th>商品画像</th>
 			<th>価格（税込）</th>
+			<th>在庫数</th>
 		</tr>
 
 		<%
@@ -68,6 +69,7 @@
 		%></td>
 
 			<td><%=prod.getPriceIncludingTax()%></td>
+			<td><%=prod.getStock()%></td>
 		</tr>
 		<%
 		}

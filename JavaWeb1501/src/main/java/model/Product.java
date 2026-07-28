@@ -22,6 +22,9 @@ public class Product {
 	 * 価格
 	 */
 	private int price;
+	
+	//在庫数
+	private int stock;
 
 	/******** コンストラクタ **************************************/
 	/**
@@ -30,11 +33,12 @@ public class Product {
 	 * @param name
 	 * @param price
 	 */
-	public Product(String id, String name, String image_path,int price) {
+	public Product(String id, String name, String image_path,int price, int stock) {
 		this.id = id;
 		this.name = name;
 		this.image_path = image_path;
 		this.price = price;
+		this.stock = stock;
 	}
 
 	/******** メソッド ******************************************/
@@ -62,6 +66,10 @@ public class Product {
 	 */
 	public int getPrice() {
 		return price;
+	}
+	
+	public int getStock() {
+		return stock;
 	}
 	
 	//税額のみ取得（予備）

@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
+
 body {
 	font-family: BIZ UDPゴシック;
-	background-color: #98fb98;
+	background-color: #F8E8B0;
 	text-align: center;
 }
 
@@ -42,13 +43,18 @@ height:300px
 
 h1 {
 	font-size: 32px;
-    color: green
+	color: #06038D;
+	text-shadow:2px 2px 3px rgba(0,0,0,0.2);
+
+border-top: 4px solid #FF9933;
+border-bottom:4px solid #138808;
+background-color:#FEFBF5;
 }
 
 h2 {
 	font-size: 28px;
-    background-color: green;
-    color: white
+	background-color: #138808;
+	color: white
 }
 
 hr {
@@ -57,26 +63,34 @@ hr {
 }
 
 .error-msg {
-    color: red;
+	color: red;
 }
 
 table {
-	border: 1px solid #5e696c;
+	border: 3px solid #5D4037;
+	border-radius: 10px;
+	overflow: hidden;
+	border-collapse: separate;
 	margin-left: auto;
 	margin-right: auto;
-	width: 80%; 					/* テーブル横幅 */
-	border-collapse:  collapse; 	/* 境界線を共有 */
+	width: 80%;
+	border-spacing: 0;
+	/* 境界線を共有 */
 }
 
 th {
-	border: 1px solid #5e696c;
-    text-align:center;
-    background-color: #3cb371;
-    height: 32px;
+
+	border: 1px solid #5D4037;
+	;
+	text-align: center;
+	background-color: #E67E22;
+	color: white;
+	height: 32px;
 }
 
 td {
-	border: 1px solid #5e696c;
+	border: 1px solid #5D4037;
+	;
 	text-align: center;
 	height: 24px;
 }
@@ -86,11 +100,26 @@ td {
 }
 
 .select-list {
-    background-color: #eee8aa;
+	tr:nth-child(even) {
+		background: #FFF8E8;
+	}
+
+	tr:nth-child(odd) {
+		background: #FDF0D5;
+	}
 }
+
 .cart-list {
-	background-color: orange;
+	tr:nth-child(even) {
+		background: #FFF8E8;
+	}
+
+	tr:nth-child(odd) {
+		background: #FDF0D5;
+	}
 }
+
 .pay-list {
-	background-color: pink;
+	background-color: #FFE6BF;
+	color: #CC6600;
 }

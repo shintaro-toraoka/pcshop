@@ -29,25 +29,30 @@
 
 	<table class="cart-list">
 		<tr>
-		<th></th>
+			<th></th>
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>商品画像</th>
 			<th>価格（税込）</th>
+			<th>在庫数</th>
 		</tr>
 		<%
 		for (int idx = 0; idx < listProd.size(); idx++) {
 			Product prod = listProd.get(idx);
 		%>
 		<tr>
-		<td>
-		<form action="remove-prod-servlet" method="POST">
-		<input type="hidden" name="idx" value="<%=idx%>">
-		<input type="submit" value="削除">
-		</form>
-		</td>
+			<td>
+				<form action="remove-prod-servlet" method="POST">
+					<input type="hidden" name="idx" value="<%=idx%>"> <input
+						type="submit" value="削除">
+				</form>
+			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
+<<<<<<< HEAD
+			<td><a href="images/<%=prod.getImagePath()%>"><img
+					src="images/<%=prod.getImagePath()%>" width="60" height="50"></a></td>
+=======
 			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
 			<%
 			if(prod.getImagePath() == null){
@@ -63,7 +68,9 @@
 		}
 		%></td>
 			
+>>>>>>> 1d34f76051b3f4fa1d7cdb79e37c9efbe0dde0be
 			<td><%=prod.getPriceIncludingTax()%></td>
+			<td><%=prod.getStock()%></td>
 		</tr>
 		<%
 		}
@@ -104,15 +111,22 @@
 	</script>
 	
 	<br>
+
+
+	<p>
+		合計（税込）：<%=cart.getTotalPriceIncludingTax()%>円になります。
+	</p>
+
 	<form action="pay-servlet" method="post">
-	<input type="submit" value="精算"><br>
+		<input type="submit" value="精算"><br>
+
 	</form>
 	<%
 	} else {
 	%>
 	<p>カートの中は空です。</p>
 	<%
-}
-%>
+	}
+	%>
 </body>
 </html>
