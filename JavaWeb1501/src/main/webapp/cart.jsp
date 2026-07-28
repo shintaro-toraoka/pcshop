@@ -48,7 +48,21 @@
 		</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"></td>
+			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
+			<%
+			if(prod.getImagePath() == null){
+%>
+			<p>No Image</p>
+
+			<%
+			}else{
+%>
+			alt=<%=prod.getName() %>
+			onerror="src='images/Error.png'">
+<%
+		}
+		%></td>
+			
 			<td><%=prod.getPriceIncludingTax()%></td>
 		</tr>
 		<%
