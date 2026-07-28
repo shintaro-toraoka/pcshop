@@ -22,8 +22,8 @@ public class Operation {
 	//private PaymentDaoDB paymentDao;
 
 	public Operation() {
-	userDao = new UserDaoDB("localhost","3306","cscdb","RyanGosling","DBcsc26Newbie");
-	productDao = new ProductDaoDB("localhost","3306","cscdb","RyanGosling","DBcsc26Newbie");
+	userDao = new UserDaoDB("10.10.30.127","3306","cscdb","RyanGosling","DBcsc26Newbie");
+	productDao = new ProductDaoDB("10.10.30.127","3306","cscdb","RyanGosling","DBcsc26Newbie");
 	//paymentDao = new PaymentDaoDB("localhost","3306","cscdb","root","mysql2026");
 	}
 	/**
