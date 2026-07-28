@@ -34,6 +34,7 @@
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>商品画像</th>
+			<th>数量</th>
 			<th>価格（税込）</th>
 		</tr>
 
@@ -46,12 +47,15 @@
 				<form action="add-prod-servlet" method="POST">
 					<input type="hidden" name="idx" value="<%=idx%>"> <input
 						type="submit" value="選択">
-				</form>
 			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
 			<td><a href="images/<%=prod.getImagePath()%>"><img src = "images/<%=prod.getImagePath()%>" width="60" height="50" ></a></td>
+			<td>
+				<input type="number" name="quantity" value="1" min="1" max="10" class="quanti">
+			</td>
 			<td><%=prod.getPriceIncludingTax()%></td>
+				</form>
 		</tr>
 		<%
 		}

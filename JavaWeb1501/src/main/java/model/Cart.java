@@ -75,6 +75,15 @@ public class Cart {
 		listProd.clear();
 	}
 	
+	public void oldRemoveProd(String productId) {
+		for(int i = 0; i < listProd.size(); i++) {
+			if(listProd.get(i).getId().equals(productId)) {
+				listProd.remove(i);
+				break;
+			}
+		}
+	}
+	
 	/**
 	 * カート内の商品の合計金額（税込）を取得する
 	 * @return 合計金額（税込）

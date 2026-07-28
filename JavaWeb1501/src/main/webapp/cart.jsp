@@ -33,6 +33,7 @@
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>商品画像</th>
+			<th>数量</th>
 			<th>価格（税込）</th>
 		</tr>
 		<%
@@ -49,6 +50,7 @@
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
 			<td><a href="images/<%=prod.getImagePath()%>"><img src = "images/<%=prod.getImagePath()%>" width="60" height="50" ></a></td>
+			<td><%=prod.getQuantity() %>個</td>
 			<td><%=prod.getPriceIncludingTax()%></td>
 		</tr>
 		<%

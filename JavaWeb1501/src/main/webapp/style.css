@@ -51,6 +51,10 @@ td {
 	color: red;
 }
 
+.quanti {
+	width:30px;
+	text-align:center;
+}
 .select-list {
     background-color: #eee8aa;
 }

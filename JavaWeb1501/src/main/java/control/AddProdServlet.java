@@ -42,13 +42,14 @@ public class AddProdServlet extends HttpServlet {
 		//パラメータ取得
 		request.setCharacterEncoding("UTF-8");
 		int idx = Integer.parseInt(request.getParameter("idx"));
-		
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+
 		//セッションオブジェクト取得
 		HttpSession session = request.getSession();
 		
 		//カートへの商品追加処理
 		Operation op = new Operation();
-		op.addProd(idx, session);
+		op.addProd(idx, quantity, session);
 		
 		//転送先設定
 		String url = "cart.jsp";

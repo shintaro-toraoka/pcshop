@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ page import="model.Cart"%>
 <%@ page import="model.Store"%>
-
+<%@ page import="model.Product"%>
 <%-- 店舗名・ユーザIDの表示 --%>
 <% 
 		Store storeHdr = (Store) session.getAttribute("store");
@@ -24,7 +24,9 @@
 Cart cart = (Cart)session.getAttribute("cart");
 int count = 0;
 if(cart != null){
-count = cart.getListProd().size();
+	for(Product prod : cart.getListProd()) {
+count += prod.getQuantity();
+	}
 }%>
 
 ｜
