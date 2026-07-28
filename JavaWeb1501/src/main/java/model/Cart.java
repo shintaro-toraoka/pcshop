@@ -99,7 +99,7 @@ public class Cart {
 	 * @return
 	 */
 	public String getTotalPriceIncludingTaxString() {
-		return String.format("%,d", getTotalPriceIncludingTax()) + "円";
+		return String.format("%,d", getTotalPriceIncludingTax());
 	}
 
 }

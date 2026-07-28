@@ -29,44 +29,104 @@
 
 	<table class="cart-list">
 		<tr>
-		<th></th>
+			<th></th>
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>商品画像</th>
 			<th>数量</th>
 			<th>価格（税込）</th>
+			<th>在庫数</th>
 		</tr>
 		<%
 		for (int idx = 0; idx < listProd.size(); idx++) {
 			Product prod = listProd.get(idx);
 		%>
 		<tr>
-		<td>
-		<form action="remove-prod-servlet" method="POST">
-		<input type="hidden" name="idx" value="<%=idx%>">
-		<input type="submit" value="削除">
-		</form>
-		</td>
+			<td>
+				<form action="remove-prod-servlet" method="POST">
+					<input type="hidden" name="idx" value="<%=idx%>"> <input
+						type="submit" value="削除">
+				</form>
+			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
+<<<<<<< HEAD
 			<td><a href="images/<%=prod.getImagePath()%>"><img src = "images/<%=prod.getImagePath()%>" width="60" height="50" ></a></td>
 			<td><%=prod.getQuantity() %>個</td>
+=======
+
+			<td><img style=width="60" height="50"" img src="./image/<%=prod.getImagePath()%>.png"class="zoom"
+			<%
+			if(prod.getImagePath() == null){
+%>
+			<p>No Image</p>
+
+			<%
+			}else{
+%>
+			alt=<%=prod.getName() %>
+			onerror="src='images/Error.png'">
+<%
+		}
+		%></td>
+			
+>>>>>>> 107fec47e3a6c35e2088d22c00b14f5679c2a9b9
 			<td><%=prod.getPriceIncludingTax()%></td>
+			<td><%=prod.getStock()%></td>
 		</tr>
 		<%
 		}
 		%>
 	</table>
+	
+	<div id="zoomback">
+		<img id="zoomimg" src="">
+		
+	</div>
+	<script>
+		// 要素を取得　..①
+		const zoom = document.querySelectorAll(".zoom");
+		const zoomback = document.getElementById("zoomback");
+		const zoomimg = document.getElementById("zoomimg");
+
+		// 一括でイベントリスナ　..②
+		zoom.forEach(function(value) {
+			value.addEventListener("click", kakudai);
+		});
+
+		function kakudai(e) {
+
+			// 拡大領域を表示　..③
+			zoomback.style.display = "flex";
+			// 押された画像のリンクを渡す　..④
+			zoomimg.setAttribute("src", e.target.getAttribute("src"));
+		}
+
+		// 元に戻すイベントリスナを指定　..⑤
+		zoomback.addEventListener("click", modosu);
+
+		// 拡大領域を無きものに　..⑥
+		function modosu() {
+
+			zoomback.style.display = "none";
+		}
+	</script>
+	
 	<br>
+
+	<p>合計（税込）：<%=cart.getTotalPriceIncludingTaxString() %> 円になります。</p>
+
+	
 	<form action="pay-servlet" method="post">
-	<input type="submit" value="精算"><br>
+		<input type="submit" value="精算"><br>
+
 	</form>
 	<%
 	} else {
 	%>
 	<p>カートの中は空です。</p>
 	<%
-}
-%>
+	}
+	%>
 </body>
 </html>

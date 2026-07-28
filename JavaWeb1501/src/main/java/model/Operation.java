@@ -88,7 +88,7 @@ public class Operation {
 		
 
 		// 店舗情報作成
-		Store store = new Store("速水PC販売→カレー屋さん予定", productList);
+		Store store = new Store("ToraoCurry", productList);
 
 		// 商品追加
 		/*store.add(new Product("A110", "無線マウス", 2000));
@@ -174,6 +174,8 @@ public class Operation {
 			List<Product> listProd = cart.getListProd();
 //
 for (Product product : listProd) {
+	
+	productDao.reduceStock(product.getId());
 //
 //            paymentDao.insertPayment(
 //                cart.getUserId(),     // ユーザID
@@ -182,8 +184,11 @@ for (Product product : listProd) {
 //                product.getName(),    // 商品名
 //                product.getPrice()    // 金額
 //            );
+	
 			System.out.println("User;"+ cart.getUserId());
 			System.out.println("商品;" + product.getId());
+			
+			
         }
 
 			//カート情報の新規作成→セッションに格納

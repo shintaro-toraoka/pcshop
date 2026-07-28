@@ -48,7 +48,7 @@ if (listProd.size() > 0) {
 		%>
 	</table>
 	<br>
-	<p>合計（税込）：<%=payData.getTotalPriceIncludingTaxString() %> になります。</p>
+	<p>合計（税込）：<%=payData.getTotalPriceIncludingTaxString() %> 円になります。</p>
 
 	<%
 	session.removeAttribute("pay");//精算済情報の削除

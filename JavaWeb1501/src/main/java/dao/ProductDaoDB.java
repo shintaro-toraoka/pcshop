@@ -32,8 +32,15 @@ public class ProductDaoDB implements ProductDao {
 		List<Product> productList = new ArrayList<>(); 
 		//データベース接続
 		try (Connection connection = getConnection()) {
-			String sql = "SELECT * FROM products"; //TODO：ユーザを取得するSQLを書く
-
+			String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
+			/*if () {
+				String sql = "SELECT * FROM products WHERE "; //TODO：ユーザを取得するSQLを書く
+				
+			} else {
+				String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
+				
+			}
+*/
 			PreparedStatement statement = connection.prepareStatement(sql);
 			/*statement.setString(1, product_id); *///ユーザIDをSQLパラメータに設定する
 			try (ResultSet resultSet = statement.executeQuery()) {
@@ -41,7 +48,8 @@ public class ProductDaoDB implements ProductDao {
 					productList.add (new Product(resultSet.getString("product_id"),
 							resultSet.getString("product_name"),
 							resultSet.getString("image_path"),
-							resultSet.getInt("price")));//TODO：ユーザを生成する
+							resultSet.getInt("price"),
+							resultSet.getInt("stock")));//TODO：ユーザを生成する
 				}
 			}
 		} catch (Exception e) { //例外発生時の処理
@@ -50,6 +58,32 @@ public class ProductDaoDB implements ProductDao {
 		return productList;
 	}
 
+	
+	//
+	public void reduceStock(
+	        String productId
+	        ) {
+
+	    try (Connection connection = getConnection()) {
+
+	        String sql =
+	            "UPDATE products SET stock = stock - 1 WHERE product_id = ?";
+	        
+	        PreparedStatement statement =
+	                connection.prepareStatement(sql);
+	        statement.setString(1, productId); //在庫数をSQLパラメータに設定する
+
+	        System.out.println(statement);
+	        statement.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }}
+	    
+
+	
+	
+	
 	// DB接続処理	
 	private Connection getConnection() throws ClassNotFoundException, SQLException {
 		// MySQL JDBCドライバを読み込む	
