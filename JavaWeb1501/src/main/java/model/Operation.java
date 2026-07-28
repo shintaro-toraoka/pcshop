@@ -88,7 +88,7 @@ public class Operation {
 		
 
 		// 店舗情報作成
-		Store store = new Store("速水PC販売→カレー屋さん予定", productList);
+		Store store = new Store("ToraoCurry", productList);
 
 		// 商品追加
 		/*store.add(new Product("A110", "無線マウス", 2000));
