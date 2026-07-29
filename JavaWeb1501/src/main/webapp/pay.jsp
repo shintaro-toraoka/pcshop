@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <title>精算完了</title>
 <link rel="stylesheet" href="style.css">
+ <link rel="icon" href="<%= request.getContextPath() %>/images/tiger.png" type="image/png">
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
@@ -41,7 +42,7 @@ if (listProd.size() > 0) {
 		<tr>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-			<td><%=prod.getPriceIncludingTax() * prod.getQuantity()%>円</td>
+			<td><%=String.format("%,d",prod.getPriceIncludingTax() * prod.getQuantity())%>円</td>
 		</tr>
 		<%
 		}
