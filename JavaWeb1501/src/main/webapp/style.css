@@ -40,7 +40,7 @@ position:relative;
 	
 	
 /* 絶対位置に配置 */
-position:absolute;
+position:fixed;
 top:0;
 
 /* 画面いっぱいに */
