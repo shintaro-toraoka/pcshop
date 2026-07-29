@@ -162,6 +162,11 @@ public class Operation {
 
 		}
 	}
+	
+	public void search(String product_name, session) {
+		//商品の検索
+		
+	}
 
 	public void pay(HttpSession session) {
 		//店舗情報・カート情報の取得
