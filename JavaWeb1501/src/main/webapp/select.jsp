@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <title>商品選択</title>
 <link rel="stylesheet" href="style.css">
+ <link rel="icon" href="<%= request.getContextPath() %>/images/ikon.png" type="image/png">
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
