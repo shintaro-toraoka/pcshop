@@ -11,10 +11,9 @@ import model.Store;
 
 public class ProductDaoDB extends DaoDB implements ProductDao {
 
-
 	@Override
 	public List<Product> getProductList() {
-		List<Product> productList = new ArrayList<>(); 
+		List<Product> productList = new ArrayList<>();
 		//データベース接続
 		try (Connection connection = super.getConnection()) {
 			String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
@@ -25,12 +24,12 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 				String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
 				
 			}
-*/
+			*/
 			PreparedStatement statement = connection.prepareStatement(sql);
 			/*statement.setString(1, product_id); *///ユーザIDをSQLパラメータに設定する
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					productList.add (new Product(resultSet.getString("product_id"),
+					productList.add(new Product(resultSet.getString("product_id"),
 							resultSet.getString("product_name"),
 							resultSet.getString("image_path"),
 							resultSet.getInt("price"),
@@ -43,37 +42,36 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 		return productList;
 	}
 
-	
 	//
+	
+	
 	public void reduceStock(
-	        String productId
-	        ) {
+			int quantity, String productId) {
+		try (Connection connection = getConnection()) {
 
-	    try (Connection connection = getConnection()) {
+			String sql = "UPDATE products SET stock = stock - ?  WHERE product_id = ?";
 
-	        String sql =
-	            "UPDATE products SET stock = stock - 1 WHERE product_id = ?";
-	        
-	        PreparedStatement statement =
-	                connection.prepareStatement(sql);
-	        statement.setString(1, productId); //在庫数をSQLパラメータに設定する
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, quantity);
+			statement.setString(2, productId); //在庫数をSQLパラメータに設定する
 
-	        System.out.println(statement);
-	        statement.executeUpdate();
+			System.out.println(statement);
+			statement.executeUpdate();
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }}
-	    
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
+
 	private Store makeStore() {
 		//Productテーブルから商品を検索して取得する
 		List<Product> productList = getProductList();
 		//店舗情報作成
-		Store store = new Store("速水PC販売",new ArrayList<Product>());
+		Store store = new Store("速水PC販売", new ArrayList<Product>());
 		//
-		for(Product product:productList) {
+		for (Product product : productList) {
 			//store.add(new.Product(・・・ここで商品情報を渡す...));
 			store.add(product);
 		}
