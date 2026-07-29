@@ -34,7 +34,7 @@
 			<th>商品名</th>
 			<th>商品画像</th>
 			<th>数量</th>
-			<th>価格（税込）</th>
+			<th>小計（税込）</th>
 			<th>在庫数</th>
 		</tr>
 		<%
@@ -78,7 +78,7 @@ String imagePath = prod.getImagePath();
 </td>
 
 <td><%=prod.getQuantity()%>個</td>
-			<td><%=prod.getPriceIncludingTax()%></td>
+			<td><%=prod.getPriceIncludingTax() * prod.getQuantity()%>円</td>
 			<td><%=prod.getStock()%></td>
 		</tr>
 		<%

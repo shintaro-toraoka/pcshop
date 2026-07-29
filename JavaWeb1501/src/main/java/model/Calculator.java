@@ -60,8 +60,8 @@ public class Calculator {
 	public int totalPriceIncludingTax(List<Product> listProd) {
 		int amount = 0;
 		for (int i = 0; i < listProd.size(); i++) {
-			//Product prod = listProd.get(i);
-			amount += addTax(listProd.get(i).getPrice());
+			Product prod = listProd.get(i);
+			amount += prod.getQuantity() * addTax(listProd.get(i).getPrice());
 		}
 		return amount;
 

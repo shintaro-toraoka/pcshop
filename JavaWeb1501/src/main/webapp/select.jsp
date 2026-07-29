@@ -103,7 +103,7 @@ String imagePath = prod.getImagePath();
 		class="quanti">
 </td>
 
-<td><%=prod.getPriceIncludingTax()%></td>
+<td><%=prod.getPriceIncludingTaxString()%></td>
 
 <td><%=prod.getStock()%></td>
 		</form>
@@ -114,7 +114,7 @@ String imagePath = prod.getImagePath();
 	</table>
 	<div id="productModal" class="modal">
     <div class="modal-content">
-        <span id="closeModal">&times;</span>
+        <span id="closeModal"></span>
     
 </div>
 <div id="zoomback">
