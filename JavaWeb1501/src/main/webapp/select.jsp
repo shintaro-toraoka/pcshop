@@ -16,20 +16,27 @@
 	<%@include file="header-navi.jsp"%>
 
 	<%
-	List<Product> listProd;
-	Store store = (Store) session.getAttribute("store");
-	if (store == null) {
-		listProd = new ArrayList<Product>();
-	} else {
-		listProd = store.getListProd();
+//	List<Product> listProd;
+	List<Product> listProd = (List<Product>)request.getAttribute("listProd");
+	
+	if (listProd == null){
+		
+		Store store = (Store) session.getAttribute("store");
+		if (store == null) {
+			listProd = new ArrayList<Product>();
+		} else {
+			listProd = store.getListProd();
+		}		
 	}
+	
+
 	if (listProd.size() > 0) {
 	%>
 
 	<h2>商品選択</h2>
-	<form action="/search" method="get">
+	<form action="search" method="get">
 	<input type="text" name="query" placeholder="キーワードを1つ入力">
-	<botton type="submit">をさがす</botton>
+	<button type="submit">をさがす</button>
 	</form>
 	
 	<br>

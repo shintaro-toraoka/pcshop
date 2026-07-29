@@ -13,11 +13,11 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 
 
 	@Override
-	public List<Product> getProductList() {
+	public List<Product> getProductList(String keyword) {
 		List<Product> productList = new ArrayList<>(); 
 		//データベース接続
 		try (Connection connection = super.getConnection()) {
-			String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
+//			String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
 			/*if () {
 				String sql = "SELECT * FROM products WHERE "; //TODO：ユーザを取得するSQLを書く
 				
@@ -26,8 +26,30 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 				
 			}
 */
+			String sql;
+			if (keyword != null && !keyword.isEmpty()) {
+
+			    sql = "SELECT * FROM products WHERE product_name LIKE ?";
+
+			} else {
+
+			    sql = "SELECT * FROM products";
+
+			}			
+			
 			PreparedStatement statement = connection.prepareStatement(sql);
 			/*statement.setString(1, product_id); *///ユーザIDをSQLパラメータに設定する
+
+	        if (keyword != null && !keyword.isEmpty()) {
+
+	            statement.setString(1, "%" + keyword + "%");
+
+	        }			
+			
+	        
+	        System.out.println(statement);
+	        
+			
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					productList.add (new Product(resultSet.getString("product_id"),
@@ -69,7 +91,7 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 	
 	private Store makeStore() {
 		//Productテーブルから商品を検索して取得する
-		List<Product> productList = getProductList();
+		List<Product> productList = getProductList(null);
 		//店舗情報作成
 		Store store = new Store("速水PC販売",new ArrayList<Product>());
 		//

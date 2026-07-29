@@ -85,7 +85,7 @@ public class Operation {
 	 * @return 店舗情報
 	 */
 	private Store makeStore() {
-		List<Product> productList = productDao.getProductList();
+		List<Product> productList = productDao.getProductList(null);
 		
 
 		// 店舗情報作成
@@ -163,9 +163,14 @@ public class Operation {
 		}
 	}
 	
-	public void search(String product_name, session) {
-		//商品の検索
-		
+	//public void search(String product_name, session) {
+	//	//商品の検索
+	//	
+	//}
+	public List<Product> searchProduct(String keyword){
+
+	    return productDao.getProductList(keyword);
+
 	}
 
 	public void pay(HttpSession session) {
