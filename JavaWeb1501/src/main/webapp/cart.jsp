@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <title>カート内一覧</title>
 <link rel="stylesheet" href="style.css">
+ <link rel="icon" href="<%= request.getContextPath() %>/images/ikon.png" type="image/png">
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
@@ -34,7 +35,7 @@
 			<th>商品名</th>
 			<th>商品画像</th>
 			<th>数量</th>
-			<th>価格（税込）</th>
+			<th>小計（税込）</th>
 			<th>在庫数</th>
 		</tr>
 		<%
@@ -63,7 +64,7 @@ String imagePath = prod.getImagePath();
 	} else {
 		String imageUrl = "images/" + imagePath;
 	%>
-		<a href="<%=imageUrl%>">
+		<%-- <a href="<%=imageUrl%>"> --%>
 			<img
 				src="<%=imageUrl%>"
 				class="zoom"
@@ -78,7 +79,7 @@ String imagePath = prod.getImagePath();
 </td>
 
 <td><%=prod.getQuantity()%>個</td>
-			<td><%=prod.getPriceIncludingTax()%></td>
+			<td><%=String.format("%,d",prod.getPriceIncludingTax() * prod.getQuantity())%>円</td>
 			<td><%=prod.getStock()%></td>
 		</tr>
 		<%

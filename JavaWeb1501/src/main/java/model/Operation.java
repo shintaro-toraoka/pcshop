@@ -186,7 +186,7 @@ public class Operation {
 //
 for (Product product : listProd) {
 	
-	productDao.reduceStock(product.getId());
+	productDao.reduceStock(product.getQuantity(),product.getId());
 //
 //            paymentDao.insertPayment(
 //                cart.getUserId(),     // ユーザID
@@ -198,6 +198,7 @@ for (Product product : listProd) {
 	
 			System.out.println("User;"+ cart.getUserId());
 			System.out.println("商品;" + product.getId());
+			System.out.println("購入数;" + product.getQuantity());
 			
 			
         }

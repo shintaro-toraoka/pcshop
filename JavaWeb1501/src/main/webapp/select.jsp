@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <title>商品選択</title>
 <link rel="stylesheet" href="style.css">
+ <link rel="icon" href="<%= request.getContextPath() %>/images/ikon.png" type="image/png">
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
@@ -86,7 +87,7 @@ String imagePath = prod.getImagePath();
 	} else {
 		String imageUrl = "images/" + imagePath;
 	%>
-		<a href="<%=imageUrl%>">
+		<%-- <a href="<%=imageUrl%>"> --%>
 			<img
 				src="<%=imageUrl%>"
 				class="zoom"
@@ -110,7 +111,7 @@ String imagePath = prod.getImagePath();
 		class="quanti">
 </td>
 
-<td><%=prod.getPriceIncludingTax()%></td>
+<td><%=prod.getPriceIncludingTaxString()%></td>
 
 <td><%=prod.getStock()%></td>
 		</form>

@@ -46,6 +46,7 @@ public class Product {
 		this.stock = stock;
 	}
 
+
 	/******** メソッド ******************************************/
 	/*--------------------getter/setter--------------------*/
 	/**
@@ -95,7 +96,7 @@ public class Product {
 	 * 税込価格を文字列で返す（３桁カンマ区切り＋"円"）
 	 * @return 税込価格 + 円
 	 */
-	public String getPriceIncludingTax() {
+	public String getPriceIncludingTaxString() {
 		//改修
 		//商品価格を税込表示（税率10％）
 		Calculator calculator = new Calculator();
@@ -105,5 +106,11 @@ public class Product {
 		return String.format("%,d", amount) + "円";
 		//return String.format("%,d", price) + "円";
 	}
-
+	//税込価格をintで返す
+	public int getPriceIncludingTax() {
+		Calculator calculator = new Calculator();
+		int amount = 0;
+		amount = calculator.addTax(price);
+		return amount;
+	}
 }
