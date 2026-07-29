@@ -64,7 +64,7 @@ String imagePath = prod.getImagePath();
 	} else {
 		String imageUrl = "images/" + imagePath;
 	%>
-		<a href="<%=imageUrl%>">
+		<%-- <a href="<%=imageUrl%>"> --%>
 			<img
 				src="<%=imageUrl%>"
 				class="zoom"
