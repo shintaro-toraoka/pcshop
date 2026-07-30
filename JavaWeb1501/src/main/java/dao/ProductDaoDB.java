@@ -22,17 +22,17 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 			} else {
 				String sql = "SELECT * FROM products "; //TODO：ユーザを取得するSQLを書く
 				
-//			}
-/// 
+			}
+ 
  */
 			String sql;
 			if (keyword != null && !keyword.isEmpty()) {
 
-			    sql = "SELECT * FROM products WHERE product_name LIKE ?";
+			    sql = "SELECT * FROM products WHERE category IS NOT NULL AND product_name LIKE ?";
 
 			} else {
 
-			    sql = "SELECT * FROM products";
+			    sql = "SELECT * FROM products WHERE category IS NOT NULL";
 
 			}			
 			

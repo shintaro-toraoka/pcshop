@@ -15,6 +15,8 @@
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
+	<img src ="images/deco3.png" class="main-image3">
+	<img src ="images/deco4.png" class="main-image4">
 
 	<%
 List<Product> listProd;

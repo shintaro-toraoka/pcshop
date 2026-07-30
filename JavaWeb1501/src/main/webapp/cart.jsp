@@ -15,7 +15,8 @@
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
-
+	<img src ="images/deco1.png" class="main-image1">
+	<img src ="images/deco2.png" class="main-image2">
 	<%
 	List<Product> listProd;
 	Cart cart = (Cart) session.getAttribute("cart");
