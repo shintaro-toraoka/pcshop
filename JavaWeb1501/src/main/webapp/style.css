@@ -24,8 +24,8 @@
 		position: absolute;
 		top: -30px;
 		left: -10px;
-		width: 450px;
-		height: 350px;
+		width: 350px;
+		height: 250px;
 		z-index: 9999;
 	}
 
@@ -33,11 +33,22 @@
 		position: absolute;
 		top: -30px;
 		right: -10px;
-		width: 450px;
-		height: 350px;
+		width: 350px;
+		height: 250px;
 		z-index: 9999;
 	}
 
+	/* ブラウザ幅が800px以下の場合 */
+	@media screen and (max-width: 800px) {
+		.main-image1,
+		.main-image2,
+		.main-image3,
+		.main-image4 {
+			display: none;
+		}
+	}	
+	 
+	 
 
 body {
 
