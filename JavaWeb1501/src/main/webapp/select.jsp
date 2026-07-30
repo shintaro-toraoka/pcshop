@@ -61,7 +61,7 @@
 		<form action="add-prod-servlet" method="POST">
 			<td>
 				
-					<input type="hidden" name="idx" value="<%=idx%>"> <input
+					<input type="hidden" name="productId" value="<%=prod.getId()%>"> <input
 						type="submit" value="選択">
 			</td>
 			<td><%=prod.getId()%></td>
@@ -108,7 +108,7 @@ String imagePath = prod.getImagePath();
 		value="1"
 		min="1"
 		max="<%=Math.min(prod.getStock(), 10)%>"
-		class="quanti">
+		class="quanti"><!-- cssで編集用name -->
 </td>
 
 <td><%=prod.getPriceIncludingTaxString()%></td>

@@ -116,33 +116,30 @@ public class Operation {
 
 	}
 
-	public void addProd(int idx, int quantity, HttpSession session) {
+	public void addProd(String productId, int quantity, HttpSession session) {
 
 		//店舗情報・カート情報の取得
 		Store store = (Store) session.getAttribute("store");
 		Cart cart  = (Cart) session.getAttribute("cart");
 
 		if((store != null) && (cart != null)) {
-			String newProd = store.getListProd().get(idx).getId();		
+//			String newProd = store.getListProd().getId();		
 			for(Product prod : cart.getListProd()) {
-				if(prod.getId().equals(newProd)) {
-//					System.out.println("一致");
-//					System.out.println(store.getListProd().get(idx).getQuantity());//元
-//					System.out.println(prod.getQuantity());//新
-					int total = prod.getQuantity() + quantity;
-					quantity = total;
-				}
-				
+				if(prod.getId().equals(productId)) {
+					 quantity += prod.getQuantity();
+				}		
 			}
-			cart.oldRemoveProd(newProd);
-
-			store.getListProd().get(idx).setQuantity(quantity);
+			cart.oldRemoveProd(productId);
+			for(Product prod : store.getListProd()) {
+				if(prod.getId().equals(productId)) {
+					prod.setQuantity(quantity);
+					cart.add(prod);
+					break;
+				}
+			}
+//		store.getListProd().get(productId).setQuantity(quantity);
 			//カートに指定の商品を追加
-			cart.add(store.getListProd().get(idx));
-
-
-			
-
+//			cart.add(store.getListProd().get(productId));
 			//セッションに再度格納
 			session.setAttribute("cart", cart);
 		}

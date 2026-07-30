@@ -42,7 +42,8 @@ public class AddProdServlet extends HttpServlet {
 		
 		//パラメータ取得
 		request.setCharacterEncoding("UTF-8");
-		int idx = Integer.parseInt(request.getParameter("idx"));
+//		int idx = Integer.parseInt(request.getParameter("idx"));
+		String productId = request.getParameter("productId");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 
 		//セッションオブジェクト取得
@@ -50,7 +51,7 @@ public class AddProdServlet extends HttpServlet {
 		
 		//カートへの商品追加処理
 		Operation op = new Operation();
-		op.addProd(idx, quantity, session);
+		op.addProd(productId, quantity, session);
 		
 		//転送先設定
 		String url = "cart.jsp";
