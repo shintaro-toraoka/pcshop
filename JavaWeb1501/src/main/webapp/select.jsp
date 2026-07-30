@@ -19,6 +19,12 @@
 	<img src="images/deco1.png" class="main-image3">
 	<img src="images/deco2.png" class="main-image4">
 
+	<h2>商品選択</h2>
+	<form action="search" method="get">
+	<input type="text" name="query" placeholder="キーワードを1つ入力">
+	<button type="submit">をさがす</button>
+	</form>
+	
 	<%
 //	List<Product> listProd;
 	List<Product> listProd = (List<Product>)request.getAttribute("listProd");
@@ -37,12 +43,17 @@
 	if (listProd.size() > 0) {
 	%>
 
+<<<<<<< HEAD
 	<h2>商品選択</h2>
 	<form action="search" method="get">
 		<input type="text" name="query" placeholder="キーワードを1つ入力">
 		<button type="submit">をさがす</button>
 	</form>
 
+=======
+	
+	
+>>>>>>> 989689d706020a54d343be9b2ad1a6d1cfeae54c
 	<br>
 
 	<table class="select-list">
