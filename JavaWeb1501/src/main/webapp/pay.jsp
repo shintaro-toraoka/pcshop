@@ -33,6 +33,7 @@ if (listProd.size() > 0) {
 		<tr>
 			<th>商品ID</th>
 			<th>商品名</th>
+			<th>数量</th>
 			<th>小計（税込）</th>
 		</tr>
 
@@ -42,6 +43,7 @@ if (listProd.size() > 0) {
 		<tr>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
+			<td><%=prod.getQuantity()%>個</td>
 			<td><%=String.format("%,d",prod.getPriceIncludingTax() * prod.getQuantity())%>円</td>
 		</tr>
 		<%
