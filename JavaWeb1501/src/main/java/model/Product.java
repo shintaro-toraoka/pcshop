@@ -113,4 +113,12 @@ public class Product {
 		amount = calculator.addTax(price);
 		return amount;
 	}
+	
+	public int getboughtPrice () {
+		Calculator calculator = new Calculator();
+		int amount = 0;
+		amount = calculator.addTax(price) * quantity;
+		return amount;
+
+	}
 }
