@@ -11,12 +11,13 @@
 <meta charset="UTF-8">
 <title>カート内一覧</title>
 <link rel="stylesheet" href="style.css">
- <link rel="icon" href="<%= request.getContextPath() %>/images/ikon.png" type="image/png">
+<link rel="icon" href="<%=request.getContextPath()%>/images/ikon.png"
+	type="image/png">
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
-	<img src ="images/deco1.png" class="main-image1">
-	<img src ="images/deco2.png" class="main-image2">
+	<img src="images/deco1.png" class="main-image1">
+	<img src="images/deco2.png" class="main-image2">
 	<%
 	List<Product> listProd;
 	Cart cart = (Cart) session.getAttribute("cart");
@@ -52,45 +53,36 @@
 			</td>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
-<%
-String imagePath = prod.getImagePath();
-%>
+			<%
+			String imagePath = prod.getImagePath();
+			%>
 
-<td>
-	<%
-	if (imagePath == null || imagePath.isBlank()) {
-	%>
-		<p>No Image</p>
-	<%
-	} else {
-		String imageUrl = "images/" + imagePath;
-	%>
-		<%-- <a href="<%=imageUrl%>"> --%>
-			<img
-				src="<%=imageUrl%>"
-				class="zoom"
-				width="60"
-				height="50"
-				alt="<%=prod.getName()%>"
-				onerror="this.onerror=null; this.src='images/Error.png';">
-		</a>
-	<%
-	}
-	%>
-</td>
+			<td>
+				<%
+				if (imagePath == null || imagePath.isBlank()) {
+				%>
+				<p>No Image</p> <%
+ } else {
+ String imageUrl = "images/" + imagePath;
+ %> <%-- <a href="<%=imageUrl%>"> --%> <img src="<%=imageUrl%>"
+				class="zoom" width="60" height="50" alt="<%=prod.getName()%>"
+				onerror="this.onerror=null; this.src='images/Error.png';"> </a> <%
+ }
+ %>
+			</td>
 
-<td><%=prod.getQuantity()%>個</td>
-			<td><%=String.format("%,d",prod.getPriceIncludingTax() * prod.getQuantity())%>円</td>
+			<td><%=prod.getQuantity()%>個</td>
+			<td><%=String.format("%,d", prod.getPriceIncludingTax() * prod.getQuantity())%>円</td>
 			<td><%=prod.getStock()%></td>
 		</tr>
 		<%
 		}
 		%>
 	</table>
-	
+
 	<div id="zoomback">
 		<img id="zoomimg" src="">
-		
+
 	</div>
 	<script>
 		// 要素を取得　..①
@@ -120,15 +112,32 @@ String imagePath = prod.getImagePath();
 			zoomback.style.display = "none";
 		}
 	</script>
-	
+
 	<br>
 
-	<p>合計（税込）：<%=cart.getTotalPriceIncludingTaxString() %> 円になります。</p>
+	<p>
+		合計（税込）：<%=cart.getTotalPriceIncludingTaxString()%>
+		円になります。
+	</p>
 
-	<form action="pay-servlet" method="post">
-		<input type="submit" value="精算"><br>
+	<form action="pay-servlet" method="post" onSubmit="PayCheck()">
+		<input type="submit" value="精算"> <br>
 
 	</form>
+
+	<!--精算ボタンを押すと確認のポップアップを表示-->
+	</form>
+	<script>
+		function PayCheck() {
+			if (confirm('カート内の商品を精算してよろしいですか？')) {
+				return true;
+			} else {
+				alert('キャンセルされました');
+				return false;
+			}
+		}
+	</script>
+
 	<%
 	} else {
 	%>
