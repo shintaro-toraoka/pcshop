@@ -11,11 +11,20 @@
 <meta charset="UTF-8">
 <title>商品選択</title>
 <link rel="stylesheet" href="style.css">
- <link rel="icon" href="<%= request.getContextPath() %>/images/ikon.png" type="image/png">
+<link rel="icon" href="<%= request.getContextPath() %>/images/ikon.png"
+	type="image/png">
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
+	<img src="images/deco1.png" class="main-image3">
+	<img src="images/deco2.png" class="main-image4">
 
+	<h2>商品選択</h2>
+	<form action="search" method="get">
+	<input type="text" name="query" placeholder="キーワードを1つ入力">
+	<button type="submit">をさがす</button>
+	</form>
+	
 	<%
 //	List<Product> listProd;
 	List<Product> listProd = (List<Product>)request.getAttribute("listProd");
@@ -34,12 +43,17 @@
 	if (listProd.size() > 0) {
 	%>
 
+<<<<<<< HEAD
 	<h2>商品選択</h2>
 	<form action="search" method="get">
-	<input type="text" name="query" placeholder="キーワードを1つ入力">
-	<button type="submit">をさがす</button>
+		<input type="text" name="query" placeholder="キーワードを1つ入力">
+		<button type="submit">をさがす</button>
 	</form>
+
+=======
 	
+	
+>>>>>>> 989689d706020a54d343be9b2ad1a6d1cfeae54c
 	<br>
 
 	<table class="select-list">
@@ -58,17 +72,16 @@
 			Product prod = listProd.get(idx);
 		%>
 		<tr>
-		<form action="add-prod-servlet" method="POST">
-			<td>
-				
-					<input type="hidden" name="idx" value="<%=idx%>"> <input
-						type="submit" value="選択">
-			</td>
-			<td><%=prod.getId()%></td>
-<%
+			<form action="add-prod-servlet" method="POST">
+				<td><input type="hidden" name="idx" value="<%=idx%>"> 
+				<%if (prod.getStock() >0){%><input
+					type="submit" value="選択"><% }%></td>
+				<td><%=prod.getId()%></td>
+				<%
 String imagePath = prod.getImagePath();
 %>
 
+<<<<<<< HEAD
 <td>
 	<%-- <a href="#"
 		class="product-link"
@@ -78,58 +91,51 @@ String imagePath = prod.getImagePath();
 	</a>--%>
 	<%=prod.getName()%>
 </td>
+=======
+				<td><a href="#" class="product-link"
+					data-id-price="<%=prod.getPriceIncludingTax()%>"
+					data-stock="<%=prod.getStock()%>"> <%=prod.getName()%>
+				</a></td>
+>>>>>>> b1862a5d34b1c865156ba97d5c35437d042c7e94
 
-<td>
-	<%
+				<td>
+					<%
 	if (imagePath == null || imagePath.isBlank()) {
 	%>
-		<p>No Image</p>
-	<%
+					<p>No Image</p> <%
 	} else {
 		String imageUrl = "images/" + imagePath;
-	%>
-		<%-- <a href="<%=imageUrl%>"> --%>
-			<img
-				src="<%=imageUrl%>"
-				class="zoom"
-				width="60"
-				height="50"
-				alt="<%=prod.getName()%>"
-				onerror="this.onerror=null; this.src='images/Error.png';">
-		</a>
-	<%
+	%> <%-- <a href="<%=imageUrl%>"> --%> <img src="<%=imageUrl%>"
+					class="zoom" width="60" height="50" alt="<%=prod.getName()%>"
+					onerror="this.onerror=null; this.src='images/Error.png';"> </a> <%
 	}
 	%>
-</td>
+				</td>
 
-<td>
-	<input
-		type="number"
-		name="quantity"
-		value="1"
-		min="1"
-		max="<%=Math.min(prod.getStock(), 10)%>"
-		class="quanti">
-</td>
+				<td><input type="number" name="quantity" value="1" min="1"
+					max="<%=Math.min(prod.getStock(), 10)%>" class="quanti"></td>
 
-<td><%=prod.getPriceIncludingTaxString()%></td>
+				<td><%=prod.getPriceIncludingTaxString()%></td>
 
-<td><%=prod.getStock()%></td>
-		</form>
+				<td>
+					<%if (prod.getStock() >0){%><%=prod.getStock()%>
+					<%}else{%>在庫切れ<%}%>
+				</td>
+			</form>
 		</tr>
 		<%
 		}
 		%>
 	</table>
 	<div id="productModal" class="modal">
-    <div class="modal-content">
-        <span id="closeModal"></span>
-    
-</div>
-<div id="zoomback">
-		<img id="zoomimg" src="">
-	</div>
-	<script>
+		<div class="modal-content">
+			<span id="closeModal"></span>
+
+		</div>
+		<div id="zoomback">
+			<img id="zoomimg" src="">
+		</div>
+		<script>
 		// 要素を取得　..①
 		const zoom = document.querySelectorAll(".zoom");
 		const zoomback = document.getElementById("zoomback");
@@ -158,9 +164,9 @@ String imagePath = prod.getImagePath();
 		}
 		
 	</script>
-	<%
+		<%
 	}
 	%>
-
+	
 </body>
 </html>
