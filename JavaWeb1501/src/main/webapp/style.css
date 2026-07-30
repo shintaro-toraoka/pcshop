@@ -1,10 +1,6 @@
 @charset "UTF-8";
 
-
-body {
-
-
-	.main-image3 {
+.main-image1 {
 		position: absolute;
 		top: -30px;
 		left: -10px;
@@ -13,7 +9,7 @@ body {
 		z-index: 9999;
 	}
 
-	.main-image4 {
+	.main-image2 {
 		position: absolute;
 		top: -30px;
 		right: -10px;
@@ -21,6 +17,31 @@ body {
 		height: 350px;
 		z-index: 9999;
 	}
+	
+
+
+	.main-image3 {
+		position: absolute;
+		top: -30px;
+		left: -10px;
+		width: 450px;
+		height: 350px;
+		z-index: 9999;
+	}
+
+	.main-image4 {
+		position: absolute;
+		top: -30px;
+		right: -10px;
+		width: 450px;
+		height: 350px;
+		z-index: 9999;
+	}
+
+
+body {
+
+
 
 	font-family: BIZ UDPゴシック;
 	background-color: #F8E8B0;

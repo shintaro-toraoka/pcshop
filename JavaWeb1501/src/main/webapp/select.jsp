@@ -16,8 +16,8 @@
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
-	<img src="images/deco1.png" class="main-image3">
-	<img src="images/deco2.png" class="main-image4">
+	<img src="images/deco1.png" class="main-image1">
+	<img src="images/deco2.png" class="main-image2">
 
 	<h2>商品選択</h2>
 	<form action="search" method="get">
@@ -41,6 +41,7 @@
 
 	if (listProd.size() > 0) {
 	%>
+
 
 	<h2>商品選択</h2>
 	<form action="search" method="get">
@@ -79,11 +80,23 @@
 				String imagePath = prod.getImagePath();
 				%>
 
+
+
+<td>
+	<%-- <a href="#"
+		class="product-link"
+		data-id-price="<%=prod.getPriceIncludingTax()%>"
+		data-stock="<%=prod.getStock()%>">
+		<%=prod.getName()%>
+	</a>--%> <!-- I'll be back. -->
+	<%=prod.getName()%>
+</td>
+
 				<td><a href="#" class="product-link"
 					data-id-price="<%=prod.getPriceIncludingTax()%>"
 					data-stock="<%=prod.getStock()%>"> <%=prod.getName()%>
 				</a></td>
-
+				
 				<td>
 					<%
 					if (imagePath == null || imagePath.isBlank()) {
@@ -101,9 +114,6 @@
 				<td><input type="number" name="quantity" value="1" min="1"
 					required max="<%=Math.min(prod.getStock(), 10)%>" class="quanti">
 				</td> 
-				<td><input type="number" name="quantity" value="1" min="1"
-					max="<%=Math.min(prod.getStock(), 10)%>" class="quanti"></td>
-			
 
 				<td><%=prod.getPriceIncludingTaxString()%></td>
 
