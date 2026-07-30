@@ -56,102 +56,79 @@
 			<th>在庫数</th>
 		</tr>
 
-<%
-for (int idx = 0; idx < listProd.size(); idx++) {
-	Product prod = listProd.get(idx);
-	String imagePath = prod.getImagePath();
-	String formId = "addProdForm" + idx;
-%>
-
-<tr>
-	<td>
-		<form
-			id="<%=formId%>"
-			action="add-prod-servlet"
-			method="POST">
-
-			<input
-				type="hidden"
-				name="productId"
-				value="<%=prod.getId()%>">
-
-			<%
-			if (prod.getStock() > 0) {
-			%>
-				<input type="submit" value="選択">
-			<%
-			}
-			%>
-		</form>
-	</td>
-
-	<td><%=prod.getId()%></td>
-
-	<td><%=prod.getName()%></td>
-
-	<td>
 		<%
-		if (imagePath == null || imagePath.isBlank()) {
+		for (int idx = 0; idx < listProd.size(); idx++) {
+			Product prod = listProd.get(idx);
+			String imagePath = prod.getImagePath();
+			String formId = "addProdForm" + idx;
 		%>
-			<p>No Image</p>
-		<%
-		} else {
-			String imageUrl = "images/" + imagePath;
-		%>
-			<img
-				src="<%=imageUrl%>"
-				class="zoom"
-				width="60"
-				height="50"
+
+		<tr>
+			<td>
+				<form id="<%=formId%>" action="add-prod-servlet" method="POST">
+
+					<input type="hidden" name="productId" value="<%=prod.getId()%>">
+
+					<%
+					if (prod.getStock() > 0) {
+					%>
+					<input type="submit" value="選択">
+					<%
+					} else {
+					%><input type="submit" value="選択" disabled>
+					<%
+					}
+					%>
+
+				</form>
+			</td>
+
+			<td><%=prod.getId()%></td>
+
+			<td><%=prod.getName()%></td>
+
+			<td>
+				<%
+				if (imagePath == null || imagePath.isBlank()) {
+				%>
+				<p>No Image</p> <%
+ } else {
+ String imageUrl = "images/" + imagePath;
+ %> <img src="<%=imageUrl%>" class="zoom" width="60" height="50"
 				alt="<%=prod.getName()%>"
-				onerror="this.onerror=null; this.src='images/Error.png';">
+				onerror="this.onerror=null; this.src='images/Error.png';"> <%
+ }
+ %>
+			</td>
+
+			<td>
+				<%
+				if (prod.getStock() > 0) {
+				%> <input type="number" name="quantity" value="1" min="1"
+				max="<%=Math.min(prod.getStock(), 10)%>" required class="quanti"
+				form="<%=formId%>"> <%
+ } else {
+ %> - <%
+ }
+ %>
+			</td>
+
+			<td><%=prod.getPriceIncludingTaxString()%></td>
+
+			<td>
+				<%
+				if (prod.getStock() > 0) {
+				%> <%=prod.getStock()%> <%
+ } else {
+ %> 在庫切れ <%
+ }
+ %>
+			</td>
+		</tr>
+
 		<%
 		}
 		%>
-	</td>
-
-	<td>
-		<%
-		if (prod.getStock() > 0) {
-		%>
-			<input
-				type="number"
-				name="quantity"
-				value="1"
-				min="1"
-				max="<%=Math.min(prod.getStock(), 10)%>"
-				required
-				class="quanti"
-				form="<%=formId%>">
-		<%
-		} else {
-		%>
-			-
-		<%
-		}
-		%>
-	</td>
-
-	<td><%=prod.getPriceIncludingTaxString()%></td>
-
-	<td>
-		<%
-		if (prod.getStock() > 0) {
-		%>
-			<%=prod.getStock()%>
-		<%
-		} else {
-		%>
-			在庫切れ
-		<%
-		}
-		%>
-	</td>
-</tr>
-
-<%
-}
-%>
 	</table>
 	<div id="productModal" class="modal">
 		<div class="modal-content">
