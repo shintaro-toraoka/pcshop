@@ -108,7 +108,7 @@ String imagePath = prod.getImagePath();
 		type="number"
 		name="quantity"
 		value="1"
-		min="1"
+		min="1" required
 		max="<%=Math.min(prod.getStock(), 10)%>"
 		class="quanti">
 </td>
