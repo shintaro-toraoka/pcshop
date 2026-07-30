@@ -70,12 +70,13 @@ String imagePath = prod.getImagePath();
 %>
 
 <td>
-	<a href="#"
+	<%-- <a href="#"
 		class="product-link"
 		data-id-price="<%=prod.getPriceIncludingTax()%>"
 		data-stock="<%=prod.getStock()%>">
 		<%=prod.getName()%>
-	</a>
+	</a>--%>
+	<%=prod.getName()%>
 </td>
 
 <td>
