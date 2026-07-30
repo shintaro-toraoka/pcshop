@@ -70,26 +70,19 @@
 					}
 					%></td>
 				<td><%=prod.getId()%></td>
-				<%
-				String imagePath = prod.getImagePath();
-				%>
+		<td><%=prod.getName()%></td>
+				<%String imagePath = prod.getImagePath();%>
 
 
 
-<td>
-	<%-- <a href="#"
+<%-- <td>
+	 <a href="#"
 		class="product-link"
 		data-id-price="<%=prod.getPriceIncludingTax()%>"
 		data-stock="<%=prod.getStock()%>">
 		<%=prod.getName()%>
-	</a>--%> <!-- I'll be back. -->
-	<%=prod.getName()%>
-</td>
-
-				<td><a href="#" class="product-link"
-					data-id-price="<%=prod.getPriceIncludingTax()%>"
-					data-stock="<%=prod.getStock()%>"> <%=prod.getName()%>
-				</a></td>
+	</a> <!-- I'll be back. -->
+</td> --%>
 				
 				<td>
 					<%
