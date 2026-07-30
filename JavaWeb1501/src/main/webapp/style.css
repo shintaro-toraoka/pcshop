@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+
+/* ブラウザ幅が800px以下の場合 */
+@media screen and (max-width: 800px) {
+
+	.main-image1,
+	.main-image2,
+	.main-image3,
+	.main-image4 {
+		display: none;
+	}
+}
+
 .main-image1 {
 	position: absolute;
 	top: -30px;
@@ -37,15 +49,7 @@
 	height: 250px;
 	z-index: 9999;
 }
-/* ブラウザ幅が800px以下の場合 */
-@media screen and (max-width: 800px) {
-	.main-image1,
-	.main-image2,
-	.main-image3,
-	.main-image4 {
-		display: none;
-	}
-} 
+
 
 body {
 
@@ -162,127 +166,129 @@ h1::after {
 	background-image: url("images/tiger_right.jpg");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-position: center;}
+	background-position: center;
+}
 
 .pay-page h1::after {
-		content: "";
-		display: inline-block;
-		width: 80px;
-		height: 50px;
+	content: "";
+	display: inline-block;
+	width: 80px;
+	height: 50px;
 
-		background-image: url("images/tiger_left.jpg");
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: center;}
+	background-image: url("images/tiger_left.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
 
 
 
-		h2 {
-			font-size: 28px;
-			background-color: #138808;
-			color: white
-		}
+h2 {
+	font-size: 28px;
+	background-color: #138808;
+	color: white
+}
 
-		hr {
-			border: 0;
-			border-top: 1px solid #8fbc8f;
-		}
+hr {
+	border: 0;
+	border-top: 1px solid #8fbc8f;
+}
 
-		.error-msg {
-			color: red;
-		}
+.error-msg {
+	color: red;
+}
 
-		table {
-			border: 3px solid #5D4037;
-			border-radius: 10px;
-			overflow: hidden;
-			border-collapse: separate;
-			margin-left: auto;
-			margin-right: auto;
-			width: 80%;
-			border-spacing: 0;
-			/* 境界線を共有 */
-		}
+table {
+	border: 3px solid #5D4037;
+	border-radius: 10px;
+	overflow: hidden;
+	border-collapse: separate;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	border-spacing: 0;
+	/* 境界線を共有 */
+}
 
-		th {
+th {
 
-			border: 1px solid #5D4037;
-			;
-			text-align: center;
-			background-color: #E67E22;
-			color: white;
-			height: 32px;
-		}
+	border: 1px solid #5D4037;
+	;
+	text-align: center;
+	background-color: #E67E22;
+	color: white;
+	height: 32px;
+}
 
-		td {
-			border: 1px solid #5D4037;
-			;
-			text-align: center;
-			height: 24px;
-		}
+td {
+	border: 1px solid #5D4037;
+	;
+	text-align: center;
+	height: 24px;
+}
 
-		.cartCount {
-			color: red;
-		}
+.cartCount {
+	color: red;
+}
 
-		.quanti {
-			width: 30px;
-			text-align: center;
-		}
+.quanti {
+	width: 30px;
+	text-align: center;
+}
 
-		.select-list {
-			tr:nth-child(even) {
-				background: #FFF8E8;
-			}
+.select-list {
+	tr:nth-child(even) {
+		background: #FFF8E8;
+	}
 
-			tr:nth-child(odd) {
-				background: #FDF0D5;
-			}
-		}
+	tr:nth-child(odd) {
+		background: #FDF0D5;
+	}
+}
 
-		.cart-list {
-			tr:nth-child(even) {
-				background: #FFF8E8;
-			}
+.cart-list {
+	tr:nth-child(even) {
+		background: #FFF8E8;
+	}
 
-			tr:nth-child(odd) {
-				background: #FDF0D5;
-			}
-		}
+	tr:nth-child(odd) {
+		background: #FDF0D5;
+	}
+}
 
-		.pay-list {
-			background-color: #FFE6BF;
-			color: #CC6600;
+.pay-list {
+	background-color: #FFE6BF;
+	color: #CC6600;
 
-			.modal {
-				display: none;
-				position: fixed;
-				z-index: 9999;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				background-color: rgba(0, 0, 0, 0.5);
-			}
+	.modal {
+		display: none;
+		position: fixed;
+		z-index: 9999;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
 
-			.modal-content {
-				background-color: white;
-				width: 400px;
-				margin: 10% auto;
-				padding: 20px;
-				border-radius: 10px;
-			}
+	.modal-content {
+		background-color: white;
+		width: 400px;
+		margin: 10% auto;
+		padding: 20px;
+		border-radius: 10px;
+	}
 
-			#closeModal {
-				float: right;
-				font-size: 28px;
-				cursor: pointer;
-			}
+	#closeModal {
+		float: right;
+		font-size: 28px;
+		cursor: pointer;
+	}
 
-			.product-link {
-				color: blue;
-				text-decoration: underline;
-				cursor: pointer;
-			}
+	.product-link {
+		color: blue;
+		text-decoration: underline;
+		cursor: pointer;
+	}
 
-		}
+}
