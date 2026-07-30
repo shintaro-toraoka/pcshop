@@ -84,12 +84,14 @@
 		<%=prod.getName()%>
 	</a>--%> <!-- I'll be back. -->
 	<%=prod.getName()%>
-</td>
+</td> 
 
+<%-- 
 				<td><a href="#" class="product-link"
-					data-id-price="<%=prod.getPriceIncludingTax()%>"
-					data-stock="<%=prod.getStock()%>"> <%=prod.getName()%>
+					data-id-price="<%=//prod.getPriceIncludingTax()--%>
+					<%-- data-stock="<%=//prod.getStock()%>"<%=//prod.getName()%>
 				</a></td>
+				--%>
 				
 				<td>
 					<%
