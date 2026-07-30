@@ -4,8 +4,8 @@
 		position: absolute;
 		top: -30px;
 		left: -10px;
-		width: 400px;
-		height: 350px;
+		width: 300px;
+		height: 200px;
 		z-index: 9999;
 	}
 
@@ -13,8 +13,8 @@
 		position: absolute;
 		top: -30px;
 		right: -10px;
-		width: 400px;
-		height: 350px;
+		width: 300px;
+		height: 200px;
 		z-index: 9999;
 	}
 	
