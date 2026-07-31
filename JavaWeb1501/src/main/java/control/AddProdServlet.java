@@ -45,6 +45,7 @@ public class AddProdServlet extends HttpServlet {
 //		int idx = Integer.parseInt(request.getParameter("idx"));
 		String productId = request.getParameter("productId");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String productName = request.getParameter("productName");
 
 		//セッションオブジェクト取得
 		HttpSession session = request.getSession();
@@ -52,6 +53,7 @@ public class AddProdServlet extends HttpServlet {
 		//カートへの商品追加処理
 		Operation op = new Operation();
 		op.addProd(productId, quantity, session);
+		session.setAttribute("addedMessage",productName + "を追加しました！");
 		
 		//転送先設定
 		String url = "select.jsp";
