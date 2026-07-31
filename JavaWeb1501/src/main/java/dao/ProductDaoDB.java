@@ -25,29 +25,31 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 			}
  
  */
-			String sql;
-			if (keyword != null && !keyword.isEmpty()) {
+			StringBuilder sql = new StringBuilder("SELECT * FROM products WHERE category IS NOT NULL");
+				
+			String[]keywords = null;
 
-			    sql = "SELECT * FROM products WHERE category IS NOT NULL AND product_name LIKE ?";
-
-			} else {
-
-			    sql = "SELECT * FROM products WHERE category IS NOT NULL";
-
-			}			
-			
-
-			PreparedStatement statement = connection.prepareStatement(sql);
-			/*statement.setString(1, product_id); *///ユーザIDをSQLパラメータに設定する
-
-	        if (keyword != null && !keyword.isEmpty()) {
-
-	            statement.setString(1, "%" + keyword + "%");
-
-	        }			
-			
-	        
-	        System.out.println(statement);
+				if(keyword != null && !keyword.trim().isEmpty()){
+					
+					keywords =keyword.trim().split("[\\s　]+");
+				 	for(String word : keywords){
+				 		sql.append(" AND product_name LIKE ?");
+				 		}
+				}
+				 	PreparedStatement statement = connection.prepareStatement(sql.toString());
+				
+				 	if(keywords !=null){
+				 			for(int i =0; i<keywords.length; i++){
+				 			statement.setString( i+1,
+				 			"%" + keywords[i] + "%"
+				 			);
+				 		}
+		
+				 			
+				 		System.out.println(statement);
+				 		
+				 	}else { System.out.println("該当商品が見つかりませんでした。");
+				}
 	        
 			
 			try (ResultSet resultSet = statement.executeQuery()) {
@@ -75,11 +77,11 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 			e.printStackTrace();
 		}
 		return productList;
-	}
+		
+		}
 
 	//
-	
-	
+
 	public void reduceStock(
 			int quantity, String productId) {
 		try (Connection connection = getConnection()) {
@@ -98,7 +100,5 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 		}
 	}
 
-	
-	
 
-	}
+}

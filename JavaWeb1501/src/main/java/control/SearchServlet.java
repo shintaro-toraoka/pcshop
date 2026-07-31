@@ -28,16 +28,24 @@ public class SearchServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String keyword = request.getParameter("query");
 		
+		if(keyword != null) {
+			keyword = keyword.replace("　", " ");
+		}
+		
 		//検索処理
 		Operation op = new Operation();
-		
 		List<Product> listProd = op.searchProduct(keyword);
+		
+		//商品が見つからない場合
+		if (listProd.isEmpty()) {
+			request.setAttribute("message","該当商品が見つかりませんでした。");
+		}
 
 
 		// JSPへ渡す
+		request.setAttribute("query",keyword);
 		request.setAttribute("listProd", listProd);
-
-
+		
 		// 商品一覧画面へ戻す
 		request.getRequestDispatcher("/select.jsp")
 		       .forward(request, response);
