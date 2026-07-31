@@ -18,7 +18,8 @@
 	<%@include file="header-navi.jsp"%>
 	<img src="images/deco1.png" class="main-image1">
 	<img src="images/deco2.png" class="main-image2">
-
+	
+<!-- 商品検索の処理 -->
 	<h2>商品選択</h2>
 	<form action="search" method="get">
 		<input type="text" value="${query}" name="query" placeholder="キーワードを1つ入力">
@@ -89,18 +90,37 @@
 					%>
 					<input type="submit" value="選択">
 					<%
+
+					}
+					%>
+
 					} else {
 					%><input type="submit" value="選択" disabled>
 					<%
 					}
 					%>
-
 				</form>
 			</td>
 
 			<td><%=prod.getId()%></td>
 
+			<!-- <td><%=prod.getName()%></td>-->
+
+			<!-- ここから商品リンク化 -->
+			<td><span class="prod-name" data-id="<%=prod.getId()%>"
+				data-name="<%=prod.getName()%>"
+				data-price="<%=prod.getPriceIncludingTaxString()%>"
+				data-stock="<%=prod.getStock()%>" data-image="<%=imagePath%>"
+				data-calories="<%=prod.getCalories()%>"
+				data-nutrients="<%=prod.getNutrients()%>"
+				data-recommendation="<%=prod.getRecommendation()%>">
+				 <%=prod.getName()%>
+
+			</span></td>
+			<!-- ここまで -->
+=======
 			<td><%=prod.getName()%></td>
+>>>>>>> 3f6742ad24ba0334daca5380b64e7d224ddeebe9
 
 			<td>
 				<%
@@ -145,6 +165,35 @@
 		}
 		%>
 	</table>
+
+	<!-- 商品名クリックしたら情報表示 -->
+	<div id="detailModal" class="modal">
+		<div class="modal-content">
+			<span id="closeDetailModal">&times;</span>
+
+			<h3 id="modalName"></h3>
+
+			<p>
+				<img id="modalImage" src="">
+			</p>
+			<p>
+				<b>カロリー</b><br> <span id="modalCalories"></span>
+			</p>
+
+			<p>
+				<b>栄養素</b><br> <span id="modalNutrients"></span>
+			</p>
+
+			<p>
+				<b>おすすめポイント</b><br> <span id="modalRecommendation"></span>
+			</p>
+
+
+		</div>
+
+		<!--ここまで -->
+
+	</div>
 	<div id="productModal" class="modal">
 		<div class="modal-content">
 			<span id="closeModal"></span>
@@ -153,6 +202,10 @@
 		<div id="zoomback">
 			<img id="zoomimg" src="">
 		</div>
+
+
+
+
 		<script>
 			// 要素を取得　..①
 			const zoom = document.querySelectorAll(".zoom");
@@ -180,6 +233,41 @@
 
 				zoomback.style.display = "none";
 			}
+
+			//ここから商品リンク化
+			const modal = document.getElementById("detailModal");
+const closeModal = document.getElementById("closeDetailModal");
+
+document.querySelectorAll(".prod-name").forEach(item => {
+
+    item.addEventListener("click", function() {
+
+        document.getElementById("modalName").textContent =
+            this.textContent;
+        
+        document.getElementById("modalCalories").textContent =
+            this.dataset.calories;
+
+        document.getElementById("modalNutrients").textContent =
+            this.dataset.nutrients;
+
+        document.getElementById("modalRecommendation").textContent =
+            this.dataset.recommendation;
+
+        document.getElementById("modalImage").src =
+            "images/" + this.dataset.image;
+
+        modal.style.display = "block";
+        
+        
+    });
+
+});
+
+closeModal.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+			
 		</script>
 		<%
 		}

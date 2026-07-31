@@ -31,6 +31,14 @@ public class Product {
 	//在庫数
 	private int stock;
 
+	//商品情報詳細フィールド名
+	private String calories;
+	private String nutrients;
+	private String recommendation;
+
+	
+	
+	
 	/******** コンストラクタ **************************************/
 	/**
 	 * フィールド初期化コンストラクタ
@@ -38,12 +46,34 @@ public class Product {
 	 * @param name
 	 * @param price
 	 */
-	public Product(String id, String name, String image_path,int price, int stock) {
+	/*これがもともとのもの商品情報詳細表示のためコメントアウト
+	 * public Product(String id, String name, String image_path,int price, int stock) {
 		this.id = id;
 		this.name = name;
 		this.image_path = image_path;
 		this.price = price;
 		this.stock = stock;
+	}*/
+	
+	//コンストラクタ
+	public Product(
+	        String id,
+	        String name,
+	        String image_path,
+	        int price,
+	        int stock,
+	        String calories,
+	        String nutrients,
+	        String recommendation) {
+	    this.id = id;
+	    this.name = name;
+	    this.image_path = image_path;
+	    this.price = price;
+	    this.stock = stock;
+
+	    this.calories = calories;
+	    this.nutrients = nutrients;
+	    this.recommendation = recommendation;
 	}
 
 
@@ -113,4 +143,38 @@ public class Product {
 		amount = calculator.addTax(price);
 		return amount;
 	}
+	
+	//商品情報詳細ゲッターセッター
+	public String getCalories() {
+	    return calories;
+	}
+
+	public void setCalories(String calories) {
+	    this.calories = calories;
+	}
+
+	public String getNutrients() {
+	    return nutrients;
+	}
+
+	public void setNutrients(String nutrients) {
+	    this.nutrients = nutrients;
+	}
+
+	public String getRecommendation() {
+	    return recommendation;
+	}
+
+	public void setRecommendation(String recommendation) {
+	    this.recommendation = recommendation;
+	}
+	
+	public int getboughtPrice () {
+		Calculator calculator = new Calculator();
+		int amount = 0;
+		amount = calculator.addTax(price) * quantity;
+		return amount;
+
+	}
+
 }
