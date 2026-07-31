@@ -21,9 +21,24 @@
 
 	<h2>商品選択</h2>
 	<form action="search" method="get">
-		<input type="text" name="query" placeholder="キーワードを1つ入力">
+		<input type="text" value="${query}" name="query" placeholder="キーワードを1つ入力">
 		<button type="submit">をさがす</button>
 	</form>
+	<%
+	String keyword = request.getParameter("query");
+	%>
+	<%
+	String message =(String)request.getAttribute("message");
+	
+	if(message !=null){
+	%>
+	
+	<p style="color:red;">
+	<%= message %>
+	</p>
+	<%
+	}
+	%>
 
 	<%
 	//	List<Product> listProd;
@@ -169,6 +184,28 @@
 		<%
 		}
 		%>
-	
+<div class="pp-btn-wrap">
+	<button id="pp-btn">ひとくち</button>
+</div>
+<div id="pp-popup" class="pp-popup">
+<p class="pp-headline">カレーって美味しいよね</p>
+<p class="pp-body">肉食が解禁された明治時代に、「ライスカレー」が普及したそうです。</p>
+</div>
+
+<script>
+const ppBtn = document.querySelector('#pp-btn');
+const ppPopup = document.querySelector('#pp-popup');
+
+if (ppBtn && ppPopup) {
+  ppBtn.addEventListener('click', function() {
+    ppPopup.className = 'pp-popup pp-active';
+  });
+  ppPopup.addEventListener('animationend', function(e) {
+    if (e.animationName === 'ppAnim') {
+      ppPopup.className = 'pp-popup';
+    }
+  });
+}
+</script>
 </body>
 </html>

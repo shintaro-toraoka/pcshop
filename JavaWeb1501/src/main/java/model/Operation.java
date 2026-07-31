@@ -160,16 +160,17 @@ public class Operation {
 		}
 	}
 	
-	//public void search(String product_name, session) {
-	//	//商品の検索
-	//	
-	//}
+	
 	public List<Product> searchProduct(String keyword){
-
+		if(keyword !=null) {
+			keyword = keyword.trim();
+		}
+		
 	    return productDao.getProductList(keyword);
 
 	}
 
+	
 	public void pay(HttpSession session) {
 		//店舗情報・カート情報の取得
 		Cart cart  = (Cart) session.getAttribute("cart");
