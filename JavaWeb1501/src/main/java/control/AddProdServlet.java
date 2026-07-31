@@ -54,7 +54,7 @@ public class AddProdServlet extends HttpServlet {
 		op.addProd(productId, quantity, session);
 		
 		//転送先設定
-		String url = "cart.jsp";
+		String url = "select.jsp";
 		
 		// 転送
 		/*

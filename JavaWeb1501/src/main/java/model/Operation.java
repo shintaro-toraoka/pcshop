@@ -159,6 +159,7 @@ public class Operation {
 
 		}
 	}
+<<<<<<< HEAD
 
 	//public void search(String product_name, session) {
 	//	//商品の検索
@@ -167,6 +168,16 @@ public class Operation {
 	public List<Product> searchProduct(String keyword) {
 
 		return productDao.getProductList(keyword);
+=======
+	
+	
+	public List<Product> searchProduct(String keyword){
+		if(keyword !=null) {
+			keyword = keyword.trim();
+		}
+		
+	    return productDao.getProductList(keyword);
+>>>>>>> 89cd6489d3f2ff17e3b25f0be1c58420bf359cf9
 
 	}
 	
@@ -176,6 +187,7 @@ public class Operation {
 		return paymentDao.getPaymentList(userId);
 		}
 
+	
 	public void pay(HttpSession session) {
 		System.out.println("pay開始");
 		

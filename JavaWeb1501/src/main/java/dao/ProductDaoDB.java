@@ -25,49 +25,63 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 			}
  
  */
-			String sql;
-			if (keyword != null && !keyword.isEmpty()) {
+			StringBuilder sql = new StringBuilder("SELECT * FROM products WHERE category IS NOT NULL");
+				
+			String[]keywords = null;
 
-			    sql = "SELECT * FROM products WHERE category IS NOT NULL AND product_name LIKE ?";
-
-			} else {
-
-			    sql = "SELECT * FROM products WHERE category IS NOT NULL";
-
-			}			
-			
-
-			PreparedStatement statement = connection.prepareStatement(sql);
-			/*statement.setString(1, product_id); *///ユーザIDをSQLパラメータに設定する
-
-	        if (keyword != null && !keyword.isEmpty()) {
-
-	            statement.setString(1, "%" + keyword + "%");
-
-	        }			
-			
-	        
-	        System.out.println(statement);
+				if(keyword != null && !keyword.trim().isEmpty()){
+					
+					keywords =keyword.trim().split("[\\s　]+");
+				 	for(String word : keywords){
+				 		sql.append(" AND product_name LIKE ?");
+				 		}
+				}
+				 	PreparedStatement statement = connection.prepareStatement(sql.toString());
+				
+				 	if(keywords !=null){
+				 			for(int i =0; i<keywords.length; i++){
+				 			statement.setString( i+1,
+				 			"%" + keywords[i] + "%"
+				 			);
+				 		}
+		
+				 			
+				 		System.out.println(statement);
+				 		
+				 	}else { System.out.println("該当商品が見つかりませんでした。");
+				}
 	        
 			
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					productList.add(new Product(resultSet.getString("product_id"),
+					/*productList.add(new Product(resultSet.getString("product_id"),
 							resultSet.getString("product_name"),
 							resultSet.getString("image_path"),
 							resultSet.getInt("price"),
-							resultSet.getInt("stock")));//TODO：ユーザを生成する
+							resultSet.getInt("stock")));*///TODO：ユーザを生成する
+					productList.add(
+						    new Product(
+						        resultSet.getString("product_id"),
+						        resultSet.getString("product_name"),
+						        resultSet.getString("image_path"),
+						        resultSet.getInt("price"),
+						        resultSet.getInt("stock"),
+						        resultSet.getString("calories"),
+						        resultSet.getString("nutrients"),
+						        resultSet.getString("recommendation")
+						    )
+						);
 				}
 			}
 		} catch (Exception e) { //例外発生時の処理
 			e.printStackTrace();
 		}
 		return productList;
-	}
+		
+		}
 
 	//
-	
-	
+
 	public void reduceStock(
 			int quantity, String productId) {
 		try (Connection connection = getConnection()) {
@@ -86,6 +100,5 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 		}
 	}
 
-	
 
-	}
+}

@@ -19,11 +19,28 @@
 	<img src="images/deco1.png" class="main-image1">
 	<img src="images/deco2.png" class="main-image2">
 
+	<!-- 商品検索の処理 -->
 	<h2>商品選択</h2>
 	<form action="search" method="get">
-		<input type="text" name="query" placeholder="キーワードを1つ入力">
+		<input type="text" value="${query}" name="query"
+			placeholder="キーワードを入力">
 		<button type="submit">をさがす</button>
 	</form>
+	<%
+	String keyword = request.getParameter("query");
+	%>
+	<%
+	String message = (String) request.getAttribute("message");
+
+	if (message != null) {
+	%>
+
+	<p style="color: red;">
+		<%=message%>
+	</p>
+	<%
+	}
+	%>
 
 	<%
 	//	List<Product> listProd;
@@ -72,10 +89,12 @@
 					<%
 					if (prod.getStock() > 0) {
 					%>
-					<input type="submit" value="選択">
+						<input type="submit" value="選択">
 					<%
 					} else {
-					%><input type="submit" value="選択" disabled>
+					%>
+					<input type="submit" value="選択" disabled>
+
 					<%
 					}
 					%>
@@ -85,7 +104,19 @@
 
 			<td><%=prod.getId()%></td>
 
-			<td><%=prod.getName()%></td>
+
+			<!-- <td><%=prod.getName()%></td>-->
+
+			<!-- ここから商品リンク化 -->
+			<td><span class="prod-name" data-id="<%=prod.getId()%>"
+				data-name="<%=prod.getName()%>"
+				data-price="<%=prod.getPriceIncludingTaxString()%>"
+				data-stock="<%=prod.getStock()%>" data-image="<%=imagePath%>"
+				data-calories="<%=prod.getCalories()%>"
+				data-nutrients="<%=prod.getNutrients()%>"
+				data-recommendation="<%=prod.getRecommendation()%>"> <%=prod.getName()%>
+
+			</span></td>
 
 			<td>
 				<%
@@ -130,14 +161,48 @@
 		}
 		%>
 	</table>
+
+	<!-- 商品名クリックしたら情報表示 -->
+	<div id="detailModal" class="modal">
+		<div class="modal-content">
+			<span id="closeDetailModal">&times;</span>
+
+			<h3 id="modalName"></h3>
+
+			<p>
+				<img id="modalImage" src="">
+			</p>
+			<p>
+				<b>カロリー</b><br> <span id="modalCalories"></span>
+			</p>
+
+			<p>
+				<b>栄養素</b><br> <span id="modalNutrients"></span>
+			</p>
+
+			<p>
+				<b>おすすめポイント</b><br> <span id="modalRecommendation"></span>
+			</p>
+
+
+		</div>
+
+		<!--ここまで -->
+
+	</div>
 	<div id="productModal" class="modal">
 		<div class="modal-content">
 			<span id="closeModal"></span>
 
 		</div>
+		</div>
 		<div id="zoomback">
 			<img id="zoomimg" src="">
 		</div>
+
+
+
+
 		<script>
 			// 要素を取得　..①
 			const zoom = document.querySelectorAll(".zoom");
@@ -165,10 +230,69 @@
 
 				zoomback.style.display = "none";
 			}
+
+			//ここから商品リンク化
+			const modal = document.getElementById("detailModal");
+const closeModal = document.getElementById("closeDetailModal");
+
+document.querySelectorAll(".prod-name").forEach(item => {
+
+    item.addEventListener("click", function() {
+
+        document.getElementById("modalName").textContent =
+            this.textContent;
+        
+        document.getElementById("modalCalories").textContent =
+            this.dataset.calories;
+
+        document.getElementById("modalNutrients").textContent =
+            this.dataset.nutrients;
+
+        document.getElementById("modalRecommendation").textContent =
+            this.dataset.recommendation;
+
+        document.getElementById("modalImage").src =
+            "images/" + this.dataset.image;
+
+        modal.style.display = "block";
+        
+        
+    });
+
+});
+
+closeModal.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+			
 		</script>
 		<%
 		}
-		%>
-	
+		%>	
+		
+<!-- ポップアップ表示 -->
+<div class="pp-btn-wrap">
+	<button id="pp-btn">ひとくち</button>
+</div>
+<div id="pp-popup" class="pp-popup">
+<p class="pp-headline">カレーって美味しいよね</p>
+<p class="pp-body">肉食が解禁された明治時代に、「ライスカレー」が普及したそうです。</p>
+</div>
+
+<script>
+const ppBtn = document.querySelector('#pp-btn');
+const ppPopup = document.querySelector('#pp-popup');
+
+if (ppBtn && ppPopup) {
+  ppBtn.addEventListener('click', function() {
+    ppPopup.className = 'pp-popup pp-active';
+  });
+  ppPopup.addEventListener('animationend', function(e) {
+    if (e.animationName === 'ppAnim') {
+      ppPopup.className = 'pp-popup';
+    }
+  });
+}
+</script>
 </body>
 </html>
