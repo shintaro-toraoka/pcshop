@@ -63,13 +63,13 @@
 
 	<table class="select-list">
 		<tr>
-			<th></th>
-			<th>商品ID</th>
-			<th>商品名</th>
-			<th>商品画像</th>
-			<th>数量</th>
-			<th>価格（税込）</th>
-			<th>在庫数</th>
+			<th class="selectColumn"></th><!-- 選択列 -->
+			<th class="proIdColumn">商品ID</th>
+			<th class="proNameColumn">商品名</th>
+			<th class="proImageColumn">商品画像</th>
+			<th class="quantityColumn">数量</th>
+			<th class="priceColumn">価格（税込）</th>
+			<th class="stockColumn">在庫数</th>
 		</tr>
 
 		<%

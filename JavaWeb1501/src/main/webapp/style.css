@@ -291,8 +291,29 @@ td {
 .select-list {
 	tr:nth-child(even) {
 		background: #FFF8E8;
+		table-layout: fixed;
 	}
-
+.selectColumn {
+	width:90px;
+}
+.proIdColumn {
+	width:140px;
+}
+.proNameColumn {
+	width:280px;
+}
+.proImageColumn {
+	width:160px;
+}
+.quantityColumn {
+	width:90px;
+}
+.priceColumn {
+	width:180px;
+}
+.stockColumn {
+	width:140px;
+}
 	tr:nth-child(odd) {
 		background: #FDF0D5;
 	}
