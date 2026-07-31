@@ -5,9 +5,9 @@ import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
+import dao.PaymentDaoDB;
 import dao.ProductDaoDB;
 import dao.UserDaoDB;
-
 
 /**
  * 店内オペレーションクラス
@@ -15,18 +15,18 @@ import dao.UserDaoDB;
  */
 
 public class Operation {
-	
-	
+
 	private UserDaoDB userDao;
 	private ProductDaoDB productDao;
-	//private PaymentDaoDB paymentDao;
+	private PaymentDaoDB paymentDao;
 
 	public Operation() {
 		// 親クラスで共通化した by M.Yokota
 		userDao = new UserDaoDB();
 		productDao = new ProductDaoDB();
-		//paymentDao = new PaymentDaoDB("localhost","3306","cscdb","root","mysql2026");
+		paymentDao = new PaymentDaoDB();
 	}
+
 	/**
 	 * ログイン時の処理
 	 * @param userId リクエストパラメータ
@@ -42,6 +42,7 @@ public class Operation {
 		if (result) {
 			// 店舗データの作成⇒セッションに格納
 			User user = userDao.getUser(userId);
+			session.setAttribute("userId", userId);
 			session.setAttribute("userName", user.getName());
 			Store store = makeStore();
 			session.setAttribute("store", store);
@@ -68,8 +69,8 @@ public class Operation {
 		User user = userDao.getUser(userId);
 		//Userがある場合
 		//パスワードを照合（入力値と登録されているパスワードが一致するか確認）
-		if(user != null) {
-		result = password.equals(user.getPassword());
+		if (user != null) {
+			result = password.equals(user.getPassword());
 		}
 		//Userがない場合
 		//false（認証NG）
@@ -86,7 +87,6 @@ public class Operation {
 	 */
 	private Store makeStore() {
 		List<Product> productList = productDao.getProductList(null);
-		
 
 		// 店舗情報作成
 		Store store = new Store("ToraoCurry", productList);
@@ -102,7 +102,7 @@ public class Operation {
 		store.add(new Product("A180", "小型ディスプレイ", 11000));
 		store.add(new Product("A190", "LED照明", 4200));
 		store.add(new Product("A200", "骨伝導イヤホン", 7800));
-*/
+		*/
 		return store;
 	}
 
@@ -120,26 +120,26 @@ public class Operation {
 
 		//店舗情報・カート情報の取得
 		Store store = (Store) session.getAttribute("store");
-		Cart cart  = (Cart) session.getAttribute("cart");
+		Cart cart = (Cart) session.getAttribute("cart");
 
-		if((store != null) && (cart != null)) {
-//			String newProd = store.getListProd().getId();		
-			for(Product prod : cart.getListProd()) {
-				if(prod.getId().equals(productId)) {
-					 quantity += prod.getQuantity();
-				}		
+		if ((store != null) && (cart != null)) {
+			//			String newProd = store.getListProd().getId();		
+			for (Product prod : cart.getListProd()) {
+				if (prod.getId().equals(productId)) {
+					quantity += prod.getQuantity();
+				}
 			}
 			cart.oldRemoveProd(productId);
-			for(Product prod : store.getListProd()) {
-				if(prod.getId().equals(productId)) {
+			for (Product prod : store.getListProd()) {
+				if (prod.getId().equals(productId)) {
 					prod.setQuantity(quantity);
 					cart.add(prod);
 					break;
 				}
 			}
-//		store.getListProd().get(productId).setQuantity(quantity);
+			//		store.getListProd().get(productId).setQuantity(quantity);
 			//カートに指定の商品を追加
-//			cart.add(store.getListProd().get(productId));
+			//			cart.add(store.getListProd().get(productId));
 			//セッションに再度格納
 			session.setAttribute("cart", cart);
 		}
@@ -148,9 +148,9 @@ public class Operation {
 	public void removeProd(int idx, HttpSession session) {
 		//店舗情報・カート情報の取得
 		Store store = (Store) session.getAttribute("store");
-		Cart cart  = (Cart) session.getAttribute("cart");
+		Cart cart = (Cart) session.getAttribute("cart");
 
-		if((store != null) && (cart != null)) {
+		if ((store != null) && (cart != null)) {
 			//カートに追加された商品を除去
 			cart.remove(idx);
 
@@ -159,52 +159,69 @@ public class Operation {
 
 		}
 	}
-	
+
 	//public void search(String product_name, session) {
 	//	//商品の検索
 	//	
 	//}
-	public List<Product> searchProduct(String keyword){
+	public List<Product> searchProduct(String keyword) {
 
-	    return productDao.getProductList(keyword);
+		return productDao.getProductList(keyword);
 
 	}
+	
+	
+	//購入履歴をJavaで取得
+	public List<Payment> getPaymentList(String userId){
+		return paymentDao.getPaymentList(userId);
+		}
 
 	public void pay(HttpSession session) {
-		//店舗情報・カート情報の取得
-		Cart cart  = (Cart) session.getAttribute("cart");
+		System.out.println("pay開始");
 		
-		if(cart != null) {
+		//店舗情報・カート情報の取得
+		Cart cart = (Cart) session.getAttribute("cart");
+
+		if (cart != null) {
+			
+			
+			
 			//セッションに格納（精算済みデータ）
 			session.setAttribute("pay", cart);
 			//cartの内容をpaymentテーブルに登録する
 			//カート内の商品リスト List<Product> listProd の件数分 paymentテーブルに登録する
 			List<Product> listProd = cart.getListProd();
-//
-for (Product product : listProd) {
-	
-	productDao.reduceStock(product.getQuantity(),product.getId());
-//
-//            paymentDao.insertPayment(
-//                cart.getUserId(),     // ユーザID
-//                cart.getUserName(),//ユーザ名
-//                product.getId(),      // 商品ID
-//                product.getName(),    // 商品名
-//                product.getPrice()    // 金額
-//            );
-	
-			System.out.println("User;"+ cart.getUserId());
-			System.out.println("商品;" + product.getId());
-			System.out.println("購入数;" + product.getQuantity());
+			//
 			
 			
-        }
+			for (Product product : listProd) {
+				
+				String userName = (String) session.getAttribute("userName");
+				System.out.println("ユーザー名=" + userName);
+
+				productDao.reduceStock(product.getQuantity(), product.getId());
+
+				paymentDao.insertPayment(
+						cart.getUserId(), // ユーザID
+						//cart.getUserName(), //ユーザ名
+						userName,
+						product.getId(), // 商品ID
+						product.getName(), // 商品名
+						product.getQuantity(), //数量
+						product.getboughtPrice() // 購入金額
+				);
+
+				System.out.println("User;" + cart.getUserId());
+				System.out.println("商品;" + product.getId());
+				System.out.println("購入数;" + product.getQuantity());
+
+			}
 
 			//カート情報の新規作成→セッションに格納
 			Cart newCart = new Cart(cart.getUserId(), new ArrayList<Product>());
 			session.setAttribute("cart", newCart);
-			
+
 		}
-		
+
 	}
 }
