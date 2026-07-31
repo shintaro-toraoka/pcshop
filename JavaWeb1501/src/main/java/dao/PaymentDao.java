@@ -1,5 +1,10 @@
 package dao;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import model.Payment;
+
 public interface PaymentDao {
 	int insertPayment(
 			String userId,
@@ -7,6 +12,9 @@ public interface PaymentDao {
 			String productId,
 			String productName,
 			int quantity,
-			int price);
+			int price,
+			LocalDateTime purchaseDate);
+	
+	List<Payment> getPaymentList(String userId);
 
 }

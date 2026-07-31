@@ -30,7 +30,10 @@ count += prod.getQuantity();
 }%>
 
 ｜
-<a href="cart.jsp">カート内一覧<span class = "cartCount">(<%= count %>)</span></a>
+<a href="cart.jsp">カート内一覧<span class="cartCount">(<%= count %>)
+</span></a>
+｜
+<a href="History">購入履歴</a>
 ｜
 <a href="logout-servlet">ログアウト</a>
 ｜

@@ -55,7 +55,6 @@
 			listProd = store.getListProd();
 		}
 	}
-
 	if (listProd.size() > 0) {
 	%>
 
@@ -94,7 +93,8 @@
 				<form id="<%=formId%>" action="add-prod-servlet" method="POST">
 
 					<input type="hidden" name="productId" value="<%=prod.getId()%>">
-
+					<input type="hidden" name="productName" value="<%=prod.getName()%>">
+					
 					<%
 					if (prod.getStock() > 0) {
 					%>
@@ -110,11 +110,21 @@
 
 				</form>
 			</td>
+<%
+	String addedMessage = (String)session.getAttribute("addedMessage");
+	if(addedMessage !=null){
+
+
+%>
+	<div id="select-popup" class="pp-popup pp-active">
+	<p><%=addedMessage %></p>
+	</div>
+<%
+		session.removeAttribute("addedMessage");
+	}
+%>
 
 			<td><%=prod.getId()%></td>
-
-
-			<!-- <td><%=prod.getName()%></td>-->
 
 			<!-- ここから商品リンク化 -->
 			<td><span class="prod-name" data-id="<%=prod.getId()%>"
