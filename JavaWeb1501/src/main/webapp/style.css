@@ -31,7 +31,6 @@
 }
 
 
-
 .main-image3 {
 	position: absolute;
 	top: -30px;
@@ -50,6 +49,17 @@
 	z-index: 9999;
 }
 
+	/* ブラウザ幅が800px以下の場合 */
+	@media screen and (max-width: 800px) {
+		.main-image1,
+		.main-image2,
+		.main-image3,
+		.main-image4 {
+			display: none;
+		}
+	}	
+	 
+	 
 
 body {
 
@@ -78,6 +88,28 @@ body::before {
 	opacity: 0.1;
 	/* 20% */
 	z-index: -1;
+}
+
+.pay-page h1::before {
+content: "";
+display: inline-block;
+width: 80px;
+height: 50px;
+background-image: url("images/tiger_right.png");
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+ 
+.pay-page h1::after {
+content: "";
+display: inline-block;
+width: 80px;
+height: 50px;
+background-image: url("images/tiger_left.png");
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
 }
 
 /* 親要素をrelativeに */
@@ -189,6 +221,26 @@ h2 {
 	color: white
 }
 
+.history-count {
+text-align: center;
+width: fit-content;
+margin: 30px auto;
+padding: 12px 25px;
+background-color: #fff8e6;
+border: 3px solid #d98b1f;
+border-radius: 30px;
+font-size: 24px;
+font-weight: bold;
+color: #5a3a1b;
+box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.history-count span {
+color: #d9531e;
+font-size: 32px;
+}
+
+
 hr {
 	border: 0;
 	border-top: 1px solid #8fbc8f;
@@ -255,6 +307,17 @@ td {
 		background: #FDF0D5;
 	}
 }
+
+.payment-list {
+	tr:nth-child(even) {
+		background: #FFF8E8;
+	}
+
+	tr:nth-child(odd) {
+		background: #FDF0D5;
+	}
+}
+
 
 .pay-list {
 	background-color: #FFE6BF;

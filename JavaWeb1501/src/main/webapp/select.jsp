@@ -55,7 +55,6 @@
 			listProd = store.getListProd();
 		}
 	}
-
 	if (listProd.size() > 0) {
 	%>
 
