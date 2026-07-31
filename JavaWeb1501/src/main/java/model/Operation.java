@@ -159,16 +159,12 @@ public class Operation {
 
 		}
 	}
-<<<<<<< HEAD
 
 	//public void search(String product_name, session) {
 	//	//商品の検索
 	//	
 	//}
-	public List<Product> searchProduct(String keyword) {
-
-		return productDao.getProductList(keyword);
-=======
+	
 	
 	
 	public List<Product> searchProduct(String keyword){
@@ -177,7 +173,7 @@ public class Operation {
 		}
 		
 	    return productDao.getProductList(keyword);
->>>>>>> 89cd6489d3f2ff17e3b25f0be1c58420bf359cf9
+
 
 	}
 	
