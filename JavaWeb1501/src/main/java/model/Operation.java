@@ -19,7 +19,7 @@ public class Operation {
 	
 	private UserDaoDB userDao;
 	private ProductDaoDB productDao;
-	//private PaymentDaoDB paymentDao;
+//	private PaymentDaoDB paymentDao;
 
 	public Operation() {
 		// 親クラスで共通化した by M.Yokota
@@ -185,13 +185,14 @@ public class Operation {
 for (Product product : listProd) {
 	
 	productDao.reduceStock(product.getQuantity(),product.getId());
-//
+
 //            paymentDao.insertPayment(
 //                cart.getUserId(),     // ユーザID
 //                cart.getUserName(),//ユーザ名
 //                product.getId(),      // 商品ID
-//                product.getName(),    // 商品名
-//                product.getPrice()    // 金額
+//                product.getName(), // 商品名
+//                product.getQuantity(),//数量
+//                product.getboughtPrice ()    // 購入金額
 //            );
 	
 			System.out.println("User;"+ cart.getUserId());

@@ -6,6 +6,7 @@ public interface PaymentDao {
 			String userName,
 			String productId,
 			String productName,
+			int quantity,
 			int price);
 
 }

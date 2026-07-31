@@ -18,24 +18,25 @@
 	<%@include file="header-navi.jsp"%>
 	<img src="images/deco1.png" class="main-image1">
 	<img src="images/deco2.png" class="main-image2">
-	
-<!-- 商品検索の処理 -->
+
+	<!-- 商品検索の処理 -->
 	<h2>商品選択</h2>
 	<form action="search" method="get">
-		<input type="text" value="${query}" name="query" placeholder="キーワードを1つ入力">
+		<input type="text" value="${query}" name="query"
+			placeholder="キーワードを1つ入力">
 		<button type="submit">をさがす</button>
 	</form>
 	<%
 	String keyword = request.getParameter("query");
 	%>
 	<%
-	String message =(String)request.getAttribute("message");
-	
-	if(message !=null){
+	String message = (String) request.getAttribute("message");
+
+	if (message != null) {
 	%>
-	
-	<p style="color:red;">
-	<%= message %>
+
+	<p style="color: red;">
+		<%=message%>
 	</p>
 	<%
 	}
@@ -93,14 +94,16 @@
 					} else {
 					%>
 					<input type="submit" value="選択" disabled>
-					
+
 					<%
 					}
 					%>
+
 				</form>
 			</td>
 
 			<td><%=prod.getId()%></td>
+
 
 			<!-- <td><%=prod.getName()%></td>-->
 
@@ -111,12 +114,11 @@
 				data-stock="<%=prod.getStock()%>" data-image="<%=imagePath%>"
 				data-calories="<%=prod.getCalories()%>"
 				data-nutrients="<%=prod.getNutrients()%>"
-				data-recommendation="<%=prod.getRecommendation()%>">
-				 <%=prod.getName()%>
+				data-recommendation="<%=prod.getRecommendation()%>"> <%=prod.getName()%>
 
 			</span></td>
 			<!-- ここまで -->
-
+			
 			<td><%=prod.getName()%></td>
 
 			<td>
@@ -268,8 +270,7 @@ closeModal.addEventListener("click", function() {
 		</script>
 		<%
 		}
-		%>
-		
+		%>	
 <!-- ポップアップ表示 -->
 <div class="pp-btn-wrap">
 	<button id="pp-btn">ひとくち</button>

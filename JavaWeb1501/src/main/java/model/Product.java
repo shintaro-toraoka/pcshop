@@ -143,7 +143,7 @@ public class Product {
 		amount = calculator.addTax(price);
 		return amount;
 	}
-	
+
 	//商品情報詳細ゲッターセッター
 	public String getCalories() {
 	    return calories;
@@ -169,6 +169,7 @@ public class Product {
 	    this.recommendation = recommendation;
 	}
 	
+
 	public int getboughtPrice () {
 		Calculator calculator = new Calculator();
 		int amount = 0;

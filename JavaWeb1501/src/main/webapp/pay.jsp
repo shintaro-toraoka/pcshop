@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="style.css">
  <link rel="icon" href="<%= request.getContextPath() %>/images/tiger.png" type="image/png">
 </head>
-<body>
+<body class ="pay-page">
 	<%@include file="header-navi.jsp"%>
 	<img src ="images/deco3.png" class="main-image3">
 	<img src ="images/deco4.png" class="main-image4">
