@@ -74,7 +74,16 @@
 		</tr>
 
 		<%
-		for (int idx = 0; idx < listProd.size(); idx++) {
+		int pageSize = 10;
+		int pageNo = 1;
+		String pageParam = request.getParameter("page");
+		if (pageParam != null) {
+		pageNo = Integer.parseInt(pageParam);
+		}
+		int start = (pageNo - 1) * pageSize;
+		int end = pageNo * pageSize;
+
+		for (int idx = start; idx < end && idx < listProd.size(); idx++) {
 			Product prod = listProd.get(idx);
 			String imagePath = prod.getImagePath();
 			String formId = "addProdForm" + idx;
@@ -89,7 +98,7 @@
 					<%
 					if (prod.getStock() > 0) {
 					%>
-						<input type="submit" value="選択">
+					<input type="submit" value="選択">
 					<%
 					} else {
 					%>
@@ -161,6 +170,15 @@
 		}
 		%>
 	</table>
+
+	<%
+int totalPage = (listProd.size() + pageSize - 1) / pageSize;
+for(int i = 1; i <= totalPage; i++){
+%>
+	<a href="select.jsp?page=<%=i%>"><%=i%></a>
+	<%
+	}
+%>
 
 	<!-- 商品名クリックしたら情報表示 -->
 	<div id="detailModal" class="modal">
