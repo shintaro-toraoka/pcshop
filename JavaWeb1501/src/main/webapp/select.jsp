@@ -23,7 +23,7 @@
 	<h2>商品選択</h2>
 	<form action="search" method="get">
 		<input type="text" value="${query}" name="query"
-			placeholder="キーワードを1つ入力">
+			placeholder="キーワードを入力">
 		<button type="submit">をさがす</button>
 	</form>
 	<%
@@ -117,9 +117,6 @@
 				data-recommendation="<%=prod.getRecommendation()%>"> <%=prod.getName()%>
 
 			</span></td>
-			<!-- ここまで -->
-			
-			<td><%=prod.getName()%></td>
 
 			<td>
 				<%
@@ -198,6 +195,7 @@
 			<span id="closeModal"></span>
 
 		</div>
+		</div>
 		<div id="zoomback">
 			<img id="zoomimg" src="">
 		</div>
@@ -271,6 +269,7 @@ closeModal.addEventListener("click", function() {
 		<%
 		}
 		%>	
+		
 <!-- ポップアップ表示 -->
 <div class="pp-btn-wrap">
 	<button id="pp-btn">ひとくち</button>
