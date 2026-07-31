@@ -45,7 +45,7 @@ public class PayServlet extends HttpServlet {
 				//セッションオブジェクト取得
 				HttpSession session = request.getSession();
 				
-				//清算処理
+				//精算処理
 				Operation op = new Operation();
 				op.pay(session);
 				

@@ -144,7 +144,7 @@ public class Product {
 		return amount;
 	}
 	
-<<<<<<< HEAD
+
 	//商品情報詳細ゲッターセッター
 	public String getCalories() {
 	    return calories;
@@ -170,7 +170,7 @@ public class Product {
 	    this.recommendation = recommendation;
 	}
 	
-=======
+
 	public int getboughtPrice () {
 		Calculator calculator = new Calculator();
 		int amount = 0;
@@ -178,5 +178,5 @@ public class Product {
 		return amount;
 
 	}
->>>>>>> 3f6742ad24ba0334daca5380b64e7d224ddeebe9
+
 }
