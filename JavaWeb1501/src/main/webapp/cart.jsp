@@ -120,7 +120,7 @@
 		円になります。
 	</p>
 
-	<form action="pay-servlet" method="post" onSubmit="PayCheck()">
+	<form action="pay-servlet" method="post" onSubmit="return PayCheck()">
 		<input type="submit" value="精算"> <br>
 
 	</form>
@@ -132,7 +132,6 @@
 			if (confirm('カート内の商品を精算してよろしいですか？')) {
 				return true;
 			} else {
-				alert('キャンセルされました');
 				return false;
 			}
 		}
