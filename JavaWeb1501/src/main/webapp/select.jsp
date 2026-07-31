@@ -88,14 +88,12 @@
 					<%
 					if (prod.getStock() > 0) {
 					%>
-					<input type="submit" value="選択">
+						<input type="submit" value="選択">
 					<%
-
-					}
-					%>
-
 					} else {
-					%><input type="submit" value="選択" disabled>
+					%>
+					<input type="submit" value="選択" disabled>
+					
 					<%
 					}
 					%>
@@ -118,9 +116,8 @@
 
 			</span></td>
 			<!-- ここまで -->
-=======
+
 			<td><%=prod.getName()%></td>
->>>>>>> 3f6742ad24ba0334daca5380b64e7d224ddeebe9
 
 			<td>
 				<%
@@ -272,6 +269,8 @@ closeModal.addEventListener("click", function() {
 		<%
 		}
 		%>
+		
+<!-- ポップアップ表示 -->
 <div class="pp-btn-wrap">
 	<button id="pp-btn">ひとくち</button>
 </div>
