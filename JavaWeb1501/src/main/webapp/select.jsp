@@ -56,103 +56,118 @@
 			<th>在庫数</th>
 		</tr>
 
-<%
-for (int idx = 0; idx < listProd.size(); idx++) {
-	Product prod = listProd.get(idx);
-	String imagePath = prod.getImagePath();
-	String formId = "addProdForm" + idx;
-%>
-
-<tr>
-	<td>
-		<form
-			id="<%=formId%>"
-			action="add-prod-servlet"
-			method="POST">
-
-			<input
-				type="hidden"
-				name="productId"
-				value="<%=prod.getId()%>">
-
-			<%
-			if (prod.getStock() > 0) {
-			%>
-				<input type="submit" value="選択">
-			<%
-			}
-			%>
-		</form>
-	</td>
-
-	<td><%=prod.getId()%></td>
-
-	<td><%=prod.getName()%></td>
-
-	<td>
 		<%
-		if (imagePath == null || imagePath.isBlank()) {
+		for (int idx = 0; idx < listProd.size(); idx++) {
+			Product prod = listProd.get(idx);
+			String imagePath = prod.getImagePath();
+			String formId = "addProdForm" + idx;
 		%>
-			<p>No Image</p>
-		<%
-		} else {
-			String imageUrl = "images/" + imagePath;
-		%>
-			<img
-				src="<%=imageUrl%>"
-				class="zoom"
-				width="60"
-				height="50"
+
+		<tr>
+			<td>
+				<form id="<%=formId%>" action="add-prod-servlet" method="POST">
+
+					<input type="hidden" name="productId" value="<%=prod.getId()%>">
+
+					<%
+					if (prod.getStock() > 0) {
+					%>
+					<input type="submit" value="選択">
+					<%
+					}
+					%>
+				</form>
+			</td>
+
+			<td><%=prod.getId()%></td>
+
+			<!-- <td><%=prod.getName()%></td>-->
+
+			<!-- ここから商品リンク化 -->
+			<td><span class="prod-name" data-id="<%=prod.getId()%>"
+				data-name="<%=prod.getName()%>"
+				data-price="<%=prod.getPriceIncludingTaxString()%>"
+				data-stock="<%=prod.getStock()%>" data-image="<%=imagePath%>"
+				data-calories="<%=prod.getCalories()%>"
+				data-nutrients="<%=prod.getNutrients()%>"
+				data-recommendation="<%=prod.getRecommendation()%>">
+				 <%=prod.getName()%>
+
+			</span></td>
+			<!-- ここまで -->
+
+			<td>
+				<%
+				if (imagePath == null || imagePath.isBlank()) {
+				%>
+				<p>No Image</p> <%
+ } else {
+ String imageUrl = "images/" + imagePath;
+ %> <img src="<%=imageUrl%>" class="zoom" width="60" height="50"
 				alt="<%=prod.getName()%>"
-				onerror="this.onerror=null; this.src='images/Error.png';">
+				onerror="this.onerror=null; this.src='images/Error.png';"> <%
+ }
+ %>
+			</td>
+
+			<td>
+				<%
+				if (prod.getStock() > 0) {
+				%> <input type="number" name="quantity" value="1" min="1"
+				max="<%=Math.min(prod.getStock(), 10)%>" required class="quanti"
+				form="<%=formId%>"> <%
+ } else {
+ %> - <%
+ }
+ %>
+			</td>
+
+			<td><%=prod.getPriceIncludingTaxString()%></td>
+
+			<td>
+				<%
+				if (prod.getStock() > 0) {
+				%> <%=prod.getStock()%> <%
+ } else {
+ %> 在庫切れ <%
+ }
+ %>
+			</td>
+		</tr>
+
 		<%
 		}
 		%>
-	</td>
-
-	<td>
-		<%
-		if (prod.getStock() > 0) {
-		%>
-			<input
-				type="number"
-				name="quantity"
-				value="1"
-				min="1"
-				max="<%=Math.min(prod.getStock(), 10)%>"
-				required
-				class="quanti"
-				form="<%=formId%>">
-		<%
-		} else {
-		%>
-			-
-		<%
-		}
-		%>
-	</td>
-
-	<td><%=prod.getPriceIncludingTaxString()%></td>
-
-	<td>
-		<%
-		if (prod.getStock() > 0) {
-		%>
-			<%=prod.getStock()%>
-		<%
-		} else {
-		%>
-			在庫切れ
-		<%
-		}
-		%>
-	</td>
-</tr>
-
-<%
-}
-%>
 	</table>
+
+	<!-- 商品名クリックしたら情報表示 -->
+	<div id="detailModal" class="modal">
+		<div class="modal-content">
+			<span id="closeDetailModal">&times;</span>
+
+			<h3 id="modalName"></h3>
+
+			<p>
+				<img id="modalImage" src="">
+			</p>
+			<p>
+				<b>カロリー</b><br> <span id="modalCalories"></span>
+			</p>
+
+			<p>
+				<b>栄養素</b><br> <span id="modalNutrients"></span>
+			</p>
+
+			<p>
+				<b>おすすめポイント</b><br> <span id="modalRecommendation"></span>
+			</p>
+
+
+		</div>
+
+		<!--ここまで -->
+
+	</div>
 	<div id="productModal" class="modal">
 		<div class="modal-content">
 			<span id="closeModal"></span>
@@ -161,6 +176,10 @@ for (int idx = 0; idx < listProd.size(); idx++) {
 		<div id="zoomback">
 			<img id="zoomimg" src="">
 		</div>
+
+
+
+
 		<script>
 			// 要素を取得　..①
 			const zoom = document.querySelectorAll(".zoom");
@@ -188,6 +207,41 @@ for (int idx = 0; idx < listProd.size(); idx++) {
 
 				zoomback.style.display = "none";
 			}
+
+			//ここから商品リンク化
+			const modal = document.getElementById("detailModal");
+const closeModal = document.getElementById("closeDetailModal");
+
+document.querySelectorAll(".prod-name").forEach(item => {
+
+    item.addEventListener("click", function() {
+
+        document.getElementById("modalName").textContent =
+            this.textContent;
+        
+        document.getElementById("modalCalories").textContent =
+            this.dataset.calories;
+
+        document.getElementById("modalNutrients").textContent =
+            this.dataset.nutrients;
+
+        document.getElementById("modalRecommendation").textContent =
+            this.dataset.recommendation;
+
+        document.getElementById("modalImage").src =
+            "images/" + this.dataset.image;
+
+        modal.style.display = "block";
+        
+        
+    });
+
+});
+
+closeModal.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+			
 		</script>
 		<%
 		}

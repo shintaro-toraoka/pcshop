@@ -52,11 +52,23 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 			
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					productList.add(new Product(resultSet.getString("product_id"),
+					/*productList.add(new Product(resultSet.getString("product_id"),
 							resultSet.getString("product_name"),
 							resultSet.getString("image_path"),
 							resultSet.getInt("price"),
-							resultSet.getInt("stock")));//TODO：ユーザを生成する
+							resultSet.getInt("stock")));*///TODO：ユーザを生成する
+					productList.add(
+						    new Product(
+						        resultSet.getString("product_id"),
+						        resultSet.getString("product_name"),
+						        resultSet.getString("image_path"),
+						        resultSet.getInt("price"),
+						        resultSet.getInt("stock"),
+						        resultSet.getString("calories"),
+						        resultSet.getString("nutrients"),
+						        resultSet.getString("recommendation")
+						    )
+						);
 				}
 			}
 		} catch (Exception e) { //例外発生時の処理
@@ -86,6 +98,7 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 		}
 	}
 
+	
 	
 
 	}

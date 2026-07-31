@@ -224,8 +224,42 @@ td {
 
 .pay-list {
 	background-color: #FFE6BF;
-	color: #CC6600;
+	color: #CC6600;}
 
+	
+	/*商品名リンク化商品情報表示*/
+	.modal {
+	    display: none;
+	    position: fixed;
+	    z-index: 9999;
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: 100%;
+	    background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.modal-content {
+	    background-color: white;
+	    width: 400px;
+	    margin: 10% auto;
+	    padding: 20px;
+	    border-radius: 10px;
+	}
+
+	#closeModal {
+	    float: right;
+	    font-size: 28px;
+	    cursor: pointer;
+	}
+
+	.prod-name {
+	    color: blue;
+	    text-decoration: underline;
+	    cursor: pointer;
+	}
+	
+	
 	.modal {
 		display: none;
 		position: fixed;
@@ -245,7 +279,7 @@ td {
 		border-radius: 10px;
 	}
 
-	#closeModal {
+	#closeDetailModal {
 		float: right;
 		font-size: 28px;
 		cursor: pointer;
@@ -255,6 +289,16 @@ td {
 		color: blue;
 		text-decoration: underline;
 		cursor: pointer;
-	}
+		}
+		
+	/*商品画像*/
+	#modalImage {
+		    width: 300px;
+		    height: auto;
+		    display: block;
+		    margin: 10px auto;
+		    border-radius: 10px;
+		}
+		/*ここまで商品情報表示*/
+	
 
-}
