@@ -1,46 +1,57 @@
 @charset "UTF-8";
 
-.main-image1 {
-		position: absolute;
-		top: -30px;
-		left: -10px;
-		width: 300px;
-		height: 200px;
-		z-index: 9999;
-	}
 
-	.main-image2 {
-		position: absolute;
-		top: -30px;
-		right: -10px;
-		width: 300px;
-		height: 200px;
-		z-index: 9999;
-	}
-	
+/* ブラウザ幅が800px以下の場合 */
+@media screen and (max-width: 800px) {
 
-
-	.main-image3 {
-		position: absolute;
-		top: -30px;
-		left: -10px;
-		width: 450px;
-		height: 350px;
-		z-index: 9999;
-	}
-
+	.main-image1,
+	.main-image2,
+	.main-image3,
 	.main-image4 {
-		position: absolute;
-		top: -30px;
-		right: -10px;
-		width: 450px;
-		height: 350px;
-		z-index: 9999;
+		display: none;
 	}
+}
+
+.main-image1 {
+	position: absolute;
+	top: -30px;
+	left: -10px;
+	width: 300px;
+	height: 200px;
+	z-index: 9999;
+}
+
+.main-image2 {
+	position: absolute;
+	top: -30px;
+	right: -10px;
+	width: 300px;
+	height: 200px;
+	z-index: 9999;
+}
+
+
+
+.main-image3 {
+	position: absolute;
+	top: -30px;
+	left: -10px;
+	width: 350px;
+	height: 250px;
+	z-index: 9999;
+}
+
+.main-image4 {
+	position: absolute;
+	top: -30px;
+	right: -10px;
+	width: 350px;
+	height: 250px;
+	z-index: 9999;
+}
 
 
 body {
-
 
 
 	font-family: BIZ UDPゴシック;
@@ -48,10 +59,10 @@ body {
 	text-align: center;
 
 	background-image: repeating-radial-gradient(circle,
-		rgba(255, 255, 255, 0.07) 0px,
-		rgba(255, 255, 255, 0.07) 3px,
-		transparent 3px,
-		transparent 40px);
+			rgba(255, 255, 255, 0.07) 0px,
+			rgba(255, 255, 255, 0.07) 3px,
+			transparent 3px,
+			transparent 40px);
 }
 
 body::before {
@@ -146,6 +157,29 @@ h1::after {
 	background-position: center;
 }
 
+.pay-page h1::before {
+	content: "";
+	display: inline-block;
+	width: 80px;
+	height: 50px;
+
+	background-image: url("images/tiger_right.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.pay-page h1::after {
+	content: "";
+	display: inline-block;
+	width: 80px;
+	height: 50px;
+
+	background-image: url("images/tiger_left.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
 
 
 

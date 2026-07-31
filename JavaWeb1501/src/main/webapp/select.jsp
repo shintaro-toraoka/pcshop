@@ -74,13 +74,23 @@
 					%>
 					<input type="submit" value="選択">
 					<%
+<<<<<<< HEAD
 					}
 					%>
+=======
+					} else {
+					%><input type="submit" value="選択" disabled>
+					<%
+					}
+					%>
+
+>>>>>>> 3f6742ad24ba0334daca5380b64e7d224ddeebe9
 				</form>
 			</td>
 
 			<td><%=prod.getId()%></td>
 
+<<<<<<< HEAD
 			<!-- <td><%=prod.getName()%></td>-->
 
 			<!-- ここから商品リンク化 -->
@@ -95,6 +105,9 @@
 
 			</span></td>
 			<!-- ここまで -->
+=======
+			<td><%=prod.getName()%></td>
+>>>>>>> 3f6742ad24ba0334daca5380b64e7d224ddeebe9
 
 			<td>
 				<%
