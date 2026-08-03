@@ -1,6 +1,5 @@
 package dao;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import model.Payment;
@@ -13,7 +12,6 @@ public interface PaymentDao {
 			String productName,
 			int quantity,
 			int price,
-			LocalDateTime purchaseDate,
 			String historyId
 			);
 	

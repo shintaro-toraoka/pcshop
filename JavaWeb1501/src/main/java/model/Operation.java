@@ -151,18 +151,8 @@ public class Operation {
 		}
 	}
 
-<<<<<<< HEAD
-	//public void search(String product_name, session) {
-	//	//商品の検索
-	//	
-	//}
-
 	public List<Product> searchProduct(String keyword) {
 		if (keyword != null) {
-=======
-	public List<Product> searchProduct(String keyword){
-		if(keyword !=null) {
->>>>>>> security
 			keyword = keyword.trim();
 		}
 

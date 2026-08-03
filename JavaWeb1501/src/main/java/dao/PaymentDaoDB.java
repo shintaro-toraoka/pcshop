@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,15 +82,12 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 
 				payment.setAmount(paymentResult.getInt("amount"));
 
-				payment.setQuantity(
-						paymentResult.getInt("quantity"));
+				payment.setQuantity(paymentResult.getInt("quantity"));
 
-				payment.setPurchaseDate(
-						paymentResult.getTimestamp("purchase_date")
+				payment.setPurchaseDate(paymentResult.getTimestamp("purchase_date")
 								.toLocalDateTime());
 				
-				payment.setHistoryId(
-						paymentResult.getString("history_id"));
+				payment.setHistoryId(paymentResult.getString("history_id"));
 
 				payment.setPurchaseDate(paymentResult.getTimestamp("purchase_date")
 						.toLocalDateTime());
@@ -103,22 +99,4 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 		}
 		return paymentList;
 	}
-
-	public int insertPayment(String userId, String userName, String productId, String productName, int quantity,
-			int price, LocalDateTime purchaseDate, String historyId) {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
-	}
-
-	@Override
-	public int insertPayment(String userId, String userName, String productId, String productName, int quantity) {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
-	}
-
-	//private Connection getConnection() {
-	//	// TODO 自動生成されたメソッド・スタブ
-	//	return null;
-	//}
-
 }
