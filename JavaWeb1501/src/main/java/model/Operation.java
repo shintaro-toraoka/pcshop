@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import dao.PaymentDaoDB;
 import dao.ProductDaoDB;
 import dao.UserDaoDB;
+import util.PasswordUtil;
 
 /**
  * 店内オペレーションクラス
@@ -62,7 +63,9 @@ public class Operation {
 	 * @return 結果 (true / false)
 	 */
 	private boolean authenticate(String userId, String password) {
-
+		
+		//入力されたpasswordをハッシュ化
+		String inputPasswordHash = PasswordUtil.hashPassword(password);
 		// ★ここでは password = "pass" であれば true とする
 		boolean result = false;//password.equals("pass");
 		//userdaoを使ってUserを検索して、Userを取得
@@ -70,7 +73,7 @@ public class Operation {
 		//Userがある場合
 		//パスワードを照合（入力値と登録されているパスワードが一致するか確認）
 		if (user != null) {
-			result = password.equals(user.getPassword());
+			result = inputPasswordHash.equals(user.getPassword());
 		}
 		//Userがない場合
 		//false（認証NG）
@@ -91,18 +94,6 @@ public class Operation {
 		// 店舗情報作成
 		Store store = new Store("ToraoCurry", productList);
 
-		// 商品追加
-		/*store.add(new Product("A110", "無線マウス", 2000));
-		store.add(new Product("A120", "薄型キーボード", 3600));
-		store.add(new Product("A130", "Webカメラ", 3900));
-		store.add(new Product("A140", "トラックボールマウス", 2900));
-		store.add(new Product("A150", "USB接続HDD（外付け）", 9800));
-		store.add(new Product("A160", "2m電源タップ５口", 1900));
-		store.add(new Product("A170", "USB接続マイク", 3500));
-		store.add(new Product("A180", "小型ディスプレイ", 11000));
-		store.add(new Product("A190", "LED照明", 4200));
-		store.add(new Product("A200", "骨伝導イヤホン", 7800));
-		*/
 		return store;
 	}
 
@@ -115,7 +106,8 @@ public class Operation {
 		session.invalidate();
 
 	}
-
+	
+	//カート内に商品追加時の処理
 	public void addProd(String productId, int quantity, HttpSession session) {
 
 		//店舗情報・カート情報の取得
@@ -123,12 +115,14 @@ public class Operation {
 		Cart cart = (Cart) session.getAttribute("cart");
 
 		if ((store != null) && (cart != null)) {
-			//			String newProd = store.getListProd().getId();		
+			
 			for (Product prod : cart.getListProd()) {
+				//同一商品が選択されたとき、数量加算
 				if (prod.getId().equals(productId)) {
 					quantity += prod.getQuantity();
 				}
 			}
+			//カート内の同一商品を削除
 			cart.oldRemoveProd(productId);
 			for (Product prod : store.getListProd()) {
 				if (prod.getId().equals(productId)) {
@@ -137,9 +131,6 @@ public class Operation {
 					break;
 				}
 			}
-			//		store.getListProd().get(productId).setQuantity(quantity);
-			//カートに指定の商品を追加
-			//			cart.add(store.getListProd().get(productId));
 			//セッションに再度格納
 			session.setAttribute("cart", cart);
 		}
@@ -160,6 +151,7 @@ public class Operation {
 		}
 	}
 
+<<<<<<< HEAD
 	//public void search(String product_name, session) {
 	//	//商品の検索
 	//	
@@ -167,6 +159,10 @@ public class Operation {
 
 	public List<Product> searchProduct(String keyword) {
 		if (keyword != null) {
+=======
+	public List<Product> searchProduct(String keyword){
+		if(keyword !=null) {
+>>>>>>> security
 			keyword = keyword.trim();
 		}
 
