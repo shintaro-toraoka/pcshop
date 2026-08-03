@@ -160,11 +160,14 @@ public class Operation {
 		}
 	}
 
+<<<<<<< HEAD
 	//public void search(String product_name, session) {
 	//	//商品の検索
 	//	
 	//}
 
+=======
+>>>>>>> d34bdaf9f3c47c620550abbde54486d84d8f7140
 	public List<Product> searchProduct(String keyword) {
 		if (keyword != null) {
 			keyword = keyword.trim();
