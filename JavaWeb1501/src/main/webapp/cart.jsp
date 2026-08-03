@@ -11,13 +11,17 @@
 <meta charset="UTF-8">
 <title>カート内一覧</title>
 <link rel="stylesheet" href="style.css">
+<!-- ブラウザアイコンの設定 -->
 <link rel="icon" href="<%=request.getContextPath()%>/images/ikon.png"
 	type="image/png">
 </head>
 <body>
 	<%@include file="header-navi.jsp"%>
+	<!-- 画面上部の装飾 -->
 	<img src="images/deco1.png" class="main-image1">
 	<img src="images/deco2.png" class="main-image2">
+
+	<!-- カート内商品のリストを作成 -->
 	<%
 	List<Product> listProd;
 	Cart cart = (Cart) session.getAttribute("cart");
@@ -31,8 +35,10 @@
 	<h2>カート内一覧</h2>
 
 	<table class="cart-list">
+		<!-- カート内商品テーブルのヘッダー -->
 		<tr>
-			<th class="selectColumn"></th><!-- 削除列 -->
+			<th class="selectColumn"></th>
+			<!-- 削除列 -->
 			<th class="proIdColumn">商品ID</th>
 			<th class="proNameColumn">商品名</th>
 			<th class="proImageColumn">商品画像</th>
@@ -40,29 +46,33 @@
 			<th class="priceColumn">小計（税込）</th>
 			<th class="stockColumn">在庫数</th>
 		</tr>
+		<!-- カート内商品の数だけテーブルの行を作る -->
 		<%
 		for (int idx = 0; idx < listProd.size(); idx++) {
 			Product prod = listProd.get(idx);
 		%>
 		<tr>
+			<!-- カート内から商品を削除する削除ボタンを作成 -->
 			<td>
 				<form action="remove-prod-servlet" method="POST">
 					<input type="hidden" name="idx" value="<%=idx%>"> <input
 						type="submit" value="削除">
 				</form>
 			</td>
+			<!-- カート内テーブルの中身を表示 -->
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
+			<!-- 商品画像を表示 -->
 			<%
 			String imagePath = prod.getImagePath();
 			%>
-
 			<td>
-				<%
-				if (imagePath == null || imagePath.isBlank()) {
-				%>
+				<!-- 画像が入っていない場合、「NoImage」を表示 --> <%
+ if (imagePath == null || imagePath.isBlank()) {
+ %>
 				<p>No Image</p> <%
  } else {
+ //画像表示がエラーの場合、エラー用の画像を表示
  String imageUrl = "images/" + imagePath;
  %> <%-- <a href="<%=imageUrl%>"> --%> <img src="<%=imageUrl%>"
 				class="zoom" width="60" height="50" alt="<%=prod.getName()%>"
@@ -80,6 +90,7 @@
 		%>
 	</table>
 
+	<!-- 画像拡大表示 -->
 	<div id="zoomback">
 		<img id="zoomimg" src="">
 
@@ -120,6 +131,7 @@
 		円になります。
 	</p>
 
+	<!-- 精算ボタンを作成 -->
 	<form action="pay-servlet" method="post" onSubmit="return PayCheck()">
 		<input type="submit" value="精算"> <br>
 

@@ -11,7 +11,9 @@
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
 	%>
+	<!-- お店の名前表示 -->
 <h1><%=storeHdr.getName() %></h1>
+<!-- ログイン中のユーザー名を表示 -->
 <hr>
 ユーザ名：<%= session.getAttribute("userName") %>
 <hr>
@@ -19,7 +21,7 @@
 <%-- ナビ表示 --%>
 ｜
 <a href="select.jsp">商品選択</a>
-
+<!-- カート内一覧ヘッダーにカート内の商品数を表示 -->
 <%
 Cart cart = (Cart)session.getAttribute("cart");
 int count = 0;

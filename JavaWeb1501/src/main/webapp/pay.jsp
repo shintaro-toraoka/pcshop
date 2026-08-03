@@ -11,27 +11,33 @@
 <meta charset="UTF-8">
 <title>精算完了</title>
 <link rel="stylesheet" href="style.css">
- <link rel="icon" href="<%= request.getContextPath() %>/images/tiger.png" type="image/png">
+<!-- ブラウザアイコンの設定 -->
+<link rel="icon" href="<%=request.getContextPath()%>/images/tiger.png"
+	type="image/png">
 </head>
-<body class ="pay-page">
+<body class="pay-page">
 	<%@include file="header-navi.jsp"%>
-	<img src ="images/deco3.png" class="main-image3">
-	<img src ="images/deco4.png" class="main-image4">
+	<!-- 画面上部の装飾 -->
+	<img src="images/deco3.png" class="main-image3">
+	<img src="images/deco4.png" class="main-image4">
 
+	<!-- 購入完了商品のリストを作成 -->
 	<%
-List<Product> listProd;
-Cart payData = (Cart) session.getAttribute("pay");
-if (payData == null) {
-	listProd = new ArrayList<Product>();
-} else {
-	listProd = payData.getListProd();
-}
-if (listProd.size() > 0) {
-%>
+	List<Product> listProd;
+	Cart payData = (Cart) session.getAttribute("pay");
+	if (payData == null) {
+		listProd = new ArrayList<Product>();
+	} else {
+		listProd = payData.getListProd();
+	}
+	if (listProd.size() > 0) {
+	%>
 	<h2>精算完了</h2>
 
 	<p>お買い上げ ありがとうございました。</p>
-		<table class="pay-list">
+
+	<!-- 購入済完了商品テーブルのヘッダー -->
+	<table class="pay-list">
 		<tr>
 			<th>商品ID</th>
 			<th>商品名</th>
@@ -40,13 +46,14 @@ if (listProd.size() > 0) {
 		</tr>
 
 		<%
-		for  (Product prod : listProd) {
+		for (Product prod : listProd) {
 		%>
+		<!-- 購入完了テーブルの中身を表示 -->
 		<tr>
 			<td><%=prod.getId()%></td>
 			<td><%=prod.getName()%></td>
 			<td><%=prod.getQuantity()%>個</td>
-			<td><%=String.format("%,d",prod.getPriceIncludingTax() * prod.getQuantity())%>円</td>
+			<td><%=String.format("%,d", prod.getPriceIncludingTax() * prod.getQuantity())%>円</td>
 		</tr>
 		<%
 		}
@@ -54,13 +61,14 @@ if (listProd.size() > 0) {
 	</table>
 	<br>
 	<p>
-合計（税込）：<%= payData.getTotalPriceIncludingTaxString() %> 円になります。
-</p>
+		合計（税込）：<%=payData.getTotalPriceIncludingTaxString()%>
+		円になります。
+	</p>
 	<%
 	session.removeAttribute("pay");//精算済情報の削除
 	}
 	%>
-	
+
 
 </body>
 </html>
