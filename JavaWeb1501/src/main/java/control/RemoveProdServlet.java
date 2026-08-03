@@ -41,18 +41,21 @@ public class RemoveProdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		int idx = Integer.parseInt(request.getParameter("idx"));
+		//productId,productName(ポップアップ表示用)を取得
+		String productId = request.getParameter("productId");
+		String productName = request.getParameter("productName");
 		
 		//セッションオブジェクト取得
 		HttpSession session = request.getSession();
 		
 		//カートへの商品追加処理
 		Operation op = new Operation();
-		op.removeProd(idx, session);
-		
+		op.removeProd(productId, session);
+		session.setAttribute("popupMessage", productName + "を取り消しました。");//ポップアップ表示
 		
 		//転送先設定
 		String url = "cart.jsp";
+		
 		
 		// 転送
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

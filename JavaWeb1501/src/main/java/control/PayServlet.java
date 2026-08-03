@@ -40,17 +40,15 @@ public class PayServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//パラメータ取得
-				request.setCharacterEncoding("UTF-8");				
+				//パラメータ取得
+				request.setCharacterEncoding("UTF-8");
+				
 				//セッションオブジェクト取得
 				HttpSession session = request.getSession();
 				
 				//精算処理
 				Operation op = new Operation();
 				op.pay(session);
-				
-				//転送先設定
-				//String url = "pay.jsp";
 				
 				// 転送
 				RequestDispatcher rd = request.getRequestDispatcher("pay.jsp");

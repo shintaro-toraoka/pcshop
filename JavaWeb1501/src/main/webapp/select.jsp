@@ -109,7 +109,11 @@
 
 					<input type="hidden" name="productId" value="<%=prod.getId()%>">
 					<input type="hidden" name="productName" value="<%=prod.getName()%>">
+<<<<<<< HEAD
 					<!-- 選択ボタン -->
+=======
+
+>>>>>>> 5447b063eb9521ae70edeace02fbd3d44be4bc98
 					<%
 					if (prod.getStock() > 0) {
 					%>
@@ -124,6 +128,7 @@
 					%>
 				</form>
 			</td>
+<<<<<<< HEAD
 			
 			<!-- 商品選択完了メッセージ -->
 		<%
@@ -141,6 +146,27 @@
 		<td><%=prod.getId()%></td>
 
 			<!-- ここから商品名クリックで詳細モーダル表示 -->
+=======
+
+			<!-- 選択時のポップアップ表示 -->
+			<%
+	String popupMessage = (String)session.getAttribute("popupMessage");
+	if(popupMessage !=null){
+
+
+%>
+			<div id="select-popup" class="pp-popup pp-active">
+				<p><%=popupMessage %></p>
+			</div>
+			<%
+		session.removeAttribute("popupMessage");
+	}
+%>
+
+			<td><%=prod.getId()%></td>
+
+			<!-- ここから商品リンク化 -->
+>>>>>>> 5447b063eb9521ae70edeace02fbd3d44be4bc98
 			<td><span class="prod-name" data-id="<%=prod.getId()%>"
 				data-name="<%=prod.getName()%>"
 				data-price="<%=prod.getPriceIncludingTaxString()%>"
@@ -233,10 +259,16 @@
 	<div id="productModal" class="modal">
 		<div class="modal-content">
 			<span id="closeModal"></span>
+<<<<<<< HEAD
 		</div>
 	</div>
 	
 	<!-- 商品画像拡大モーダル -->
+=======
+
+		</div>
+	</div>
+>>>>>>> 5447b063eb9521ae70edeace02fbd3d44be4bc98
 	<div id="zoomback">
 		<img id="zoomimg" src="">
 	</div>
@@ -305,6 +337,7 @@ closeModal.addEventListener("click", function() {
     modal.style.display = "none";
 });
 			
+<<<<<<< HEAD
 		</script>}		}
 		
 
@@ -312,6 +345,16 @@ closeModal.addEventListener("click", function() {
 	<script>
 	const ppBtn = document.querySelector('#pp-btn');
 	const ppPopup = document.querySelector('#pp-popup');
+=======
+		</script>
+		}	}
+		
+
+	<!-- 選択・削除のポップアップ表示 -->
+<script>
+const ppBtn = document.querySelector('#pp-btn');
+const ppPopup = document.querySelector('#pp-popup');
+>>>>>>> 5447b063eb9521ae70edeace02fbd3d44be4bc98
 
 	if (ppBtn && ppPopup) {
  		 ppBtn.addEventListener('click', function() {
