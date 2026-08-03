@@ -164,46 +164,38 @@ public class Operation {
 	//	//商品の検索
 	//	
 	//}
-	
-	
-	
-	public List<Product> searchProduct(String keyword){
-		if(keyword !=null) {
+
+	public List<Product> searchProduct(String keyword) {
+		if (keyword != null) {
 			keyword = keyword.trim();
 		}
-		
-	    return productDao.getProductList(keyword);
 
+		return productDao.getProductList(keyword);
 
 	}
-	
-	
-	//購入履歴をJavaで取得
-	public List<Payment> getPaymentList(String userId){
-		return paymentDao.getPaymentList(userId);
-		}
 
-	
+	//購入履歴をJavaで取得
+	public List<Payment> getPaymentList(String userId) {
+		return paymentDao.getPaymentList(userId);
+	}
+
 	public void pay(HttpSession session) {
 		System.out.println("pay開始");
-		
+
 		//店舗情報・カート情報の取得
 		Cart cart = (Cart) session.getAttribute("cart");
 
 		if (cart != null) {
-			
-			
-			
+
 			//セッションに格納（精算済みデータ）
 			session.setAttribute("pay", cart);
 			//cartの内容をpaymentテーブルに登録する
 			//カート内の商品リスト List<Product> listProd の件数分 paymentテーブルに登録する
 			List<Product> listProd = cart.getListProd();
 			//
-			
-			
+
 			for (Product product : listProd) {
-				
+
 				String userName = (String) session.getAttribute("userName");
 				System.out.println("ユーザー名=" + userName);
 

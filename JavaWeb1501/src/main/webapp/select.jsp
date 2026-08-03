@@ -7,25 +7,34 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>商品選択</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="<%=request.getContextPath()%>/images/ikon.png"
-	type="image/png">
-</head>
+	<head>
+	<!-- 基本設定 -->
+		<meta charset="UTF-8">
+		<title>商品選択</title>
+		
+		<link rel="stylesheet" href="style.css">
+		<link rel="icon" href="<%=request.getContextPath()%>/images/ikon.png"
+		type="image/png">
+	</head>
 <body>
+
+	<!-- ヘッダーナビ -->
 	<%@include file="header-navi.jsp"%>
+	
+	<!-- 装飾画像 -->
 	<img src="images/deco1.png" class="main-image1">
 	<img src="images/deco2.png" class="main-image2">
 
 	<!-- 商品検索の処理 -->
 	<h2>商品選択</h2>
+	
 	<form action="search" method="get">
 		<input type="text" value="${query}" name="query"
 			placeholder="キーワードを入力">
 		<button type="submit">をさがす</button>
 	</form>
+	
+	<!-- 検索メッセージ表示 -->
 	<%
 	String keyword = request.getParameter("query");
 	%>
@@ -42,12 +51,14 @@
 	}
 	%>
 
+<!-- 商品一覧データ取得 -->
 	<%
 	//	List<Product> listProd;
 	List<Product> listProd = (List<Product>) request.getAttribute("listProd");
 
 	if (listProd == null) {
 
+		//セッションから店舗情報取得
 		Store store = (Store) session.getAttribute("store");
 		if (store == null) {
 			listProd = new ArrayList<Product>();
@@ -58,12 +69,15 @@
 	if (listProd.size() > 0) {
 	%>
 
-
 	<br>
 
+	<!-- 商品一覧テーブル -->
 	<table class="select-list">
+		
+	<!-- テーブルヘッダー -->
 		<tr>
-			<th class="selectColumn"></th><!-- 選択列 -->
+			<th class="selectColumn"></th>
+			<!-- 選択列 -->
 			<th class="proIdColumn">商品ID</th>
 			<th class="proNameColumn">商品名</th>
 			<th class="proImageColumn">商品画像</th>
@@ -72,15 +86,16 @@
 			<th class="stockColumn">在庫数</th>
 		</tr>
 
+		<!-- ページング設定 -->
 		<%
-		int pageSize = 10;
-		int pageNo = 1;
-		String pageParam = request.getParameter("page");
-		if (pageParam != null) {
-		pageNo = Integer.parseInt(pageParam);
-		}
-		int start = (pageNo - 1) * pageSize;
-		int end = pageNo * pageSize;
+			int pageSize = 10;
+			int pageNo = 1;
+			String pageParam = request.getParameter("page");
+			if (pageParam != null) {
+			pageNo = Integer.parseInt(pageParam);
+			}
+			int start = (pageNo - 1) * pageSize;
+			int end = pageNo * pageSize;
 
 		for (int idx = start; idx < end && idx < listProd.size(); idx++) {
 			Product prod = listProd.get(idx);
@@ -94,7 +109,7 @@
 
 					<input type="hidden" name="productId" value="<%=prod.getId()%>">
 					<input type="hidden" name="productName" value="<%=prod.getName()%>">
-					
+					<!-- 選択ボタン -->
 					<%
 					if (prod.getStock() > 0) {
 					%>
@@ -107,26 +122,25 @@
 					<%
 					}
 					%>
-
 				</form>
 			</td>
-<%
-	String addedMessage = (String)session.getAttribute("addedMessage");
-	if(addedMessage !=null){
+			
+			<!-- 商品選択完了メッセージ -->
+		<%
+			String addedMessage = (String)session.getAttribute("addedMessage");
+			if(addedMessage !=null){
+		%>
+		<div id="select-popup" class="pp-popup pp-active">
+			<p><%=addedMessage %></p>
+		</div>
+		<%
+			session.removeAttribute("addedMessage");
+			}
+		%>
+		
+		<td><%=prod.getId()%></td>
 
-
-%>
-	<div id="select-popup" class="pp-popup pp-active">
-	<p><%=addedMessage %></p>
-	</div>
-<%
-		session.removeAttribute("addedMessage");
-	}
-%>
-
-			<td><%=prod.getId()%></td>
-
-			<!-- ここから商品リンク化 -->
+			<!-- ここから商品名クリックで詳細モーダル表示 -->
 			<td><span class="prod-name" data-id="<%=prod.getId()%>"
 				data-name="<%=prod.getName()%>"
 				data-price="<%=prod.getPriceIncludingTaxString()%>"
@@ -134,45 +148,46 @@
 				data-calories="<%=prod.getCalories()%>"
 				data-nutrients="<%=prod.getNutrients()%>"
 				data-recommendation="<%=prod.getRecommendation()%>"> <%=prod.getName()%>
-
 			</span></td>
 
-			<td>
-				<%
+		<td>
+			<%
 				if (imagePath == null || imagePath.isBlank()) {
-				%>
-				<p>No Image</p> <%
- } else {
- String imageUrl = "images/" + imagePath;
- %> <img src="<%=imageUrl%>" class="zoom" width="60" height="50"
+			%>
+			<p>No Image</p> <%
+			} else {
+ 				String imageUrl = "images/" + imagePath;
+ 			%> <img src="<%=imageUrl%>" class="zoom" width="60" height="50"
 				alt="<%=prod.getName()%>"
 				onerror="this.onerror=null; this.src='images/Error.png';"> <%
- }
- %>
-			</td>
+ 			}
+ 			%>
+		</td>
 
-			<td>
-				<%
+		<!-- 数量選択 -->
+		<td>
+			<%
 				if (prod.getStock() > 0) {
-				%> <input type="number" name="quantity" value="1" min="1"
+			%> <input type="number" name="quantity" value="1" min="1"
 				max="<%=Math.min(prod.getStock(), 10)%>" required class="quanti"
 				form="<%=formId%>"> <%
- } else {
- %> - <%
- }
- %>
-			</td>
-
-			<td><%=prod.getPriceIncludingTaxString()%></td>
-
+			 } else {
+			 %> - <%
+			 }
+			 %>
+		</td>
+		
+		<td><%=prod.getPriceIncludingTaxString()%></td>
+		
+		<!-- 在庫切れ表示 -->
 			<td>
 				<%
 				if (prod.getStock() > 0) {
 				%> <%=prod.getStock()%> <%
- } else {
- %> 在庫切れ <%
- }
- %>
+ 				} else {
+ 				%> 在庫切れ <%
+ 				}
+ 				%>
 			</td>
 		</tr>
 
@@ -182,15 +197,15 @@
 	</table>
 
 	<%
-int totalPage = (listProd.size() + pageSize - 1) / pageSize;
-for(int i = 1; i <= totalPage; i++){
-%>
-	<a href="select.jsp?page=<%=i%>"><%=i%></a>
+		int totalPage = (listProd.size() + pageSize - 1) / pageSize;
+		for(int i = 1; i <= totalPage; i++){
+	%>
+		<a href="select.jsp?page=<%=i%>"><%=i%></a>
 	<%
 	}
-%>
+	%>
 
-	<!-- 商品名クリックしたら情報表示 -->
+	<!-- 商品名クリックしたら情報表示 商品詳細モーダル -->
 	<div id="detailModal" class="modal">
 		<div class="modal-content">
 			<span id="closeDetailModal">&times;</span>
@@ -211,28 +226,27 @@ for(int i = 1; i <= totalPage; i++){
 			<p>
 				<b>おすすめポイント</b><br> <span id="modalRecommendation"></span>
 			</p>
-
-
 		</div>
-
-		<!--ここまで -->
-
 	</div>
+	
+	
 	<div id="productModal" class="modal">
 		<div class="modal-content">
 			<span id="closeModal"></span>
-
 		</div>
-		</div>
-		<div id="zoomback">
-			<img id="zoomimg" src="">
-		</div>
+	</div>
+	
+	<!-- 商品画像拡大モーダル -->
+	<div id="zoomback">
+		<img id="zoomimg" src="">
+	</div>
 
 
 
 
-		<script>
+	<script>
 			// 要素を取得　..①
+			//商品画像拡大処理
 			const zoom = document.querySelectorAll(".zoom");
 			const zoomback = document.getElementById("zoomback");
 			const zoomimg = document.getElementById("zoomimg");
@@ -259,13 +273,13 @@ for(int i = 1; i <= totalPage; i++){
 				zoomback.style.display = "none";
 			}
 
-			//ここから商品リンク化
-			const modal = document.getElementById("detailModal");
-const closeModal = document.getElementById("closeDetailModal");
+//商品詳細モーダル表示 
+		const modal = document.getElementById("detailModal");
+		const closeModal = document.getElementById("closeDetailModal");
 
-document.querySelectorAll(".prod-name").forEach(item => {
+		document.querySelectorAll(".prod-name").forEach(item => {
 
-    item.addEventListener("click", function() {
+   		 item.addEventListener("click", function() {
 
         document.getElementById("modalName").textContent =
             this.textContent;
@@ -284,38 +298,26 @@ document.querySelectorAll(".prod-name").forEach(item => {
 
         modal.style.display = "block";
         
-        
     });
-
 });
 
 closeModal.addEventListener("click", function() {
     modal.style.display = "none";
 });
 			
-		</script>
-		<%
-		}
-		%>	
+		</script>}		}
 		
-<!-- ポップアップ表示 -->
-<div class="pp-btn-wrap">
-	<button id="pp-btn">ひとくち</button>
-</div>
-<div id="pp-popup" class="pp-popup">
-<p class="pp-headline">カレーって美味しいよね</p>
-<p class="pp-body">肉食が解禁された明治時代に、「ライスカレー」が普及したそうです。</p>
-</div>
 
-<script>
-const ppBtn = document.querySelector('#pp-btn');
-const ppPopup = document.querySelector('#pp-popup');
+	<!-- 選択・削除のポップアップ表示 -->
+	<script>
+	const ppBtn = document.querySelector('#pp-btn');
+	const ppPopup = document.querySelector('#pp-popup');
 
-if (ppBtn && ppPopup) {
-  ppBtn.addEventListener('click', function() {
+	if (ppBtn && ppPopup) {
+ 		 ppBtn.addEventListener('click', function() {
     ppPopup.className = 'pp-popup pp-active';
-  });
-  ppPopup.addEventListener('animationend', function(e) {
+ 	 });
+ 	 ppPopup.addEventListener('animationend', function(e) {
     if (e.animationName === 'ppAnim') {
       ppPopup.className = 'pp-popup';
     }
