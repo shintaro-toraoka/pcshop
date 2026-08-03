@@ -55,8 +55,9 @@
 			<!-- カート内から商品を削除する削除ボタンを作成 -->
 			<td>
 				<form action="remove-prod-servlet" method="POST">
-					<input type="hidden" name="idx" value="<%=idx%>"> <input
-						type="submit" value="削除">
+					<input type="hidden" name="productId" value="<%=prod.getId()%>"> 
+					<input type="hidden" name="productName" value="<%=prod.getName()%>">
+					<input type="submit" value="削除">
 				</form>
 			</td>
 			<!-- カート内テーブルの中身を表示 -->
@@ -156,5 +157,22 @@
 	<%
 	}
 	%>
+	
+	<!-- 削除時のポップアップ表示 -->
+	<%
+	String popupMessage = (String)session.getAttribute("popupMessage");
+	if(popupMessage !=null){
+
+
+%>
+	<div id="pp-popup" class="pp-popup pp-active">
+	<p class="pp-body"><%=popupMessage %></p>
+	</div>
+<%
+		session.removeAttribute("popupMessage");
+	}
+%>
+	
+	
 </body>
 </html>

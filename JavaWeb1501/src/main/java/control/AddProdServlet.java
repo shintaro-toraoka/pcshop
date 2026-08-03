@@ -42,7 +42,8 @@ public class AddProdServlet extends HttpServlet {
 		
 		//パラメータ取得
 		request.setCharacterEncoding("UTF-8");
-//		int idx = Integer.parseInt(request.getParameter("idx"));
+	
+		//productId,quantity,productName(検索用)を取得
 		String productId = request.getParameter("productId");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		String productName = request.getParameter("productName");
@@ -53,17 +54,19 @@ public class AddProdServlet extends HttpServlet {
 		//カートへの商品追加処理
 		Operation op = new Operation();
 		op.addProd(productId, quantity, session);
-		session.setAttribute("addedMessage",productName + "を追加しました！");
+		session.setAttribute("popupMessage",productName + "を追加しました！");//商品追加時のポップアップ
 		
 		//転送先設定
-		String url = "select.jsp";
+		String url = "select.jsp";//商品を追加しても選択画面に留まる
 		
-		// 転送
+		response.sendRedirect(url);//今回はselect.jspに遷移(=選択画面に留まる)
+		
+		// 転送＊Udemy講座で登場
 		/*
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 		*/
-		response.sendRedirect(url);
+		
 	
 
 	

@@ -63,7 +63,8 @@
 
 	<table class="select-list">
 		<tr>
-			<th class="selectColumn"></th><!-- 選択列 -->
+			<th class="selectColumn"></th>
+			<!-- 選択列 -->
 			<th class="proIdColumn">商品ID</th>
 			<th class="proNameColumn">商品名</th>
 			<th class="proImageColumn">商品画像</th>
@@ -94,7 +95,7 @@
 
 					<input type="hidden" name="productId" value="<%=prod.getId()%>">
 					<input type="hidden" name="productName" value="<%=prod.getName()%>">
-					
+
 					<%
 					if (prod.getStock() > 0) {
 					%>
@@ -110,17 +111,19 @@
 
 				</form>
 			</td>
-<%
-	String addedMessage = (String)session.getAttribute("addedMessage");
-	if(addedMessage !=null){
+
+			<!-- 選択時のポップアップ表示 -->
+			<%
+	String popupMessage = (String)session.getAttribute("popupMessage");
+	if(popupMessage !=null){
 
 
 %>
-	<div id="select-popup" class="pp-popup pp-active">
-	<p><%=addedMessage %></p>
-	</div>
-<%
-		session.removeAttribute("addedMessage");
+			<div id="select-popup" class="pp-popup pp-active">
+				<p><%=popupMessage %></p>
+			</div>
+			<%
+		session.removeAttribute("popupMessage");
 	}
 %>
 
@@ -223,15 +226,15 @@ for(int i = 1; i <= totalPage; i++){
 			<span id="closeModal"></span>
 
 		</div>
-		</div>
-		<div id="zoomback">
-			<img id="zoomimg" src="">
-		</div>
+	</div>
+	<div id="zoomback">
+		<img id="zoomimg" src="">
+	</div>
 
 
 
 
-		<script>
+	<script>
 			// 要素を取得　..①
 			const zoom = document.querySelectorAll(".zoom");
 			const zoomback = document.getElementById("zoomback");
@@ -294,19 +297,10 @@ closeModal.addEventListener("click", function() {
 });
 			
 		</script>
-		<%
-		}
-		%>	
+		}	}
 		
-<!-- ポップアップ表示 -->
-<div class="pp-btn-wrap">
-	<button id="pp-btn">ひとくち</button>
-</div>
-<div id="pp-popup" class="pp-popup">
-<p class="pp-headline">カレーって美味しいよね</p>
-<p class="pp-body">肉食が解禁された明治時代に、「ライスカレー」が普及したそうです。</p>
-</div>
 
+	<!-- 選択・削除のポップアップ表示 -->
 <script>
 const ppBtn = document.querySelector('#pp-btn');
 const ppPopup = document.querySelector('#pp-popup');

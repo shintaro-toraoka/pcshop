@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		boolean result = op.loginProc(userId, password, session);
 
 		// 転送先設定
-		String url = "select.jsp";
+		String url = "select.jsp";		
 		if (!result) {					// エラーの場合にはログイン画面に戻す
 			request.setAttribute("errorMsg", "ユーザID または パスワードに 誤りがあります。");	
 			url = "login.jsp";

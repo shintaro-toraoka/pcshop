@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="model.Payment"%>
+<%@ page import="java.util.LinkedHashSet" %>
+<%@ page import="java.util.Set" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,16 +24,52 @@
 	<!-- 購入履歴のリストを作成 -->
 	<%
 	List<Payment> paymentList = (List<Payment>) request.getAttribute("paymentList");
+
+	int totalQuantity = 0;
+
+	for (Payment payment : paymentList) {
+		totalQuantity += payment.getQuantity();
+
+	}
 	%>
 
 	<h2>購入履歴</h2>
 
-
+<%-- 
 	<div class="history-count">
-		購入件数：<%=paymentList.size()%></h3>
+		購入個数：<span><%=totalQuantity%></span> 個
 	</div>
 
 	<!-- 購入履歴テーブルのヘッダー -->
+	--%>
+	
+	<%
+Set<String> dateSet = new LinkedHashSet<>();
+for(Payment payment : paymentList){
+dateSet.add(
+payment.getPurchaseDate()
+.toLocalDate()
+.toString()
+);
+}
+%>
+	
+	<% if(paymentList.size() > 0){ %>
+<select name="date">
+<option value="">すべて表示</option>
+
+
+<% for(String date : dateSet){ %>
+<option value="<%= date %>">
+<%= date %>
+</option>
+<% } %>
+</select>
+
+<input type="submit" value="絞り込み">
+</form>
+
+
 	<table class="payment-list">
 		<tr>
 			<th>商品ID</th>
@@ -41,20 +79,52 @@
 			<th>購入日時</th>
 		</tr>
 
-		<%
-		for (Payment payment : paymentList) {
-		%>
-		<!-- 購入履歴テーブルの中身を表示 -->
-		<tr>
-			<td><%=payment.getProductId()%></td>
-			<td><%=payment.getProductName()%></td>
-			<td><%=payment.getQuantity()%>個</td>
-			<td><%=payment.getAmount()%>円</td>
-			<td><%=payment.getPurchaseDate().toLocalDate()%></td>
-		</tr>
-		<%
-		}
-		%>
+
+<%
+String oldHistoryId = "";
+String selectedDate = request.getParameter("date");
+
+
+for (Payment payment : paymentList) {
+	if (selectedDate == null
+			|| selectedDate.equals("")
+			|| payment.getPurchaseDate()
+					.toLocalDate()
+					.toString()
+					.equals(selectedDate)) {
+	if (!payment.getHistoryId().equals(oldHistoryId)) {%>
+
+<tr class="history-group">
+<td colspan="6">
+伝票番号：<%= payment.getHistoryId() %>
+</td>
+</tr>
+<%
+oldHistoryId = payment.getHistoryId();
+	}
+%>
+<tr>
+
+
+		<td><%=payment.getProductId()%></td>
+		<td><%=payment.getProductName()%></td>
+		<td><%=payment.getQuantity()%>個</td>
+		<td><%=payment.getAmount()%>円</td>
+		<td><%=payment.getPurchaseDate().toLocalDate()%></td>
+</tr>
+<%
+}
+}
+%>		
 	</table>
+	
+	
+<% } else { %>
+
+<p class="no-history">
+
+購入履歴はありません。
+</p>
+<% } %>
 </body>
 </html>
