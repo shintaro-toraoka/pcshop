@@ -54,7 +54,8 @@ payment.getPurchaseDate()
 }
 %>
 	
-	<% if(paymentList.size() > 0){ %>
+<form method="get">
+<% if(paymentList.size() > 0){ %>
 <select name="date">
 <option value="">すべて表示</option>
 
@@ -92,7 +93,7 @@ for (Payment payment : paymentList) {
 					.toLocalDate()
 					.toString()
 					.equals(selectedDate)) {
-	if (!payment.getHistoryId().equals(oldHistoryId)) {%>
+	if (payment.getHistoryId() != null && !payment.getHistoryId().equals(oldHistoryId)) {%>
 
 <tr class="history-group">
 <td colspan="6">

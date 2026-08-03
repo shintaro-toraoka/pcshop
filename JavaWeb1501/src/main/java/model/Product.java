@@ -50,7 +50,8 @@ public class Product {
 	 * public Product(String id, String name, String image_path,int price, int stock) {
 		this.id = id;
 		this.name = name;
-		this.image_path = image_path;
+		this.image_path = 
+		image_path;
 		this.price = price;
 		this.stock = stock;
 	}*/
@@ -97,6 +98,7 @@ public class Product {
 		return image_path;
 	}
 	
+	//数量取得 @return quantity
 	public int getQuantity() {
 		return quantity;
 	}
@@ -144,32 +146,37 @@ public class Product {
 		return amount;
 	}
 
-	//商品情報詳細ゲッターセッター
+	//商品情報詳細取得
+	//カロリー取得
 	public String getCalories() {
 	    return calories;
 	}
-
+	//カロリー保存
 	public void setCalories(String calories) {
 	    this.calories = calories;
 	}
 
+	//栄養情報取得
 	public String getNutrients() {
 	    return nutrients;
 	}
 
+	//栄養情報保存
 	public void setNutrients(String nutrients) {
 	    this.nutrients = nutrients;
 	}
 
+	//おすすめポイント情報取得
 	public String getRecommendation() {
 	    return recommendation;
 	}
 
+	//おすすめポイント情報設定
 	public void setRecommendation(String recommendation) {
 	    this.recommendation = recommendation;
 	}
 	
-
+	//購入金額取得
 	public int getboughtPrice () {
 		Calculator calculator = new Calculator();
 		int amount = 0;

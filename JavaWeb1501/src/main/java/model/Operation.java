@@ -63,7 +63,6 @@ public class Operation {
 	 * @return 結果 (true / false)
 	 */
 	private boolean authenticate(String userId, String password) {
-		
 		//入力されたpasswordをハッシュ化
 		String inputPasswordHash = PasswordUtil.hashPassword(password);
 		// ★ここでは password = "pass" であれば true とする
@@ -116,6 +115,7 @@ public class Operation {
 
 		if ((store != null) && (cart != null)) {
 			
+			//同一商品が追加されたとき、数量加算
 			for (Product prod : cart.getListProd()) {
 				//同一商品が選択されたとき、数量加算
 				if (prod.getId().equals(productId)) {
@@ -125,7 +125,9 @@ public class Operation {
 			//カート内の同一商品を削除
 			cart.oldRemoveProd(productId);
 			for (Product prod : store.getListProd()) {
+				
 				if (prod.getId().equals(productId)) {
+				
 					prod.setQuantity(quantity);
 					cart.add(prod);
 					break;
@@ -195,7 +197,6 @@ public class Operation {
 
 				paymentDao.insertPayment(
 						cart.getUserId(), // ユーザID
-						//cart.getUserName(), //ユーザ名
 						userName,
 						product.getId(), // 商品ID
 						product.getName(), // 商品名

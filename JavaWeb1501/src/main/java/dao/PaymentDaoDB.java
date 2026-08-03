@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import model.Payment;
 
 public class PaymentDaoDB extends DaoDB implements PaymentDao {
 
+	@Override
 	public int insertPayment(
 			String userId,
 			String userName,
@@ -26,7 +26,7 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 		try (Connection connection = getConnection()) {
 			//paymentテーブルに支払い情報を登録するSQL文
 			String sql = "INSERT INTO payment "
-					+ "(user_id, user_name, product_id, product_name, quantity, amount, purchase_date,history_id) "
+					+ "(user_id, user_name, product_id, product_name, quantity, amount, purchase_date, history_id) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)";
 
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -83,11 +83,9 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 
 				payment.setAmount(paymentResult.getInt("amount"));
 
-				payment.setQuantity(
-						paymentResult.getInt("quantity"));
+				payment.setQuantity(paymentResult.getInt("quantity"));
 
-				payment.setPurchaseDate(
-						paymentResult.getTimestamp("purchase_date")
+				payment.setPurchaseDate(paymentResult.getTimestamp("purchase_date")
 								.toLocalDateTime());
 				
 				payment.setHistoryId(
@@ -104,17 +102,7 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 		return paymentList;
 	}
 
-	public int insertPayment(String userId, String userName, String productId, String productName, int quantity,
-			int price, LocalDateTime purchaseDate, String historyId) {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
-	}
+	
 
-
-
-	//private Connection getConnection() {
-	//	// TODO 自動生成されたメソッド・スタブ
-	//	return null;
-	//}
 
 }
