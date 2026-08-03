@@ -17,15 +17,16 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 			String productId,
 			String productName,
 			int quantity,
-			int price) {
+			int price,
+			String historyId) {
 
 		System.out.println("insertPayment開始");
 
 		try (Connection connection = getConnection()) {
 
 			String sql = "INSERT INTO payment "
-					+ "(user_id, user_name, product_id, product_name, quantity, amount, purchase_date) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, NOW())";
+					+ "(user_id, user_name, product_id, product_name, quantity, amount, purchase_date,history_id) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)";
 
 			System.out.println(sql);
 
@@ -37,6 +38,7 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 			statement.setString(4, productName);
 			statement.setInt(5, quantity);
 			statement.setInt(6, price);
+			statement.setString(7, historyId);
 
 			int updateCount = statement.executeUpdate();
 
@@ -88,6 +90,9 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 				payment.setPurchaseDate(
 						paymentResult.getTimestamp("purchase_date")
 								.toLocalDateTime());
+				
+				payment.setHistoryId(
+						paymentResult.getString("history_id"));
 
 				paymentList.add(payment);
 			}
@@ -102,7 +107,7 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 
 	@Override
 	public int insertPayment(String userId, String userName, String productId, String productName, int quantity,
-			int price, LocalDateTime purchaseDate) {
+			int price, LocalDateTime purchaseDate, String historyId) {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}

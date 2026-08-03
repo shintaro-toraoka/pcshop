@@ -38,8 +38,12 @@ public class History extends HttpServlet {
 		HttpSession session = request.getSession();
 		Operation op = new Operation();
 		String userId = (String) session.getAttribute("userId");
+		
+		String date = request.getParameter("date");
+		
 		List<Payment> paymentList = op.getPaymentList(userId);
 		request.setAttribute("paymentList", paymentList);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("history.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -19,16 +19,40 @@
 
 	<%
 	List<Payment> paymentList = (List<Payment>) request.getAttribute("paymentList");
+
+	int totalQuantity = 0;
+
+	for (Payment payment : paymentList) {
+		totalQuantity += payment.getQuantity();
+
+	}
 	%>
 
 	<h2>購入履歴</h2>
 
-	
+<%-- 
 	<div class="history-count">
-		購入件数：<%=paymentList.size()%></h3>
+		購入個数：<span><%=totalQuantity%></span> 個
 	</div>
+	--%>
+	<% if(paymentList.size() > 0){ %>
+<select name="date">
+<option value="">すべて表示</option>
 
-	
+
+<%for (Payment payment : paymentList) {%>
+<option value="<%=payment.getPurchaseDate().toLocalDate()%>">
+<%=payment.getPurchaseDate().toLocalDate()%>
+</option>
+<%
+}
+%>
+</select>
+
+<input type="submit" value="絞り込み">
+</form>
+
+
 	<table class="payment-list">
 		<tr>
 			<th>商品ID</th>
@@ -39,18 +63,50 @@
 		</tr>
 
 <%
-	for (Payment payment : paymentList) {
-	%>
+String oldHistoryId = "";
+String selectedDate = request.getParameter("date");
+
+
+for (Payment payment : paymentList) {
+	if (selectedDate == null
+			|| selectedDate.equals("")
+			|| payment.getPurchaseDate()
+					.toLocalDate()
+					.toString()
+					.equals(selectedDate)) {
+	if (!payment.getHistoryId().equals(oldHistoryId)) {%>
+
+<tr class="history-group">
+<td colspan="6">
+伝票番号：<%= payment.getHistoryId() %>
+</td>
+</tr>
+<%
+oldHistoryId = payment.getHistoryId();
+	}
+%>
 <tr>
-		<td><%=payment.getProductId() %></td>
+
+
+		<td><%=payment.getProductId()%></td>
 		<td><%=payment.getProductName()%></td>
 		<td><%=payment.getQuantity()%>個</td>
 		<td><%=payment.getAmount()%>円</td>
 		<td><%=payment.getPurchaseDate().toLocalDate()%></td>
 </tr>
-		<%
-		}
-		%>
+<%
+}
+}
+%>		
 	</table>
+	
+	
+<% } else { %>
+
+<p class="no-history">
+
+購入履歴はありません。
+</p>
+<% } %>
 </body>
 </html>

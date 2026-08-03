@@ -13,7 +13,9 @@ public interface PaymentDao {
 			String productName,
 			int quantity,
 			int price,
-			LocalDateTime purchaseDate);
+			LocalDateTime purchaseDate,
+			String historyId
+			);
 	
 	List<Payment> getPaymentList(String userId);
 
