@@ -49,8 +49,8 @@ public class HistoryServlet extends HttpServlet {
 		
 		//購入履歴をセット
 		request.setAttribute("paymentList", paymentList);
-		//history.jspへ遷移する
 		
+		//history.jspへ遷移する
 		RequestDispatcher dispatcher = request.getRequestDispatcher("history.jsp");
 		dispatcher.forward(request, response);
 	}
