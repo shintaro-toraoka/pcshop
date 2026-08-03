@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +17,16 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 			String productName,
 			int quantity,
 			int price) {
-
-		System.out.println("insertPayment開始");
-
+		
+		//データベース接続
 		try (Connection connection = getConnection()) {
-
+			//paymentテーブルに支払い情報を登録するSQL文
 			String sql = "INSERT INTO payment "
 					+ "(user_id, user_name, product_id, product_name, quantity, amount, purchase_date) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
-			System.out.println(sql);
-
 			PreparedStatement statement = connection.prepareStatement(sql);
-
+			//SQL文のパラメータを設定
 			statement.setString(1, userId);
 			statement.setString(2, userName);
 			statement.setString(3, productId);
@@ -39,8 +35,6 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 			statement.setInt(6, price);
 
 			int updateCount = statement.executeUpdate();
-
-			System.out.println("updateCount=" + updateCount);
 			return updateCount;
 
 		} catch (Exception e) {
@@ -49,7 +43,8 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 
 		return 0;
 	}
-
+	
+	//指定ユーザの購入履歴を取得
 	@Override
 	public List<Payment> getPaymentList(String userId) {
 		List<Payment> paymentList = new ArrayList<>();
@@ -57,59 +52,38 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 		String sql = "SELECT * FROM payment "
 				+ "WHERE user_id = ? "
 				+ "ORDER BY purchase_date DESC";
-
+		//データベース接続
 		try (Connection connection = getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(sql);
+			//SQL文のパラメータを設定
 			statement.setString(1, userId);
 
 			ResultSet paymentResult = statement.executeQuery();
-
+			
+			//paymentテーブルから取得した値をpaymentオブジェクトに格納
 			while (paymentResult.next()) {
 				Payment payment = new Payment();
 
-				payment.setUserId(
-						paymentResult.getString("user_id"));
+				payment.setUserId(paymentResult.getString("user_id"));
 
-				payment.setUserName(
-						paymentResult.getString("user_name"));
+				payment.setUserName(paymentResult.getString("user_name"));
 
-				payment.setProductId(
-						paymentResult.getString("product_id"));
+				payment.setProductId(paymentResult.getString("product_id"));
 
-				payment.setProductName(
-						paymentResult.getString("product_name"));
+				payment.setProductName(paymentResult.getString("product_name"));
 
-				payment.setAmount(
-						paymentResult.getInt("amount"));
+				payment.setAmount(paymentResult.getInt("amount"));
 
-				payment.setQuantity(
-						paymentResult.getInt("quantity"));
+				payment.setQuantity(paymentResult.getInt("quantity"));
 
-				payment.setPurchaseDate(
-						paymentResult.getTimestamp("purchase_date")
-								.toLocalDateTime());
-
+				payment.setPurchaseDate(paymentResult.getTimestamp("purchase_date")
+						.toLocalDateTime());
+				//paymentオブジェクトを購入履歴リストに追加
 				paymentList.add(payment);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return paymentList;
-
 	}
-
-	@Override
-	public int insertPayment(String userId, String userName, String productId, String productName, int quantity,
-			int price, LocalDateTime purchaseDate) {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
-	}
-
-	//private Connection getConnection() {
-	//	// TODO 自動生成されたメソッド・スタブ
-	//	return null;
-	//}
-
 }
