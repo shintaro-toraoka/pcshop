@@ -240,6 +240,17 @@ color: #d9531e;
 font-size: 32px;
 }
 
+.history-group td{
+background-color: #c96f14;
+color: white;
+font-size: 22px;
+font-weight: bold;
+padding: 15px;
+}
+.history-group{
+height: 60px;
+}
+
 
 hr {
 	border: 0;

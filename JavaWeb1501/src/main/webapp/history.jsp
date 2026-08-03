@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="model.Payment"%>
+<%@ page import="java.util.LinkedHashSet" %>
+<%@ page import="java.util.Set" %>
 
 <!DOCTYPE html>
 <html>
@@ -35,18 +37,28 @@
 		購入個数：<span><%=totalQuantity%></span> 個
 	</div>
 	--%>
+	
+	<%
+Set<String> dateSet = new LinkedHashSet<>();
+for(Payment payment : paymentList){
+dateSet.add(
+payment.getPurchaseDate()
+.toLocalDate()
+.toString()
+);
+}
+%>
+	
 	<% if(paymentList.size() > 0){ %>
 <select name="date">
 <option value="">すべて表示</option>
 
 
-<%for (Payment payment : paymentList) {%>
-<option value="<%=payment.getPurchaseDate().toLocalDate()%>">
-<%=payment.getPurchaseDate().toLocalDate()%>
+<% for(String date : dateSet){ %>
+<option value="<%= date %>">
+<%= date %>
 </option>
-<%
-}
-%>
+<% } %>
 </select>
 
 <input type="submit" value="絞り込み">
