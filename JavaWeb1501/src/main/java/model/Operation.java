@@ -145,14 +145,14 @@ public class Operation {
 		}
 	}
 
-	public void removeProd(int idx, HttpSession session) {
+	public void removeProd(String productId, HttpSession session) {
 		//店舗情報・カート情報の取得
 		Store store = (Store) session.getAttribute("store");
 		Cart cart = (Cart) session.getAttribute("cart");
 
 		if ((store != null) && (cart != null)) {
 			//カートに追加された商品を除去
-			cart.remove(idx);
+			cart.remove(productId);
 
 			//セッションに再度格納
 			session.setAttribute("cart", cart);

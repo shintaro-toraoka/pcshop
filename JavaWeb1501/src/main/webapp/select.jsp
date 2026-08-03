@@ -101,17 +101,19 @@
 
 				</form>
 			</td>
+			
+	<!-- 選択時のポップアップ表示 -->
 <%
-	String addedMessage = (String)session.getAttribute("addedMessage");
-	if(addedMessage !=null){
+	String popupMessage = (String)session.getAttribute("popupMessage");
+	if(popupMessage !=null){
 
 
 %>
 	<div id="select-popup" class="pp-popup pp-active">
-	<p><%=addedMessage %></p>
+	<p><%=popupMessage %></p>
 	</div>
 <%
-		session.removeAttribute("addedMessage");
+		session.removeAttribute("popupMessage");
 	}
 %>
 

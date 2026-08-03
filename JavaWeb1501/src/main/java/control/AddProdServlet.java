@@ -53,7 +53,7 @@ public class AddProdServlet extends HttpServlet {
 		//カートへの商品追加処理
 		Operation op = new Operation();
 		op.addProd(productId, quantity, session);
-		session.setAttribute("addedMessage",productName + "を追加しました！");
+		session.setAttribute("popupMessage",productName + "を追加しました！");//ポップアップ
 		
 		//転送先設定
 		String url = "select.jsp";

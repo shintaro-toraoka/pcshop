@@ -14,7 +14,7 @@ public class Cart {
 	private String userId;
 	
 	private String userName;
-
+	
 	/**
 	 * カート内の商品リスト
 	 */
@@ -25,10 +25,12 @@ public class Cart {
 	 * フィールド初期化コンストラクタ
 	 * @param userId
 	 * @param listProd
+	 * @param productId 
 	 */
 	public Cart(String userId, List<Product> listProd) {
 		this.userId = userId;
 		this.listProd = listProd;
+	
 	}
 
 	/******** メソッド ******************************************/
@@ -62,10 +64,16 @@ public class Cart {
 
 	/**
 	 * カート内の特定の商品を除去する
-	 * @param index 削除する商品のリスト内のインデックス
+	 * @param productId 削除する商品のリスト内のインデックス
 	 */
-	public void remove(int index) {
-		listProd.remove(index);
+	public void remove(String productId) {
+		//listProd.remove(productId);
+		for(int i =0; i<listProd.size(); i++) {
+			if(listProd.get(i).getId().equals(productId)) {
+				listProd.remove(i);
+				break;
+			}
+		}
 	}
 	
 	/**
