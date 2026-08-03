@@ -26,6 +26,8 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 					+ "VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
 			PreparedStatement statement = connection.prepareStatement(sql);
+			System.out.println(statement);
+			
 			//SQL文のパラメータを設定
 			statement.setString(1, userId);
 			statement.setString(2, userName);
@@ -57,6 +59,8 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			//SQL文のパラメータを設定
 			statement.setString(1, userId);
+			
+			System.out.println(statement);
 
 			ResultSet paymentResult = statement.executeQuery();
 			
