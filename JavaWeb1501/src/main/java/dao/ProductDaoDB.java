@@ -27,7 +27,8 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 					
 					keywords =keyword.trim().split("[\\s　]+"); //単語を空白で分割する
 				 	for(String word : keywords){
-				 		sql.append(" AND product_name LIKE ?"); //キーワードの数だけ追加する
+				 		sql.append(" AND product_name LIKE ?");//キーワードの数だけ追加する
+				 		System.out.println(keywords);
 				 		}
 				}
 					//完成したSQLをセット
@@ -83,7 +84,7 @@ public class ProductDaoDB extends DaoDB implements ProductDao {
 			//DBに接続
 			try (Connection connection = getConnection()) {
 			
-			//
+			//SQLで在庫数を減らすための更新処理
 			String sql = "UPDATE products SET stock = stock - ?  WHERE product_id = ?";
 			
 			//SQLを実行するための準備
