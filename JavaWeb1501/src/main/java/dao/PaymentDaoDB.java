@@ -22,16 +22,17 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 
 		System.out.println("insertPayment開始");
 
+		//データベース接続
 		try (Connection connection = getConnection()) {
-
+			//paymentテーブルに支払い情報を登録するSQL文
 			String sql = "INSERT INTO payment "
 					+ "(user_id, user_name, product_id, product_name, quantity, amount, purchase_date,history_id) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)";
 
-			System.out.println(sql);
-
 			PreparedStatement statement = connection.prepareStatement(sql);
-
+			System.out.println(statement);
+			
+			//SQL文のパラメータを設定
 			statement.setString(1, userId);
 			statement.setString(2, userName);
 			statement.setString(3, productId);
@@ -41,8 +42,6 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 			statement.setString(7, historyId);
 
 			int updateCount = statement.executeUpdate();
-
-			System.out.println("updateCount=" + updateCount);
 			return updateCount;
 
 		} catch (Exception e) {
@@ -51,7 +50,8 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 
 		return 0;
 	}
-
+	
+	//指定ユーザの購入履歴を取得
 	@Override
 	public List<Payment> getPaymentList(String userId) {
 		List<Payment> paymentList = new ArrayList<>();
@@ -59,30 +59,29 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 		String sql = "SELECT * FROM payment "
 				+ "WHERE user_id = ? "
 				+ "ORDER BY purchase_date DESC";
-
+		//データベース接続
 		try (Connection connection = getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(sql);
+			//SQL文のパラメータを設定
 			statement.setString(1, userId);
+			
+			System.out.println(statement);
 
 			ResultSet paymentResult = statement.executeQuery();
-
+			
+			//paymentテーブルから取得した値をpaymentオブジェクトに格納
 			while (paymentResult.next()) {
 				Payment payment = new Payment();
 
-				payment.setUserId(
-						paymentResult.getString("user_id"));
+				payment.setUserId(paymentResult.getString("user_id"));
 
-				payment.setUserName(
-						paymentResult.getString("user_name"));
+				payment.setUserName(paymentResult.getString("user_name"));
 
-				payment.setProductId(
-						paymentResult.getString("product_id"));
+				payment.setProductId(paymentResult.getString("product_id"));
 
-				payment.setProductName(
-						paymentResult.getString("product_name"));
+				payment.setProductName(paymentResult.getString("product_name"));
 
-				payment.setAmount(
-						paymentResult.getInt("amount"));
+				payment.setAmount(paymentResult.getInt("amount"));
 
 				payment.setQuantity(
 						paymentResult.getInt("quantity"));
@@ -94,20 +93,25 @@ public class PaymentDaoDB extends DaoDB implements PaymentDao {
 				payment.setHistoryId(
 						paymentResult.getString("history_id"));
 
+				payment.setPurchaseDate(paymentResult.getTimestamp("purchase_date")
+						.toLocalDateTime());
+				//paymentオブジェクトを購入履歴リストに追加
 				paymentList.add(payment);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return paymentList;
+	}
 
+	public int insertPayment(String userId, String userName, String productId, String productName, int quantity,
+			int price, LocalDateTime purchaseDate, String historyId) {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
 	}
 
 	@Override
-	public int insertPayment(String userId, String userName, String productId, String productName, int quantity,
-			int price, LocalDateTime purchaseDate, String historyId) {
+	public int insertPayment(String userId, String userName, String productId, String productName, int quantity) {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}
