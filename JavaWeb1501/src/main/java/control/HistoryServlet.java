@@ -44,12 +44,13 @@ public class HistoryServlet extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");//セッションからuserIdを取得
 		
 		//購入履歴を取得
+		String date = request.getParameter("date");
 		List<Payment> paymentList = op.getPaymentList(userId);
 		
 		//購入履歴をセット
 		request.setAttribute("paymentList", paymentList);
-		
 		//history.jspへ遷移する
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("history.jsp");
 		dispatcher.forward(request, response);
 	}

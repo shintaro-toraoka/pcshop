@@ -11,6 +11,7 @@ public class Payment {
 	private int amount;
 	private int quantity;
 	private LocalDateTime purchaseDate;
+	private String historyId;
 
 	public String getUserId() {
 		return userId;
@@ -67,5 +68,13 @@ public class Payment {
 		
 		public void setPurchaseDate(LocalDateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
+		}
+
+		public String getHistoryId() {
+			return historyId;
+		}
+
+		public void setHistoryId(String historyId) {
+			this.historyId = historyId;
 		}
 }
