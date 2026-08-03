@@ -63,17 +63,27 @@
 
 	<table class="select-list">
 		<tr>
-			<th></th>
-			<th>商品ID</th>
-			<th>商品名</th>
-			<th>商品画像</th>
-			<th>数量</th>
-			<th>価格（税込）</th>
-			<th>在庫数</th>
+			<th class="selectColumn"></th>
+			<!-- 選択列 -->
+			<th class="proIdColumn">商品ID</th>
+			<th class="proNameColumn">商品名</th>
+			<th class="proImageColumn">商品画像</th>
+			<th class="quantityColumn">数量</th>
+			<th class="priceColumn">価格（税込）</th>
+			<th class="stockColumn">在庫数</th>
 		</tr>
 
 		<%
-		for (int idx = 0; idx < listProd.size(); idx++) {
+		int pageSize = 10;
+		int pageNo = 1;
+		String pageParam = request.getParameter("page");
+		if (pageParam != null) {
+		pageNo = Integer.parseInt(pageParam);
+		}
+		int start = (pageNo - 1) * pageSize;
+		int end = pageNo * pageSize;
+
+		for (int idx = start; idx < end && idx < listProd.size(); idx++) {
 			Product prod = listProd.get(idx);
 			String imagePath = prod.getImagePath();
 			String formId = "addProdForm" + idx;
@@ -85,11 +95,11 @@
 
 					<input type="hidden" name="productId" value="<%=prod.getId()%>">
 					<input type="hidden" name="productName" value="<%=prod.getName()%>">
-					
+
 					<%
 					if (prod.getStock() > 0) {
 					%>
-						<input type="submit" value="選択">
+					<input type="submit" value="選択">
 					<%
 					} else {
 					%>
@@ -101,18 +111,18 @@
 
 				</form>
 			</td>
-			
-	<!-- 選択時のポップアップ表示 -->
-<%
+
+			<!-- 選択時のポップアップ表示 -->
+			<%
 	String popupMessage = (String)session.getAttribute("popupMessage");
 	if(popupMessage !=null){
 
 
 %>
-	<div id="select-popup" class="pp-popup pp-active">
-	<p><%=popupMessage %></p>
-	</div>
-<%
+			<div id="select-popup" class="pp-popup pp-active">
+				<p><%=popupMessage %></p>
+			</div>
+			<%
 		session.removeAttribute("popupMessage");
 	}
 %>
@@ -174,6 +184,15 @@
 		%>
 	</table>
 
+	<%
+int totalPage = (listProd.size() + pageSize - 1) / pageSize;
+for(int i = 1; i <= totalPage; i++){
+%>
+	<a href="select.jsp?page=<%=i%>"><%=i%></a>
+	<%
+	}
+%>
+
 	<!-- 商品名クリックしたら情報表示 -->
 	<div id="detailModal" class="modal">
 		<div class="modal-content">
@@ -207,15 +226,15 @@
 			<span id="closeModal"></span>
 
 		</div>
-		</div>
-		<div id="zoomback">
-			<img id="zoomimg" src="">
-		</div>
+	</div>
+	<div id="zoomback">
+		<img id="zoomimg" src="">
+	</div>
 
 
 
 
-		<script>
+	<script>
 			// 要素を取得　..①
 			const zoom = document.querySelectorAll(".zoom");
 			const zoomback = document.getElementById("zoomback");
@@ -278,19 +297,10 @@ closeModal.addEventListener("click", function() {
 });
 			
 		</script>
-		<%
-		}
-		%>	
+		}	}
 		
-<!-- ポップアップ表示 -->
-<div class="pp-btn-wrap">
-	<button id="pp-btn">ひとくち</button>
-</div>
-<div id="pp-popup" class="pp-popup">
-<p class="pp-headline">カレーって美味しいよね</p>
-<p class="pp-body">肉食が解禁された明治時代に、「ライスカレー」が普及したそうです。</p>
-</div>
 
+	<!-- 選択・削除のポップアップ表示 -->
 <script>
 const ppBtn = document.querySelector('#pp-btn');
 const ppPopup = document.querySelector('#pp-popup');

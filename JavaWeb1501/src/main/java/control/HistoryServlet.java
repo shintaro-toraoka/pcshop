@@ -18,13 +18,13 @@ import model.Payment;
  * Servlet implementation class History
  */
 @WebServlet("/History")
-public class History extends HttpServlet {
+public class HistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public History() {
+	public HistoryServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,14 +32,24 @@ public class History extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		//セッションを取得
 		HttpSession session = request.getSession();
+		
+		//Operationオブジェクトを生成
 		Operation op = new Operation();
-		String userId = (String) session.getAttribute("userId");
+		String userId = (String) session.getAttribute("userId");//セッションからuserIdを取得
+		
+		//購入履歴を取得
 		List<Payment> paymentList = op.getPaymentList(userId);
+		
+		//購入履歴をセット
 		request.setAttribute("paymentList", paymentList);
+		
+		//history.jspへ遷移する
 		RequestDispatcher dispatcher = request.getRequestDispatcher("history.jsp");
 		dispatcher.forward(request, response);
 	}

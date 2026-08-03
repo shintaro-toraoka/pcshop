@@ -32,13 +32,13 @@
 
 	<table class="cart-list">
 		<tr>
-			<th></th>
-			<th>商品ID</th>
-			<th>商品名</th>
-			<th>商品画像</th>
-			<th>数量</th>
-			<th>小計（税込）</th>
-			<th>在庫数</th>
+			<th class="selectColumn"></th><!-- 削除列 -->
+			<th class="proIdColumn">商品ID</th>
+			<th class="proNameColumn">商品名</th>
+			<th class="proImageColumn">商品画像</th>
+			<th class="quantityColumn">数量</th>
+			<th class="priceColumn">小計（税込）</th>
+			<th class="stockColumn">在庫数</th>
 		</tr>
 		<%
 		for (int idx = 0; idx < listProd.size(); idx++) {
@@ -123,7 +123,7 @@
 		円になります。
 	</p>
 
-	<form action="pay-servlet" method="post" onSubmit="PayCheck()">
+	<form action="pay-servlet" method="post" onSubmit="return PayCheck()">
 		<input type="submit" value="精算"> <br>
 
 	</form>
@@ -135,7 +135,6 @@
 			if (confirm('カート内の商品を精算してよろしいですか？')) {
 				return true;
 			} else {
-				alert('キャンセルされました');
 				return false;
 			}
 		}

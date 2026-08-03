@@ -24,10 +24,13 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		request.setCharacterEncoding("UTF-8");
+		
+		//検索バーに入力した単語を取得する
 		String keyword = request.getParameter("query");
 		
+		//全角スペースは半角スペースに変換する
 		if(keyword != null) {
 			keyword = keyword.replace("　", " ");
 		}
