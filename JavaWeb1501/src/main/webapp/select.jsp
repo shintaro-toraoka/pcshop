@@ -10,6 +10,7 @@
 	<head>
 	<!-- 基本設定 -->
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>商品選択</title>
 		
 		<link rel="stylesheet" href="style.css">

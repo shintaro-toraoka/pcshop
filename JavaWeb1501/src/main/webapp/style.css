@@ -49,17 +49,6 @@
 	z-index: 9999;
 }
 
-/* ブラウザ幅が800px以下の場合 */
-@media screen and (max-width: 800px) {
-
-	.main-image1,
-	.main-image2,
-	.main-image3,
-	.main-image4 {
-		display: none;
-	}
-}
-
 
 
 body {
@@ -241,15 +230,16 @@ h2 {
 	font-size: 32px;
 }
 
-.history-group td{
-background-color: #c96f14;
-color: white;
-font-size: 22px;
-font-weight: bold;
-padding: 15px;
+.history-group td {
+	background-color: #c96f14;
+	color: white;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 15px;
 }
-.history-group{
-height: 60px;
+
+.history-group {
+	height: 60px;
 }
 
 
@@ -511,3 +501,186 @@ td {
 }
 
 /*ここまで商品情報表示*/
+
+
+
+
+/* ブラウザ幅が800px以下の場合（スマホ版） */
+@media screen and (max-width: 800px) {
+
+	.main-image1,
+	.main-image2,
+	.main-image3,
+	.main-image4 {
+		display: none;
+	}
+
+	h2 {
+		font-size: 40px;
+		padding: 15px 0;
+	}
+
+	form {
+		margin-top: 40px;
+		font-size: 24px;
+	}
+
+	/*ログイン画面*/
+	input[name="userId"],
+	input[name="password"] {
+		width: 300px !important;
+		height: 50px !important;
+		font-size: 20px !important;
+	}
+
+	input[value="ログイン"] {
+		width: 180px !important;
+		height: 50px !important;
+		font-size: 24px !important;
+	}
+
+	/*ヘッダー*/
+	a {
+		display: block;
+		font-size: 28px;
+		padding: 10px;
+	}
+
+	input[name="query"] {
+		width: 350px !important;
+		height: 60px !important;
+		font-size: 24px !important;
+	}
+
+	button[type="submit"] {
+		height: 60px !important;
+		font-size: 24px !important;
+		padding: 0 20px;
+	}
+
+	 商品一覧 
+	.select-list {
+		width: 100% !important;
+	}
+
+	.select-list th {
+		font-size: 20px !important;
+		padding: 10px !important;
+	}
+
+	.select-list td {
+		font-size: 18px !important;
+		padding: 8px !important;
+	}
+
+	/* 数量入力 */
+	.quanti {
+		width: 60px !important;
+		height: 40px !important;
+		font-size: 20px !important;
+	}
+
+	/* 選択ボタン */
+	.select-list input[type="submit"] {
+		width: 100px !important;
+		height: 50px !important;
+		font-size: 20px !important;
+	}
+	
+	
+	/*横スクロール
+	.select-list {
+	    display: block;
+	    overflow-x: auto;
+	}*/
+	/* カート内一覧 */
+		.cart-list {
+			width: 100% !important;
+		}
+
+		.cart-list th {
+			font-size: 20px !important;
+			padding: 10px !important;
+		}
+
+		.cart-list td {
+			font-size: 18px !important;
+			padding: 8px !important;
+		}
+		
+		p {
+			font-size: 28px;
+			margin-top: 80px;
+		}
+
+		/* 削除ボタン */
+		.cart-list input[type="submit"] {
+			width: 100px !important;
+			height: 50px !important;
+			font-size: 20px !important;
+		}
+		
+		/* 購入一覧 */
+			.pay-list {
+				width: 100% !important;
+			}
+
+			.pay-list th {
+				font-size: 20px !important;
+				padding: 10px !important;
+			}
+
+			.pay-list td {
+				font-size: 18px !important;
+				padding: 8px !important;
+			}
+
+			/* 選択ボタン */
+			.pay-list input[type="submit"] {
+				width: 100px !important;
+				height: 50px !important;
+				font-size: 20px !important;
+			}
+			
+			/*購入履歴*/
+			/*絞り込み表示拡大*/
+			select {
+				width: 200px !important;
+				height: 60px !important;
+				font-size: 24px !important;
+			}
+
+			input[value="絞り込み"] {
+				width: 180px !important;
+				height: 60px !important;
+				font-size: 24px !important;
+			}
+			/* 購入履歴一覧 */
+				.payment-list {
+					width: 100% !important;
+				}
+
+				.payment-list th {
+					font-size: 20px !important;
+					padding: 10px !important;
+				}
+
+				.payment-list td {
+					font-size: 18px !important;
+					padding: 8px !important;
+				}
+
+				/* 数量入力 */
+				.quanti {
+					width: 60px !important;
+					height: 40px !important;
+					font-size: 20px !important;
+				}
+
+				/* 選択ボタン */
+				.payment-list input[type="submit"] {
+					width: 100px !important;
+					height: 50px !important;
+					font-size: 20px !important;
+				}
+}

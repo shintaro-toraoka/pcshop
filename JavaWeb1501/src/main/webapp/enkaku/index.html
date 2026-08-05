@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ToraoCurry｜会社沿革</title>
+
+<style>
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0;
+		font-family:
+			"BIZ UDPGothic",
+			"Yu Gothic",
+			"Meiryo",
+			sans-serif;
+		color: #3d2c1e;
+		background:
+			linear-gradient(
+				rgba(255, 248, 230, 0.94),
+				rgba(255, 248, 230, 0.94)
+			),
+			repeating-linear-gradient(
+				45deg,
+				#f4c95d 0,
+				#f4c95d 10px,
+				#f8db8b 10px,
+				#f8db8b 20px
+			);
+	}
+
+	header {
+		padding: 48px 20px;
+		color: white;
+		text-align: center;
+		background:
+			linear-gradient(
+				135deg,
+				#7b1e00,
+				#c74900,
+				#e8871e
+			);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+	}
+
+	header h1 {
+		margin: 0;
+		font-size: clamp(36px, 6vw, 64px);
+		letter-spacing: 0.08em;
+		text-shadow: 3px 3px 0 #4f1600;
+	}
+
+	header p {
+		margin: 14px 0 0;
+		font-size: 18px;
+		letter-spacing: 0.12em;
+	}
+
+	.company-name {
+		display: inline-block;
+		margin-top: 20px;
+		padding: 8px 22px;
+		border: 2px solid rgba(255, 255, 255, 0.8);
+		border-radius: 999px;
+		font-weight: bold;
+		background-color: rgba(50, 10, 0, 0.22);
+	}
+
+	main {
+		width: min(1000px, calc(100% - 32px));
+		margin: 50px auto;
+	}
+
+	.introduction {
+		margin-bottom: 50px;
+		padding: 28px;
+		border: 3px double #b55b13;
+		border-radius: 12px;
+		text-align: center;
+		line-height: 1.9;
+		background-color: rgba(255, 255, 255, 0.9);
+		box-shadow: 0 8px 22px rgba(88, 44, 12, 0.15);
+	}
+
+	.introduction h2 {
+		margin-top: 0;
+		color: #9f2b00;
+		font-size: 28px;
+	}
+
+	.timeline {
+		position: relative;
+		padding: 10px 0;
+	}
+
+	.timeline::before {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 130px;
+		width: 5px;
+		border-radius: 10px;
+		background: linear-gradient(#e8871e, #8e2100);
+		content: "";
+	}
+
+	.history-item {
+		position: relative;
+		display: grid;
+		grid-template-columns: 110px 1fr;
+		gap: 44px;
+		margin-bottom: 34px;
+	}
+
+	.history-period {
+		padding-top: 19px;
+		color: #8e2100;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: right;
+	}
+
+	.history-card {
+		position: relative;
+		padding: 24px 28px;
+		border-left: 8px solid #e8871e;
+		border-radius: 10px;
+		background-color: white;
+		box-shadow: 0 6px 16px rgba(68, 34, 8, 0.16);
+	}
+
+	.history-card::before {
+		position: absolute;
+		top: 23px;
+		left: -56px;
+		width: 22px;
+		height: 22px;
+		border: 5px solid #fff8e6;
+		border-radius: 50%;
+		background-color: #b52e00;
+		box-shadow: 0 0 0 3px #b52e00;
+		content: "";
+	}
+
+	.history-card h3 {
+		margin: 0 0 10px;
+		color: #9f2b00;
+		font-size: 23px;
+	}
+
+	.history-card p {
+		margin: 0;
+		line-height: 1.85;
+	}
+
+	.history-icon {
+		margin-right: 8px;
+		font-size: 26px;
+	}
+
+	.highlight {
+		font-weight: bold;
+		color: #bf360c;
+	}
+
+	.final-event {
+		border-left-color: #333;
+		background:
+			linear-gradient(
+				135deg,
+				#ffffff,
+				#eeeeee
+			);
+	}
+
+	.final-event::before {
+		background-color: #333;
+		box-shadow: 0 0 0 3px #333;
+	}
+
+	.final-event h3 {
+		color: #333;
+	}
+
+	.message {
+		margin-top: 50px;
+		padding: 34px;
+		border-radius: 12px;
+		color: white;
+		text-align: center;
+		background:
+			linear-gradient(
+				135deg,
+				#6d1b00,
+				#bd4300
+			);
+		box-shadow: 0 8px 22px rgba(62, 20, 0, 0.25);
+	}
+
+	.message h2 {
+		margin-top: 0;
+		font-size: 30px;
+	}
+
+	.message p {
+		margin-bottom: 0;
+		line-height: 1.9;
+	}
+
+	footer {
+		padding: 24px;
+		color: #fce8c8;
+		text-align: center;
+		background-color: #3d1608;
+	}
+
+	@media screen and (max-width: 700px) {
+		.timeline::before {
+			left: 19px;
+		}
+
+		.history-item {
+			grid-template-columns: 1fr;
+			gap: 8px;
+			padding-left: 48px;
+		}
+
+		.history-period {
+			padding-top: 0;
+			text-align: left;
+		}
+
+		.history-card::before {
+			top: 22px;
+			left: -41px;
+		}
+
+		.history-card {
+			padding: 20px;
+		}
+	}
+</style>
+</head>
+
+<body>
+
+<header>
+	<h1>ToraoCurry</h1>
+	<p>恐竜島から始まった、壮大なるカレー事業の軌跡</p>
+	<div class="company-name">会社沿革</div>
+</header>
+
+<main>
+
+	<section class="introduction">
+		<h2>挑戦の歴史</h2>
+
+		<p>
+			ToraoCurryは、恐竜島を探検した5名の冒険者によって
+			築かれた知識と経験を原点としています。
+		</p>
+
+		<p>
+			PCショップからカレー専門店へ。
+			時代の変化に適応しながら、私たちは常に
+			新たな価値の創造へ挑戦してきました。
+		</p>
+	</section>
+
+	<section class="timeline">
+
+		<article class="history-item">
+			<div class="history-period">第1期</div>
+
+			<div class="history-card">
+				<h3>
+					<span class="history-icon">🦖</span>
+					恐竜島探検隊、集結
+				</h3>
+
+				<p>
+					未知の恐竜島を調査するため、
+					<span class="highlight">5名の探検家</span>が集結。
+					数々の危機を乗り越え、調査力、判断力、協調性、
+					そして食料確保の重要性を学びました。
+				</p>
+			</div>
+		</article>
+
+		<article class="history-item">
+			<div class="history-period">第2期</div>
+
+			<div class="history-card">
+				<h3>
+					<span class="history-icon">💻</span>
+					速水PCショップ開業
+				</h3>
+
+				<p>
+					恐竜島探検で培ったノウハウを事業へ転用し、
+					<span class="highlight">速水PCショップ</span>をオープン。
+					マウス、キーボード、Webカメラなど、
+					探検には必ずしも必要のない商品を幅広く取り扱いました。
+				</p>
+			</div>
+		</article>
+
+		<article class="history-item">
+			<div class="history-period">第3期</div>
+
+			<div class="history-card">
+				<h3>
+					<span class="history-icon">🔧</span>
+					山川商事によるシステム改修
+				</h3>
+
+				<p>
+					事業拡大とサービス品質向上を目的として、
+					<span class="highlight">山川商事</span>による
+					PCショップの大規模改修に着手。
+					消費税対応、商品画像表示機能などが強化されました。
+				</p>
+			</div>
+		</article>
+
+		<article class="history-item">
+			<div class="history-period">第4期</div>
+
+			<div class="history-card">
+				<h3>
+					<span class="history-icon">🍛</span>
+					PCショップからカレー屋へ転身
+				</h3>
+
+				<p>
+					世の中の多様化と、社内における
+					「PCよりカレーの方が需要があるのではないか」
+					という大胆な仮説を受け、カレー事業への全面転換を決定。
+				</p>
+
+				<p>
+					同時にインフラ体制を強化するため、
+					<span class="highlight">新たに6名の専門人材</span>を迎え、
+					総勢11名によるサービス運営体制を確立しました。
+				</p>
+			</div>
+		</article>
+
+		<article class="history-item">
+			<div class="history-period">第5期</div>
+
+			<div class="history-card">
+				<h3>
+					<span class="history-icon">🐯</span>
+					「ToraoCurry」誕生
+				</h3>
+
+				<p>
+					カレー専門店への転身に伴い、
+					店名を<span class="highlight">ToraoCurry</span>へ変更。
+					虎のような力強さと、カレーのような奥深さを兼ね備えた
+					次世代型サービスとして再出発しました。
+				</p>
+			</div>
+		</article>
+
+		<article class="history-item">
+			<div class="history-period">第6期</div>
+
+			<div class="history-card">
+				<h3>
+					<span class="history-icon">🎉</span>
+					顧客数100万人を突破
+				</h3>
+
+				<p>
+					積極的な商品展開とサービス改善の結果、
+					<span class="highlight">顧客数100万人</span>を突破。
+					アクセス数の急増によりシステムが悲鳴を上げる中、
+					アプリチームとインフラチームが力を合わせて
+					サービスを支えました。
+				</p>
+			</div>
+		</article>
+
+		<article class="history-item">
+			<div class="history-period">第7期</div>
+
+			<div class="history-card">
+				<h3>
+					<span class="history-icon">🛡️</span>
+					セキュリティ強化計画を始動
+				</h3>
+
+				<p>
+					さらなる発展と安全なサービス提供を目指し、
+					アクセス制御、暗号化、ログ監視、脆弱性対策などを含む
+					<span class="highlight">総合セキュリティ強化計画</span>
+					を始動しました。
+				</p>
+			</div>
+		</article>
+
+		<article class="history-item">
+			<div class="history-period">そして現在</div>
+
+			<div class="history-card final-event">
+				<h3>
+					<span class="history-icon">📦</span>
+					創業メンバー・横田充氏、解雇
+				</h3>
+
+				<p>
+					恐竜島探検の時代から事業に携わり、
+					ToraoCurryの発展を見守ってきた
+					<span class="highlight">横田充氏</span>について、
+					会社は「組織が十分に成長し、もはや講師の支援を
+					必要としない段階に到達した」と判断。
+				</p>
+
+				<p>
+					その功績を称えつつも、
+					<span class="highlight">無用となったため円満に解雇</span>
+					されました。
+				</p>
+			</div>
+		</article>
+
+	</section>
+
+	<section class="message">
+		<h2>私たちの冒険は、まだ終わらない。</h2>
+
+		<p>
+			恐竜、PC、カレー、100万人の顧客、そしてサイバー攻撃。
+			数々の困難を乗り越えてきたToraoCurryは、
+			これからもアプリとインフラの力を結集し、
+			まだ見ぬ未来へ挑み続けます。
+		</p>
+	</section>
+
+</main>
+
+<footer>
+	<small>
+		&copy; 2026 ToraoCurry Corporation.
+		All Rights Reserved.
+	</small>
+</footer>
+
+</body>
+</html>
